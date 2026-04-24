@@ -26,7 +26,7 @@ const DeleteCanvas = () => {
               className={"cancel-workspace-btn"}
               onClick={canvasDeletionToggle}
             >
-              CANCEL
+              Cancel
             </Button>
           </DivClass>
           <DivClass className={"delete-workspace-btn-wrapper"}>
@@ -35,7 +35,7 @@ const DeleteCanvas = () => {
               className={"delete-workspace-btn"}
               onClick={hitClickDelete}
             >
-              DELETE
+              Delete Canvaspace
             </Button>
           </DivClass>
         </DivClass>

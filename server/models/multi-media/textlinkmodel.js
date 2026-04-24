@@ -10,6 +10,9 @@ const textlinkSchema = new mongoose.Schema(
             maxlength: [6000, "Text content too long (max 6000 characters)"],
             required: [true, "Link desctination is required"],
         },
+        shareInfo: {
+            type: Boolean,
+        },
         text: {
             type: String,
             minlength: [1, "Text content cannot be empty"],

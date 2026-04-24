@@ -62,7 +62,7 @@ export const EnabledTextAreaInput = ({
     <textarea
       id={id}
       minLength={1}
-      maxLength={10000}
+      maxLength={8000}
       autoComplete="off"
       placeholder={placeholder}
       className={className}

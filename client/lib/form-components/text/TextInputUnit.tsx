@@ -209,7 +209,6 @@ const TextInputUnit = () => {
             left: `${textInputCompPosRef.current.x}px`,
             top: `${textInputCompPosRef.current.y}px`,
             color: "#fff",
-            zIndex: 4,
           }}
           onMouseDown={processTextMouseDown}
         >

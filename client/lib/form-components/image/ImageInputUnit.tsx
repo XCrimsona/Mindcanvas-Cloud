@@ -216,7 +216,6 @@ const ImageInputUnit = () => {
             left: `${imageInputCompPosRef.current.x}px`,
             top: `${imageInputCompPosRef.current.y}px`,
             color: "#fff",
-            zIndex: 4,
           }}
           onMouseDown={processImageMouseDown}
         >
