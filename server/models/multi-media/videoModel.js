@@ -12,6 +12,9 @@ const videoSchema = new mongoose.Schema(
       enum: ["Video"],
       required: true,
     },
+    shareInfo: {
+      type: Boolean,
+    },
     position: {
       x: {
         type: Number,

@@ -6,7 +6,9 @@ const imageSchema = new mongoose.Schema(
       type: String,
       required: [true, "path to images is required"],
     },
-
+    shareInfo: {
+      type: Boolean,
+    },
     //NEW STRUCTURE
     imagecluster: [
       {

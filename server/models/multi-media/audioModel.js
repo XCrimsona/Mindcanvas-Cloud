@@ -6,6 +6,9 @@ const audioSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    shareInfo: {
+      type: Boolean,
+    },
     audioFormat: {
       type: String,
       enum: ["mp3", "wav", "ogg"],

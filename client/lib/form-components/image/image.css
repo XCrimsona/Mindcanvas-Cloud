@@ -1,142 +1,160 @@
 .data-image-component {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  box-shadow: inset 0px 0px 4px 2px rgba(250, 170, 0, 0.2509803922), 0px 0px 4px 0px rgba(250, 170, 0, 0.2509803922);
-  margin: 0px auto 0px auto;
-  background-color: #000000;
-  border: 2px solid rgba(250, 170, 0, 0.2509803922);
-  height: 120px;
-  transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
-  cursor: move;
-  position: relative;
-}
-.data-image-component .image-input-form .image-label-wrapper {
-  margin: 10px 0px 4px 0px;
-}
-.data-image-component .image-input-form .image-label-wrapper .list-label,
-.data-image-component .image-input-form .image-label-wrapper .image-label {
-  text-align: left;
-  display: block;
-  margin: 0px 0px 0px 4px;
-  font-size: 12px;
-  width: 120px;
-  cursor: move;
-}
-.data-image-component .image-input-form .image-container {
-  display: flex;
-  align-items: flex-start;
-  position: relative;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper {
-  display: flex;
-  position: relative;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-list-input-field,
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-image-input-field {
-  display: flex;
-  justify-content: left;
-  border-top: 2px solid rgba(250, 170, 0, 0.2509803922);
-  border-left: 2px solid rgba(250, 170, 0, 0.2509803922);
-  border-bottom: 2px solid rgba(250, 170, 0, 0.2509803922);
-  border-right: 2px solid rgba(250, 170, 0, 0.2509803922);
-  color: #ffffff;
-  background-color: #000000;
-  transition: height 0.2s ease-in-out;
-  resize: none;
-  cursor: text;
-  font-size: 12px;
-  outline: 2px solid #000000;
-  margin: 0px;
-  margin-right: auto;
-  height: 60px;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-list-input-field::-moz-selection, .data-image-component .image-input-form .image-container .image-input-wrapper .enabled-image-input-field::-moz-selection {
-  background-color: rgba(251, 170, 0, 0.3137254902);
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-list-input-field::selection,
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-image-input-field::selection {
-  background-color: rgba(251, 170, 0, 0.3137254902);
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-list-input-field::-moz-placeholder, .data-image-component .image-input-form .image-container .image-input-wrapper .enabled-image-input-field::-moz-placeholder {
-  color: #fff;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-list-input-field::placeholder,
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-image-input-field::placeholder {
-  color: #fff;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-list-input-field:focus,
-.data-image-component .image-input-form .image-container .image-input-wrapper .enabled-image-input-field:focus {
-  height: 200px;
-  background-color: #000000;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .image-btn-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100px;
-  height: 24px;
-  z-index: 14;
-  font-size: 14px;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .image-btn-container .image-submit-btn-container {
-  display: flex;
-  justify-content: right;
-  margin: 5px auto 5px auto;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .image-btn-container .image-submit-btn-container .image-btn-submit {
-  cursor: pointer;
-  height: 20px;
-  width: 80px;
-  outline: none;
-  background-color: #111111;
-  color: #FBAA00;
-  border: 1px solid #555555;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .image-btn-container .image-selection-wrapper {
-  margin: 5px auto 5px 0px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
-  align-items: center;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .image-btn-container .image-selection-wrapper .select-image-type {
-  width: 80px;
-  outline: none;
-  background-color: #111111;
-  color: #FBAA00;
-  border: 1px solid #555555;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .image-btn-container .image-selection-wrapper .radio-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .image-btn-container .image-selection-wrapper .radio-group .image-type-option-one {
-  height: 20px;
-}
-.data-image-component .image-input-form .image-container .image-input-wrapper .image-btn-container .image-selection-wrapper .radio-group .image-type-label {
-  height: 20px;
-  margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-shadow: inset 0px 0px 4px 2px #FAAA0040, 0px 0px 4px 0px #FAAA0040;
+    margin: 0px auto 0px auto;
+    background-color: #000000;
+    border: 2px solid #FAAA0040;
+    height: 120px;
+    transition: height .2s ease-in-out, width .2s ease-in-out;
+    cursor: move;
+    position: relative;
+    z-index: 4;
+
+    .image-input-form {
+
+        .image-label-wrapper {
+            margin: 10px 0px 4px 0px;
+
+            .list-label,
+            .image-label {
+                text-align: left;
+                display: block;
+                margin: 0px 0px 0px 4px;
+                font-size: 12px;
+                width: 120px;
+                cursor: move;
+            }
+        }
+
+        .image-container {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+
+            .image-input-wrapper {
+                display: flex;
+                position: relative;
+
+                .enabled-list-input-field,
+                .enabled-image-input-field {
+                    display: flex;
+                    justify-content: left;
+                    border-top: 2px solid #FAAA0040;
+                    border-left: 2px solid #FAAA0040;
+                    border-bottom: 2px solid #FAAA0040;
+                    border-right: 2px solid #FAAA0040;
+                    color: #ffffff;
+                    background-color: #000000;
+                    transition: height .2s ease-in-out;
+                    resize: none;
+                    cursor: text;
+                    font-size: 12px;
+                    outline: 2px solid #000000;
+                    margin: 0px;
+                    margin-right: auto;
+                    height: 60px;
+                }
+
+                .enabled-list-input-field::selection,
+                .enabled-image-input-field::selection {
+                    background-color: #FBAA0050;
+                }
+
+                .enabled-list-input-field::placeholder,
+                .enabled-image-input-field::placeholder {
+                    color: #fff;
+                }
+
+                .enabled-list-input-field:focus,
+                .enabled-image-input-field:focus {
+                    height: 200px;
+                    background-color: #000000;
+                }
+
+                .image-btn-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    width: 100px;
+                    height: 24px;
+                    z-index: 14;
+                    font-size: 14px;
+
+                    .image-submit-btn-container {
+                        display: flex;
+                        justify-content: right;
+                        margin: 5px auto 5px auto;
+
+                        .image-btn-submit {
+                            cursor: pointer;
+                            height: 20px;
+                            width: 80px;
+                            outline: none;
+                            background-color: #111111;
+                            color: #FBAA00;
+                            border: 1px solid #555555;
+                        }
+                    }
+
+                    .image-selection-wrapper {
+                        margin: 5px auto 5px 0px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: start;
+                        align-items: center;
+
+                        .select-image-type {
+                            width: 80px;
+                            outline: none;
+                            background-color: #111111;
+                            color: #FBAA00;
+                            border: 1px solid #555555;
+                        }
+
+                        .radio-group {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            align-items: center;
+                            width: 80px;
+
+                            .image-type-option-one {
+                                height: 20px;
+                            }
+
+                            .image-type-label {
+                                height: 20px;
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-@media screen and (min-width: 320px) and (max-width: 600.9px) {
-  .data-image-component {
-    width: 300px;
-  }
-  .data-image-component .enabled-list-input-field,
-  .data-image-component .enabled-image-input-field {
-    width: 180px;
-  }
+@media screen and (min-width:320px) and (max-width:600.9px) {
+
+    .data-image-component {
+        width: 300px;
+
+        .enabled-list-input-field,
+        .enabled-image-input-field {
+            width: 180px;
+        }
+    }
 }
-@media screen and (min-width: 601px) {
-  .data-image-component {
-    width: 380px;
-  }
-  .data-image-component .enabled-list-input-field,
-  .data-image-component .enabled-image-input-field {
-    width: 250px;
-  }
-}/*# sourceMappingURL=image.css.map */
+
+@media screen and (min-width:601px) {
+    .data-image-component {
+        width: 380px;
+
+        .enabled-list-input-field,
+        .enabled-image-input-field {
+            width: 250px;
+        }
+    }
+}

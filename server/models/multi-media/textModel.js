@@ -7,8 +7,11 @@ const textSchema = new mongoose.Schema(
     text: {
       type: String,
       minlength: [1, "Text content cannot be empty"],
-      maxlength: [6000, "Text content too long (max 6000 characters)"],
+      maxlength: [8000, "Text content too long (max 8000 characters)"],
       required: true,
+    },
+    shareInfo: {
+      type: Boolean,
     },
     type: {
       type: String,

@@ -223,11 +223,9 @@ const TextLinkInputUnit = () => {
           ref={textLinkInputCompRef}
           style={{
             //DO NOT PUT THE PIN FEATURE HERE
-            position: "absolute",
             left: `${textLinkInputCompPosRef.current.x}px`,
             top: `${textLinkInputCompPosRef.current.y}px`,
             color: "#fff",
-            zIndex: 11,
           }}
           onMouseDown={processTextLinkMouseDown}
         >
@@ -252,59 +250,42 @@ const TextLinkInputUnit = () => {
             </DivClass>
             <DivClass className={"link-container"}>
               <DivClass className={"link-input-wrapper"}>
-                {selectedType === "TextLink" ? (
-                  <>
-                    <input
-                      type="text"
-                      autoComplete="off"
-                      autoCapitalize="off"
-                      autoSave="off"
-                      id="enabled-link-input-field"
-                      placeholder="https://..."
-                      className={"enabled-linkdescription-input-field"}
-                      value={newTextLinkComponent.link}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setNewTextLinkComponent({
-                          ...newTextLinkComponent,
-                          link: e.target.value,
-                        });
-                      }}
-                    />
-                    <EnabledTextAreaInput
-                      id="enabled-linktext-input-field"
-                      className={"enabled-link-input-field"}
-                      value={newTextLinkComponent.text}
-                      placeholder="What is the is about"
-                      // href={newTextLinkComponent.link}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setNewTextLinkComponent({
-                          ...newTextLinkComponent,
-                          text: e.target.value,
-                        });
-                      }}
-                    />
-                  </>
-                ) : (
-                  <EnabledTextAreaInput
-                    id="enabled-list-input-field"
-                    className={"enabled-list-input-field"}
-                    placeholder="Don't use - Under construction"
-                    value={newTextLinkComponent.link}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setNewTextLinkComponent({
-                        ...newTextLinkComponent,
-                        link: e.target.value,
-                      });
-                    }}
-                  />
-                )}
+                <input
+                  type="text"
+                  autoComplete="off"
+                  autoCapitalize="off"
+                  autoSave="off"
+                  id="enabled-link-input-field"
+                  placeholder="https://..."
+                  className={"enabled-linkdescription-input-field"}
+                  value={newTextLinkComponent.link}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNewTextLinkComponent({
+                      ...newTextLinkComponent,
+                      link: e.target.value,
+                    });
+                  }}
+                />
+                <EnabledTextAreaInput
+                  id="enabled-linktext-input-field"
+                  className={"enabled-link-input-field"}
+                  value={newTextLinkComponent.text}
+                  placeholder="What is the is about"
+                  // href={newTextLinkComponent.link}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNewTextLinkComponent({
+                      ...newTextLinkComponent,
+                      text: e.target.value,
+                    });
+                  }}
+                />
                 <DivClass className={"link-btn-container"}>
                   <DivClass className={"link-submit-btn-container"}>
                     <Button id="link-btn-submit" className={"link-btn-submit"}>
                       SAVE
                     </Button>
                   </DivClass>
-                  <DivClass className={"link-selection-wrapper"}>
+                  {/* <DivClass className={"link-selection-wrapper"}>
                     <div className="radio-group">
                       <input
                         type="radio"
@@ -324,7 +305,7 @@ const TextLinkInputUnit = () => {
                         Link
                       </label>
                     </div>
-                  </DivClass>
+                  </DivClass> */}
                 </DivClass>
               </DivClass>
             </DivClass>

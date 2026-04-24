@@ -312,7 +312,6 @@ const DoughnutChartInputUnit = () => {
             left: `${doughnutChartInputCompPosRef.current.x}px`,
             top: `${doughnutChartInputCompPosRef.current.y}px`,
             color: "#fff",
-            zIndex: 4,
           }}
           onMouseDown={processDoughnutChartMouseDown}
         >
