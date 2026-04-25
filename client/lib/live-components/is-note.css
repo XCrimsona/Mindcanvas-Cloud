@@ -1,0 +1,32 @@
+/* setup css of absolute 20px from top; left -30px */
+
+.is-note-state {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    /* position: absolute; */
+    /* use the 2020 css of place items and center the content  */
+    place-items: center;
+
+    /* top: 30px; */
+    /* left: -30px; */
+    /* top: 0px; */
+    /* left: 101%; */
+    cursor: pointer;
+    margin: 0px auto 10px;
+    border: 2px solid #FAAA0040;
+    /* how do I change the background color of the check box? */
+    appearance: none;
+    /* background-color: #FAAA0080; */
+    accent-color: #FAAA0040;
+    border-radius: 20px;
+    width: 170px;
+    height: 20px;
+}
+
+.is-note-state:checked {
+    background-color: #FAAA0080;
+    /* accent-color: #FAAA0080; */
+}
+
+/* .is-note-checkbox */

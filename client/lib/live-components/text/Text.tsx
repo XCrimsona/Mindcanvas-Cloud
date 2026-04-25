@@ -6,8 +6,9 @@ import { EditWindow } from "../../modify-data/EditWindow";
 import { ModificationWindow } from "../../modify-data/ModificationWindow";
 import { SpanFragment } from "../../ui/spanElement";
 import "../../form-components/text/text.css";
-import "../i-note.css";
+import "../i-menu-selector.css";
 import "./text-data-styling.css";
+import "../is-note.css";
 import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 
 //This component is used to display already create info TextInput is the one that creates text

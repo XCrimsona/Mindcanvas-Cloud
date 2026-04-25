@@ -10,8 +10,9 @@ const textSchema = new mongoose.Schema(
       maxlength: [8000, "Text content too long (max 8000 characters)"],
       required: true,
     },
-    shareInfo: {
+    personalInfo: {
       type: Boolean,
+      default: true,
     },
     type: {
       type: String,

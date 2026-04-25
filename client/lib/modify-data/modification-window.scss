@@ -1,45 +1,87 @@
-@use '../../../../../styles/index' as style;
-
 .modifications-window-container {
     display: block;
     position: absolute;
-    content: "";
     z-index: 11;
     background-color: #000000;
     top: 0;
     left: 0px;
-    @include style.width(200px);
+    width: 200px;
     height: fit-content;
     box-shadow: inset 0px 0px 4px 2px #faaa0040;
     cursor: default;
 
+    div {
+        margin: 8px auto;
+        // width: 170px;
+
+        .ux-note-status {
+            display: block;
+            font-size: 11px;
+            text-align: center;
+            margin: 8px auto 0px;
+        }
+
+        .allow-personal-data-sharing {
+            cursor: pointer;
+            margin: 5px 7px 5px 0px;
+            display: inline-block;
+            height: 18px;
+            border-radius: 4px;
+            border: 2px solid #FAAA0040;
+            font-size: 10px;
+            text-align: center;
+            padding: 2px 8px;
+            width: calc(170/2.2);
+        }
+
+        .prohibit-private-data-sharing {
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px 0px 5px 7px;
+            border-radius: 4px;
+            height: 18px;
+            font-size: 10px;
+            text-align: center;
+            padding: 2px 8px;
+            border: 2px solid #FAAA0040;
+            width: calc(170/2.2);
+        }
+
+        .select-true,
+        .select-false {
+            background-color: hsl(45, 100%, 8%);
+        }
+    }
+
+    .close-button,
     .edit-button,
     .component-reposition-button,
     .delete-button {
-        @include style.background-color(#000000);
-        @include style.border(style.$space-2, solid, #FAAA0040);
+        background-color: #000000;
+        border: 2px solid #FAAA0040;
         border-radius: 4px;
-        font-size: 14px;
+        font-size: 12px;
     }
 
+    .close-button,
     .edit-button {
-        @include style.width(170px);
+        width: 170px;
         cursor: pointer;
-        @include style.text-color(#fff);
+        color: #fff;
         margin-top: 10px;
         margin-bottom: 10px;
     }
 
     .component-reposition-button {
-        @include style.width(170px);
+        width: 170px;
         cursor: pointer;
-        @include style.text-color(#fa0);
+        color: #fa0;
         margin-top: 10px;
         margin-bottom: 10px;
     }
 
     .delete-container {
-        @include style.width(170px);
+        width: 170px;
 
         .toggle-delete {
             display: block;
@@ -48,8 +90,8 @@
         }
 
         .delete-button {
-            @include style.width(140px);
-            @include style.text-color(#f00);
+            width: 140px;
+            color: #f00;
             margin-top: 10px;
             margin-left: 5px;
             margin-bottom: 10px;
@@ -86,7 +128,6 @@
             margin-right: 15px;
             text-align: left;
             padding-bottom: 4px;
-            // border-bottom: 1px solid #79674E;
             width: 250px;
 
             .dual-data {
@@ -96,7 +137,6 @@
                     overflow-x: hidden;
                     overflow-y: auto;
                     outline: none;
-                    // margin-bottom: 4px;
                     cursor: text;
                     height: 20px;
                     white-space: pre-wrap;
@@ -188,12 +228,9 @@
             margin-left: 15px;
             margin-right: 4px;
             padding-bottom: 4px;
-            // border-bottom: 1px solid #79674E;
 
             .new-linktext,
             .new-text {
-
-                //TextLink
                 .dual-data {
                     .box-two-enabled-linkdescription-input-field {
                         background-color: #000000;
@@ -201,7 +238,6 @@
                         overflow-x: hidden;
                         overflow-y: auto;
                         outline: none;
-                        // margin-bottom: 4px;
                         cursor: text;
                         height: 20px;
                         white-space: pre-wrap;
@@ -209,7 +245,7 @@
                     }
 
                     .new-data {
-                        @include style.background-color(#000000);
+                        background-color: #000000;
                         color: white;
                         width: 250px;
                         resize: none;
@@ -225,16 +261,15 @@
                 }
 
 
-                //Text
+                /* Text */
                 .new-data {
                     height: 152px;
-                    @include style.background-color(#000000);
+                    background-color: #000000;
                     color: white;
                     width: 250px;
                     resize: none;
                     font-size: 10px;
                     outline: none;
-                    // margin-bottom: 4px;
                     padding: 0px 0px 0px 0px;
                     cursor: text;
                     white-space: pre-wrap;
@@ -256,17 +291,15 @@
                 color: white;
             }
 
-            .dual-data {}
-
             .paste-clipboard-button,
             .update-button {
                 margin-top: 5px;
                 margin-bottom: 5px;
                 cursor: pointer;
-                @include style.width(250px);
-                @include style.text-color(#FABB00);
+                width: 250px;
+                color: #FABB00;
                 padding: 4px 3px;
-                @include style.background-color(#000000);
+                background-color: #000000;
                 box-shadow: 0px 0px 4px 0px rgba(250, 170, 0, 0.251);
                 border: 2px solid rgba(250, 170, 0, 0.251);
                 border-radius: 4px;

@@ -9,4 +9,22 @@ export default defineConfig({
     strictPort: true,
     cors: true,
   },
+
+  css: {
+    // This tells Vite to use the faster Rust-based transformer
+    transformer: "lightningcss",
+    lightningcss: {
+      targets: {
+        // Targets browsers that support nesting (Chrome 111+, etc.)
+        chrome: 111,
+        safari: 16,
+      },
+      drafts: {
+        nesting: true, // Enables the nesting spec
+      },
+    },
+  },
+  build: {
+    cssTarget: "chrome111", // Ensures the output doesn't get "flattened" unnecessarily
+  },
 });

@@ -64,8 +64,9 @@ const DoughnutChartSchema = new mongoose.Schema(
             // enum: ["Text", "List"],
             required: [true, "Type is required"],
         },
-        shareInfo: {
+        personalInfo: {
             type: Boolean,
+            default: true,
         },
         position: {
             x: {
