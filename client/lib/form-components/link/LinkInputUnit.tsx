@@ -77,7 +77,7 @@ const TextLinkInputUnit = () => {
       text: "",
     });
 
-    const [selectedType, setSelectedType] = useState<string>("TextLink");
+    const [selectedType, setSelectedType] = useState<string>("TextLink"); //PURPOSE ???
 
     //submit http link
     const textLinkComponentFormData = async (

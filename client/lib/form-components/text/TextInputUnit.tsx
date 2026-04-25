@@ -195,11 +195,8 @@ const TextInputUnit = () => {
       document.addEventListener<any>("mouseup", processTextMouseUp);
     };
 
-    //pin feature here has a double toggle bug, issue is not the end of the world altough its irritating
-
     return (
       textToggle && (
-        // add the pin true false feature
         <div
           className={"data-text-component"}
           ref={textInputCompRef}
@@ -230,7 +227,6 @@ const TextInputUnit = () => {
             </DivClass>
             <DivClass className={"text-container"}>
               <DivClass className={"text-input-wrapper"}>
-                {/* {selectedType === "Text" ? ( */}
                 <EnabledTextAreaInput
                   id="enabled-text-input-field"
                   className={"enabled-text-input-field"}

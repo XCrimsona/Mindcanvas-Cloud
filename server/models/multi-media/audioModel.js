@@ -6,8 +6,9 @@ const audioSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    shareInfo: {
+    personalInfo: {
       type: Boolean,
+      default: true,
     },
     audioFormat: {
       type: String,

@@ -60,6 +60,15 @@ interface IModificationUseStateContextType {
     React.SetStateAction<{ text: string; link: string }>
   >;
 
+  //state for the personal note checkbox
+  note: { component_sub: string; note: boolean };
+  setNote: React.Dispatch<
+    React.SetStateAction<{ component_sub: string; note: boolean }>
+  >;
+
+  //isPersonalNote is a tester function
+  isPersonalNote: () => void;
+
   editLiveDataElement: (
     _id: string,
     userid: string,
@@ -150,6 +159,14 @@ const InfoModificationContextProvider = ({
   //From the WorkspaceContextProvider, it refreshes the displayed data after
   // data has been deleted using deleteLiveDataElement.
   const { updateCanvasData, setRepositionData } = useCanvasContext();
+
+  const [note, setNote] = useState<{ component_sub: string; note: boolean }>({
+    component_sub: "",
+    note: false,
+  });
+  function isPersonalNote() {
+    console.log(note);
+  }
 
   // const { updateWorkspaceData } = useWorkspaceContext();
   //find the double clicked element and modify data
@@ -366,6 +383,9 @@ const InfoModificationContextProvider = ({
         modificationWindow,
         setModificationWindow,
 
+        note,
+        setNote,
+        isPersonalNote,
         editLiveDataElement,
 
         deleteLiveDataElement,

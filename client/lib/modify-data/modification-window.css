@@ -1,7 +1,6 @@
 .modifications-window-container {
   display: block;
   position: absolute;
-  content: "";
   z-index: 11;
   background-color: #000000;
   top: 0;
@@ -12,14 +11,53 @@
   box-shadow: inset 0px 0px 4px 2px rgba(250, 170, 0, 0.2509803922);
   cursor: default;
 }
+.modifications-window-container div {
+  margin: 8px auto;
+}
+.modifications-window-container div .ux-note-status {
+  display: block;
+  font-size: 11px;
+  text-align: center;
+  margin: 8px auto 0px;
+}
+.modifications-window-container div .allow-personal-data-sharing {
+  cursor: pointer;
+  margin: 5px 7px 5px 0px;
+  display: inline-block;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid rgba(250, 170, 0, 0.2509803922);
+  font-size: 10px;
+  text-align: center;
+  padding: 2px 8px;
+  width: 77.2727272727;
+}
+.modifications-window-container div .prohibit-private-data-sharing {
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px 0px 5px 7px;
+  border-radius: 4px;
+  height: 18px;
+  font-size: 10px;
+  text-align: center;
+  padding: 2px 8px;
+  border: 2px solid rgba(250, 170, 0, 0.2509803922);
+  width: 77.2727272727;
+}
+.modifications-window-container div .select-true,
+.modifications-window-container div .select-false {
+  background-color: hsl(45, 100%, 8%);
+}
+.modifications-window-container .close-button,
 .modifications-window-container .edit-button,
 .modifications-window-container .component-reposition-button,
 .modifications-window-container .delete-button {
   background-color: #000000;
   border: 2px solid rgba(250, 170, 0, 0.2509803922);
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12px;
 }
+.modifications-window-container .close-button,
 .modifications-window-container .edit-button {
   width: 170px;
   cursor: pointer;
@@ -194,6 +232,10 @@
   cursor: text;
   white-space: pre-wrap;
   height: 136px;
+}
+.edit-window-container .update-box .box-two .new-linktext,
+.edit-window-container .update-box .box-two .new-text {
+  /* Text */
 }
 .edit-window-container .update-box .box-two .new-linktext .new-data,
 .edit-window-container .update-box .box-two .new-text .new-data {

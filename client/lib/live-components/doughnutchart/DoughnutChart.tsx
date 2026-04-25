@@ -7,7 +7,7 @@ import { DivClass } from "../../ui/Div";
 import { EditWindow } from "../../modify-data/EditWindow";
 import { ModificationWindow } from "../../modify-data/ModificationWindow";
 import { SpanFragment } from "../../ui/spanElement";
-import "../i-note.css";
+import "../i-menu-selector.css";
 import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 import ShortText from "../../ui/ShortText";
 import HeadingThree from "../../ui/HeadingThree";
