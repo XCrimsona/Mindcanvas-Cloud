@@ -12,6 +12,7 @@ import videoModel from "../../../models/multi-media/videoModel.js";
 import imageModel from "../../../models/multi-media/imageModel.js";
 import fs from 'fs';
 import path from "path";
+import { get } from "http";
 
 
 //loads all canva data depending on id access
@@ -427,10 +428,10 @@ singleDynamicCanvaDataGroupRouter
                             });
                         } else {
 
-                            const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, text, link, type, x, y, options
+                            const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, personalInfo, text, link, type, x, y, options
                             } = req.body;
-                            // console.log
-                            //     ("req.body: ", req.body);
+                            console.log
+                                ("req.body: ", req.body);
                             // const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset } = req.body;
                             // console.log(label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, text, link, type, x, y, options);
 
@@ -483,7 +484,7 @@ singleDynamicCanvaDataGroupRouter
                                         });
                                     }
                                 }
-                                if (updateType === "XY_POSITIONS") {
+                                else if (updateType === "XY_POSITIONS") {
                                     const positions = {
                                         position: {
                                             x: x,
@@ -512,6 +513,62 @@ singleDynamicCanvaDataGroupRouter
                                             success: false,
                                             code: "TEXT_UPDATE_REQUESTED_FAILED",
                                             message: "Requested text component data is not available",
+                                        });
+                                    }
+                                }
+                                else if (updateType === "SharingSettings") {
+                                    if (personalInfo === undefined) {
+                                        return res.status(400).json({
+                                            success: false,
+                                            code: "INSUFFICIENT_DATA",
+                                            message: "personalInfo field is missing",
+                                        });
+                                    }
+                                    const getCurrentSharingSettings = await textModel.findOne({ _id: _id });
+                                    if (getCurrentSharingSettings.personalInfo === false && personalInfo === "No") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "TEXT_SHARING_SETTINGS_UNCHANGED",
+                                            message: "Text sharing settings is already disabled",
+
+                                        });
+                                    }
+                                    if (getCurrentSharingSettings.personalInfo === true && personalInfo === "Yes") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "TEXT_SHARING_SETTINGS_UNCHANGED",
+                                            message: "Text sharing settings is already enabled",
+                                        });
+                                    }
+                                    const isSharing = {};
+                                    if (personalInfo === "No") {
+                                        isSharing.shareData = false;
+                                    }
+                                    if (personalInfo === "Yes") {
+                                        isSharing.shareData = true;
+                                    }
+
+                                    const reqToUpdateTextPrivacy = await textModel.updateOne(
+                                        {
+                                            _id: _id,
+                                            createdBy: user._id,
+                                        },
+                                        { $set: { personalInfo: isSharing.shareData } },
+                                        { new: true }
+                                    );
+
+                                    if (reqToUpdateTextPrivacy.modifiedCount === 1) {
+                                        return res.status(200).json({
+                                            success: true,
+                                            code: "TEXT_PRIVACY_SETTINGS_UPDATED",
+                                            message: "Text privacy settings have been updated",
+                                        });
+
+                                    } else {
+                                        return res.status(404).json({
+                                            success: false,
+                                            code: "TEXT_PRIVACY_SETTINGS_UPDATE_FAILED",
+                                            message: "Text privacy settings not updated",
                                         });
                                     }
                                 }
@@ -565,7 +622,7 @@ singleDynamicCanvaDataGroupRouter
                                         });
                                     }
                                 }
-                                if (updateType === "XY_POSITIONS") {
+                                else if (updateType === "XY_POSITIONS") {
                                     const positions = {
                                         position: {
                                             x: x,
@@ -595,8 +652,67 @@ singleDynamicCanvaDataGroupRouter
                                         })
                                     }
                                 }
+                                else if (updateType === "SharingSettings") {
+                                    if (personalInfo === undefined) {
+                                        return res.status(400).json({
+                                            success: false,
+                                            code: "INSUFFICIENT_DATA",
+                                            message: "personalInfo field is missing",
+                                        });
+                                    }
+                                    const getCurrentSharingSettings = await textLinkModel.findOne({ _id: _id });
+                                    if (getCurrentSharingSettings.personalInfo === false && personalInfo === "No") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "TEXTLINK_FRAGMENT_SHARING_UNCHANGED",
+                                            message: "TextLink fragment sharing settings is already disabled",
+
+                                        });
+                                    }
+                                    if (getCurrentSharingSettings.personalInfo === true && personalInfo === "Yes") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "TEXTLINK_FRAGMENT_SHARING_UNCHANGED",
+                                            message: "TextLink fragment sharing settings is already enabled",
+                                        });
+                                    }
+                                    const isSharing = {};
+                                    if (personalInfo === "No") {
+                                        isSharing.shareData = false;
+                                    }
+                                    if (personalInfo === "Yes") {
+                                        isSharing.shareData = true;
+                                    }
+
+                                    const reqToUpdateTextLinkComponentSharing = await textLinkModel.updateOne(
+                                        {
+                                            _id: _id,
+                                            createdBy: user._id,
+                                        },
+                                        { $set: { personalInfo: isSharing.shareData } },
+                                        { new: true }
+                                    );
+
+                                    if (reqToUpdateTextLinkComponentSharing.modifiedCount === 1) {
+                                        return res.status(200).json({
+                                            success: true,
+                                            code: "TEXTLINK_FRAGMENT_SHARING_UPDATED",
+                                            message: "TextLink fragment sharing settings have been updated",
+                                        });
+
+                                    } else {
+                                        return res.status(404).json({
+                                            success: false,
+                                            code: "TEXTLINK_FRAGMENT_SHARING_UPDATE_FAILED",
+                                            message: "TextLink fragment sharing settings not updated",
+                                        });
+                                    }
+                                }
                             }
                             else if (type === "DoughnutChart") {
+
+                                //requires if to update chart content
+                                //else if...
                                 if (updateType === "XY_POSITIONS"
                                 ) {
                                     if (!_id) {
@@ -640,9 +756,65 @@ singleDynamicCanvaDataGroupRouter
                                         });
                                     }
                                 }
+                                else if (updateType === "SharingSettings") {
+                                    if (personalInfo === undefined) {
+                                        return res.status(400).json({
+                                            success: false,
+                                            code: "INSUFFICIENT_DATA",
+                                            message: "personalInfo field is missing",
+                                        });
+                                    }
+                                    const getCurrentSharingSettings = await DoughnutChartModel.findOne({ _id: _id });
+                                    if (getCurrentSharingSettings.personalInfo === false && personalInfo === "No") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "DOUGHNUT_CHART_FRAGMENT_SHARING_UNCHANGED",
+                                            message: "DoughnutChart fragment sharing settings is already disabled",
 
+                                        });
+                                    }
+                                    if (getCurrentSharingSettings.personalInfo === true && personalInfo === "Yes") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "DOUGHNUT_CHART_FRAGMENT_SHARING_UNCHANGED",
+                                            message: "DoughnutChart fragment sharing settings is already enabled",
+                                        });
+                                    }
+                                    const isSharing = {};
+                                    if (personalInfo === "No") {
+                                        isSharing.shareData = false;
+                                    }
+                                    if (personalInfo === "Yes") {
+                                        isSharing.shareData = true;
+                                    }
+
+                                    const reqToUpdateDoughnutChartComponentSharing = await DoughnutChartModel.updateOne(
+                                        {
+                                            _id: _id,
+                                            createdBy: user._id,
+                                        },
+                                        { $set: { personalInfo: isSharing.shareData } },
+                                        { new: true }
+                                    );
+
+                                    if (reqToUpdateDoughnutChartComponentSharing.modifiedCount === 1) {
+                                        return res.status(200).json({
+                                            success: true,
+                                            code: "DOUGHNUT_CHART_FRAGMENT_SHARING_UPDATED",
+                                            message: "DoughnutChart fragment sharing settings have been updated",
+                                        });
+
+                                    } else {
+                                        return res.status(404).json({
+                                            success: false,
+                                            code: "DOUGHNUT_CHART_FRAGMENT_SHARING_UPDATE_FAILED",
+                                            message: "DoughnutChart fragment sharing settings not updated",
+                                        });
+                                    }
+                                }
                             }
                             else if (type === "Video") {
+                                //requires if to update video content
                                 if (updateType === "XY_POSITIONS") {
                                     if (!_id) {
                                         return res.status(400).json({
@@ -681,8 +853,65 @@ singleDynamicCanvaDataGroupRouter
                                         });
                                     }
                                 }
+                                else if (updateType === "SharingSettings") {
+                                    if (personalInfo === undefined) {
+                                        return res.status(400).json({
+                                            success: false,
+                                            code: "INSUFFICIENT_DATA",
+                                            message: "personalInfo field is missing",
+                                        });
+                                    }
+                                    const getCurrentSharingSettings = await videoModel.findOne({ _id: _id });
+                                    if (getCurrentSharingSettings.personalInfo === false && personalInfo === "No") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "VIDEO_FRAGMENT_SHARING_UNCHANGED",
+                                            message: "Video fragment sharing settings is already disabled",
+
+                                        });
+                                    }
+                                    if (getCurrentSharingSettings.personalInfo === true && personalInfo === "Yes") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "VIDEO_FRAGMENT_SHARING_UNCHANGED",
+                                            message: "Video fragment sharing settings is already enabled",
+                                        });
+                                    }
+                                    const isSharing = {};
+                                    if (personalInfo === "No") {
+                                        isSharing.shareData = false;
+                                    }
+                                    if (personalInfo === "Yes") {
+                                        isSharing.shareData = true;
+                                    }
+
+                                    const reqToUpdateVideoComponentSharing = await videoModel.updateOne(
+                                        {
+                                            _id: _id,
+                                            createdBy: user._id,
+                                        },
+                                        { $set: { personalInfo: isSharing.shareData } },
+                                        { new: true }
+                                    );
+
+                                    if (reqToUpdateVideoComponentSharing.modifiedCount === 1) {
+                                        return res.status(200).json({
+                                            success: true,
+                                            code: "VIDEO_FRAGMENT_SHARING_UPDATED",
+                                            message: "Video fragment sharing settings have been updated",
+                                        });
+
+                                    } else {
+                                        return res.status(404).json({
+                                            success: false,
+                                            code: "VIDEO_FRAGMENT_SHARING_UPDATE_FAILED",
+                                            message: "Video fragment sharing settings not updated",
+                                        });
+                                    }
+                                }
                             }
                             else if (type === "Images") {
+                                //requires if to update image cluster content
                                 if (updateType === "XY_POSITIONS") {
                                     if (!_id) {
                                         return res.status(400).json({
@@ -718,6 +947,62 @@ singleDynamicCanvaDataGroupRouter
                                             success: true,
                                             code: "IMAGE_CLUSTER_XY_COORDINATES_REQUEST_UPDATED",
                                             message: "Image Cluster XY coordinates have been updated",
+                                        });
+                                    }
+                                }
+                                else if (updateType === "SharingSettings") {
+                                    if (personalInfo === undefined) {
+                                        return res.status(400).json({
+                                            success: false,
+                                            code: "INSUFFICIENT_DATA",
+                                            message: "personalInfo field is missing",
+                                        });
+                                    }
+                                    const getCurrentSharingSettings = await imageModel.findOne({ _id: _id });
+                                    if (getCurrentSharingSettings.personalInfo === false && personalInfo === "No") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "IMAGE_CLUSTER_SHARING_UNCHANGED",
+                                            message: "Image Cluster sharing settings is already disabled",
+
+                                        });
+                                    }
+                                    if (getCurrentSharingSettings.personalInfo === true && personalInfo === "Yes") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "IMAGE_CLUSTER_SHARING_UPDATED",
+                                            message: "Image Cluster sharing settings have been updated",
+                                        });
+                                    }
+                                    const isSharing = {};
+                                    if (personalInfo === "No") {
+                                        isSharing.shareData = false;
+                                    }
+                                    if (personalInfo === "Yes") {
+                                        isSharing.shareData = true;
+                                    }
+
+                                    const reqToUpdateDoughnutChartComponentSharing = await imageModel.updateOne(
+                                        {
+                                            _id: _id,
+                                            createdBy: user._id,
+                                        },
+                                        { $set: { personalInfo: isSharing.shareData } },
+                                        { new: true }
+                                    );
+
+                                    if (reqToUpdateDoughnutChartComponentSharing.modifiedCount === 1) {
+                                        return res.status(200).json({
+                                            success: true,
+                                            code: "IMAGE_CLUSTER_SHARING_UPDATED",
+                                            message: "Image Cluster sharing settings have been updated",
+                                        });
+
+                                    } else {
+                                        return res.status(404).json({
+                                            success: false,
+                                            code: "IMAGE_CLUSTER_SHARING_UPDATE_FAILED",
+                                            message: "Image Cluster sharing settings not updated",
                                         });
                                     }
                                 }

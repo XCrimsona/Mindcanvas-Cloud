@@ -1,35 +1,38 @@
 .image-fragment-container {
-  display: block;
-  min-width: 600px;
-  max-width: 680px;
-  padding: 0px;
-  max-height: 400px;
-  overflow-y: scroll;
+    display: block;
+    min-width: 600px;
+    max-width: 680px;
+    padding: 0px;
+    max-height: 400px;
+    overflow-y: scroll;
+
+    .image-fragment {
+        margin: 0 auto;
+        cursor: default;
+        background-color: #000000;
+        min-width: 260px;
+        max-width: 680px;
+        padding: 10px;
+        box-shadow: inset 0px 0px 4px 2px #FAAA0040, 0px 0px 4px 0px #FAAA0040;
+    }
+
+    .image-header {
+        font-size: 11px;
+        color: #ccc;
+        word-break: break-word;
+        padding-left: 4px;
+    }
+
+    .image-element {
+        width: 300px;
+        height: auto;
+        max-height: 200px;
+        border-top-left-radius: 4px;
+        object-fit: cover;
+        background-color: #111;
+    }
+
+    .image-element:focus {
+        outline: none;
+    }
 }
-.image-fragment-container .image-fragment {
-  margin: 0 auto;
-  cursor: default;
-  background-color: #000000;
-  min-width: 260px;
-  max-width: 680px;
-  padding: 10px;
-  box-shadow: inset 0px 0px 4px 2px rgba(250, 170, 0, 0.2509803922), 0px 0px 4px 0px rgba(250, 170, 0, 0.2509803922);
-}
-.image-fragment-container .image-header {
-  font-size: 11px;
-  color: #ccc;
-  word-break: break-word;
-  padding-left: 4px;
-}
-.image-fragment-container .image-element {
-  width: 300px;
-  height: auto;
-  max-height: 200px;
-  border-top-left-radius: 4px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  background-color: #111;
-}
-.image-fragment-container .image-element:focus {
-  outline: none;
-}/*# sourceMappingURL=image-data-styling.css.map */

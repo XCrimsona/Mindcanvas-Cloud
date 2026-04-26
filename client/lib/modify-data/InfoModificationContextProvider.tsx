@@ -14,6 +14,7 @@ import { useCanvasContext } from "../form-components/canva-data-provider/CanvasD
 // import canvaNotification_TextFragmentDeleted from "../notifications/fragment-deletes/CanvaNotification_TextFragmentDeleted";
 // import canvaNotification_TextFragmentDeletedFailed from "../notifications/fragment-deletes/CanvaNotification_TextFragmentDeleteFailed";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 type TypeModificationContext = true | false;
 interface IModificationUseStateContextType {
@@ -61,13 +62,19 @@ interface IModificationUseStateContextType {
   >;
 
   //state for the personal note checkbox
-  note: { component_sub: string; note: boolean };
+  note: { component_sub: string; isSharing: boolean };
   setNote: React.Dispatch<
-    React.SetStateAction<{ component_sub: string; note: boolean }>
+    React.SetStateAction<{ component_sub: string; isSharing: boolean }>
   >;
 
   //isPersonalNote is a tester function
   isPersonalNote: () => void;
+  updateFragmentPrivacy: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    _id: string,
+    type: string,
+    personalInfo: boolean,
+  ) => void;
 
   editLiveDataElement: (
     _id: string,
@@ -160,12 +167,72 @@ const InfoModificationContextProvider = ({
   // data has been deleted using deleteLiveDataElement.
   const { updateCanvasData, setRepositionData } = useCanvasContext();
 
-  const [note, setNote] = useState<{ component_sub: string; note: boolean }>({
+  const [note, setNote] = useState<{
+    component_sub: string;
+    isSharing: boolean;
+  }>({
     component_sub: "",
-    note: false,
+    isSharing: false,
   });
   function isPersonalNote() {
     console.log(note);
+  }
+
+  const { userid, canvaid } = useParams();
+
+  async function updateFragmentPrivacy(
+    e: React.MouseEvent<HTMLButtonElement>,
+    _id: string,
+    type: string,
+    personalInfo: boolean,
+  ) {
+    e.preventDefault();
+    // console.log(type);
+    // console.log(personalInfo);
+    // console.log(_id);
+    let updateType = "SharingSettings";
+    if (!_id) {
+      toast.info("Insufficient data to update fragment privacy", {
+        autoClose: 4000,
+      });
+      return;
+    } else {
+      const patchPayload: any = {};
+      //always check for filled payload even when its always saying always true
+      if (type) patchPayload.type = type;
+      if (updateType) patchPayload.updateType = updateType;
+      //boolean value stored in class for css and selected logic reference and updates
+      const isSharing = e.currentTarget.textContent;
+      // console.log(isSharing);
+
+      if (personalInfo === false || personalInfo === true)
+        patchPayload.personalInfo = isSharing;
+      //id or _id for the backend to read the id of the chosen models
+      if (_id) patchPayload._id = _id;
+      // console.log(patchPayload);
+
+      const setFragmentPriv = await fetch(
+        `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(patchPayload),
+        },
+      );
+      if (setFragmentPriv.ok) {
+        updateCanvasData();
+        const fragmentresp = await setFragmentPriv.json();
+        toast.success(fragmentresp.message, { autoClose: 4000 });
+      } else {
+        const fragmentError = await setFragmentPriv.json();
+        toast.error("Update not successful: " + fragmentError.message, {
+          autoClose: 4000,
+        });
+      }
+    }
   }
 
   // const { updateWorkspaceData } = useWorkspaceContext();
@@ -386,6 +453,7 @@ const InfoModificationContextProvider = ({
         note,
         setNote,
         isPersonalNote,
+        updateFragmentPrivacy,
         editLiveDataElement,
 
         deleteLiveDataElement,
