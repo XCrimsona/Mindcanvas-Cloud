@@ -97,12 +97,12 @@ export const ImageCluster = ({ data }: { data: any }) => {
   };
   return (
     <>
-      {/* Modification*/}
+      {/* Modification Window*/}
       {modificationWindow && selectedComp.dataFragmentId === _id && (
         <ModificationWindow componentData={data} />
       )}
 
-      {/* Edit Windows */}
+      {/* Edit Window */}
       {editState && selectedComp.dataFragmentId === _id && (
         <EditWindow componentData={data} />
       )}
@@ -112,7 +112,7 @@ export const ImageCluster = ({ data }: { data: any }) => {
         <div
           id={`${_id}`}
           className={
-            "image-fragment justify-start flex flex-wrap  gap-0.5 rounded"
+            "image-fragment flex flex-wrap justify-start gap-0.5 rounded"
           }
         >
           {/* FEATURE ADDED: Manual Trigger Overlay */}

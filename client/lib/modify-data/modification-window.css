@@ -1,282 +1,306 @@
 .modifications-window-container {
-  display: block;
-  position: absolute;
-  z-index: 11;
-  background-color: #000000;
-  top: 0;
-  left: 0px;
-  width: 200px;
-  height: -moz-fit-content;
-  height: fit-content;
-  box-shadow: inset 0px 0px 4px 2px rgba(250, 170, 0, 0.2509803922);
-  cursor: default;
-}
-.modifications-window-container div {
-  margin: 8px auto;
-}
-.modifications-window-container div .ux-note-status {
-  display: block;
-  font-size: 11px;
-  text-align: center;
-  margin: 8px auto 0px;
-}
-.modifications-window-container div .allow-personal-data-sharing {
-  cursor: pointer;
-  margin: 5px 7px 5px 0px;
-  display: inline-block;
-  height: 18px;
-  border-radius: 4px;
-  border: 2px solid rgba(250, 170, 0, 0.2509803922);
-  font-size: 10px;
-  text-align: center;
-  padding: 2px 8px;
-  width: 77.2727272727;
-}
-.modifications-window-container div .prohibit-private-data-sharing {
-  cursor: pointer;
-  display: inline-block;
-  margin: 5px 0px 5px 7px;
-  border-radius: 4px;
-  height: 18px;
-  font-size: 10px;
-  text-align: center;
-  padding: 2px 8px;
-  border: 2px solid rgba(250, 170, 0, 0.2509803922);
-  width: 77.2727272727;
-}
-.modifications-window-container div .select-true,
-.modifications-window-container div .select-false {
-  background-color: hsl(45, 100%, 8%);
-}
-.modifications-window-container .close-button,
-.modifications-window-container .edit-button,
-.modifications-window-container .component-reposition-button,
-.modifications-window-container .delete-button {
-  background-color: #000000;
-  border: 2px solid rgba(250, 170, 0, 0.2509803922);
-  border-radius: 4px;
-  font-size: 12px;
-}
-.modifications-window-container .close-button,
-.modifications-window-container .edit-button {
-  width: 170px;
-  cursor: pointer;
-  color: #fff;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.modifications-window-container .component-reposition-button {
-  width: 170px;
-  cursor: pointer;
-  color: #fa0;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.modifications-window-container .delete-container {
-  width: 170px;
-}
-.modifications-window-container .delete-container .toggle-delete {
-  display: block;
-  cursor: pointer;
-  width: 25px;
-}
-.modifications-window-container .delete-container .delete-button {
-  width: 140px;
-  color: #f00;
-  margin-top: 10px;
-  margin-left: 5px;
-  margin-bottom: 10px;
+    display: block;
+    position: absolute;
+    z-index: 11;
+    background-color: #000000;
+    top: 0;
+    left: 0px;
+    width: 200px;
+    height: fit-content;
+    box-shadow: inset 0px 0px 4px 2px #faaa0040;
+    cursor: default;
+
+    .data-sharing-buttons-container {
+        margin: 8px auto;
+
+        .ux-note-status {
+            display: block;
+            font-size: 11px;
+            text-align: center;
+            margin: 8px auto 0px;
+        }
+
+        .allow-personal-data-sharing {
+            cursor: pointer;
+            margin: 5px 7px 5px 0px;
+            height: 18px;
+            border-radius: 4px;
+            border: 2px solid #FAAA0040;
+            font-size: 10px;
+            text-align: center;
+            padding: 2px 8px;
+            width: calc(170px/2.2);
+        }
+
+        .prohibit-private-data-sharing {
+            cursor: pointer;
+            margin: 5px 0px 5px 7px;
+            border-radius: 4px;
+            height: 18px;
+            font-size: 10px;
+            text-align: center;
+            padding: 2px 8px;
+            border: 2px solid #FAAA0040;
+            width: calc(170px/2.2);
+        }
+
+        .select-true,
+        .select-false {
+            background-color: hsl(45, 100%, 8%);
+        }
+    }
+
+    .close-button,
+    .edit-button,
+    .component-reposition-button,
+    .delete-button {
+        background-color: #000000;
+        border: 2px solid #FAAA0040;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+    .close-button,
+    .edit-button {
+        width: 170px;
+        cursor: pointer;
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .component-reposition-button {
+        width: 170px;
+        cursor: pointer;
+        color: #fa0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .delete-container {
+        width: 170px;
+
+        .toggle-delete {
+            display: block;
+            cursor: pointer;
+            width: 25px;
+        }
+
+        .delete-button {
+            width: 140px;
+            color: #f00;
+            margin-top: 10px;
+            margin-left: 5px;
+            margin-bottom: 10px;
+        }
+    }
 }
 
+
 .edit-window-container {
-  position: absolute;
-  display: block;
-  cursor: default;
-  top: 0px;
-  z-index: 11;
-  left: 0px;
-  height: -moz-fit-content;
-  height: fit-content;
-  background-color: #000000;
-  box-shadow: inset 0px 0px 4px 2px rgba(250, 170, 0, 0.2509803922), 0px 0px 4px 0px rgba(250, 170, 0, 0.2509803922);
-  width: 600px;
+    position: absolute;
+    display: block;
+    cursor: default;
+    top: 0px;
+    z-index: 11;
+    left: 0px;
+    height: fit-content;
+    background-color: #000000;
+    box-shadow: inset 0px 0px 4px 2px #FAAA0040,
+        0px 0px 4px 0px #FAAA0040;
+    width: 600px;
+
+    .update-box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
+        padding-bottom: 0px;
+        width: 600px;
+
+        .box-one {
+            display: block;
+            font-size: 10px;
+            margin-left: 4px;
+            margin-right: 15px;
+            text-align: left;
+            padding-bottom: 4px;
+            width: 250px;
+
+            .dual-data {
+                .box-one-enabled-linkdescription-input-field {
+                    background-color: #000000;
+                    color: white;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    outline: none;
+                    cursor: text;
+                    height: 20px;
+                    white-space: pre-wrap;
+                    width: 240px;
+
+                }
+
+                .pulled-link {
+                    background-color: #000000;
+                    color: white;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    outline: none;
+                    margin-bottom: 4px;
+                    padding: 0px 0px 0px 0px;
+                    cursor: text;
+                    height: 30px;
+                    white-space: pre-wrap;
+                    width: 250px;
+
+                }
+
+                .pulled-text {
+                    resize: none;
+                    height: 136px;
+                    width: 250px;
+                    white-space: pre-wrap;
+                }
+            }
+
+            .pulled-text-data {
+                background-color: #000000;
+                color: white;
+                resize: none;
+                outline: none;
+                margin-bottom: 4px;
+                padding: 0px 0px 0px 0px;
+                cursor: text;
+                height: 148px;
+                white-space: pre-wrap;
+                width: 250px;
+            }
+
+            .pulled-data {
+                background-color: #000000;
+                color: white;
+                resize: none;
+                outline: none;
+                margin-bottom: 4px;
+                padding: 0px 0px 0px 0px;
+                cursor: text;
+                height: 148px;
+                white-space: pre-wrap;
+                width: 250px;
+            }
+
+            .pulled-data::selection {
+                background-color: #79674E;
+                color: white;
+            }
+
+            .pulled-data:focus {
+                outline: none;
+            }
+
+            .copy-clipboard-button,
+            .change-windows {
+                margin-top: 5px;
+                margin-bottom: 5px;
+                cursor: pointer;
+                width: 250px;
+                color: #FABB00;
+                border-radius: 4px;
+                padding: 4px 3px;
+                background-color: #000000;
+                box-shadow: 0px 0px 4px 0px rgba(250, 170, 0, 0.251);
+                border: 2px solid rgba(250, 170, 0, 0.251);
+            }
+        }
+
+        .style-div {
+            width: 1px;
+            background-color: #79674E;
+        }
+
+        .box-two {
+            width: 250px;
+            font-size: 10px;
+            margin-left: 15px;
+            margin-right: 4px;
+            padding-bottom: 4px;
+
+            .new-linktext,
+            .new-text {
+                .dual-data {
+                    .box-two-enabled-linkdescription-input-field {
+                        background-color: #000000;
+                        color: white;
+                        overflow-x: hidden;
+                        overflow-y: auto;
+                        outline: none;
+                        cursor: text;
+                        height: 20px;
+                        white-space: pre-wrap;
+                        width: 240px;
+                    }
+
+                    .new-data {
+                        background-color: #000000;
+                        color: white;
+                        width: 250px;
+                        resize: none;
+                        font-size: 10px;
+                        overflow-y: auto;
+                        outline: none;
+                        padding: 0px 0px 0px 0px;
+                        cursor: text;
+                        white-space: pre-wrap;
+                        height: 136px;
+                    }
+
+                }
+
+
+                /* Text */
+                .new-data {
+                    height: 152px;
+                    background-color: #000000;
+                    color: white;
+                    width: 250px;
+                    resize: none;
+                    font-size: 10px;
+                    outline: none;
+                    padding: 0px 0px 0px 0px;
+                    cursor: text;
+                    white-space: pre-wrap;
+                }
+            }
+
+
+
+            .new-data::placeholder {
+                color: #ccc;
+            }
+
+            .new-data:focus {
+                outline: none;
+            }
+
+            .new-data::selection {
+                background-color: #79674E;
+                color: white;
+            }
+
+            .paste-clipboard-button,
+            .update-button {
+                margin-top: 5px;
+                margin-bottom: 5px;
+                cursor: pointer;
+                width: 250px;
+                color: #FABB00;
+                padding: 4px 3px;
+                background-color: #000000;
+                box-shadow: 0px 0px 4px 0px rgba(250, 170, 0, 0.251);
+                border: 2px solid rgba(250, 170, 0, 0.251);
+                border-radius: 4px;
+            }
+        }
+    }
 }
-.edit-window-container .update-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
-  padding-bottom: 0px;
-  width: 600px;
-}
-.edit-window-container .update-box .box-one {
-  display: block;
-  font-size: 10px;
-  margin-left: 4px;
-  margin-right: 15px;
-  text-align: left;
-  padding-bottom: 4px;
-  width: 250px;
-}
-.edit-window-container .update-box .box-one .dual-data .box-one-enabled-linkdescription-input-field {
-  background-color: #000000;
-  color: white;
-  overflow-x: hidden;
-  overflow-y: auto;
-  outline: none;
-  cursor: text;
-  height: 20px;
-  white-space: pre-wrap;
-  width: 240px;
-}
-.edit-window-container .update-box .box-one .dual-data .pulled-link {
-  background-color: #000000;
-  color: white;
-  overflow-x: hidden;
-  overflow-y: auto;
-  outline: none;
-  margin-bottom: 4px;
-  padding: 0px 0px 0px 0px;
-  cursor: text;
-  height: 30px;
-  white-space: pre-wrap;
-  width: 250px;
-}
-.edit-window-container .update-box .box-one .dual-data .pulled-text {
-  resize: none;
-  height: 136px;
-  width: 250px;
-  white-space: pre-wrap;
-}
-.edit-window-container .update-box .box-one .pulled-text-data {
-  background-color: #000000;
-  color: white;
-  resize: none;
-  outline: none;
-  margin-bottom: 4px;
-  padding: 0px 0px 0px 0px;
-  cursor: text;
-  height: 148px;
-  white-space: pre-wrap;
-  width: 250px;
-}
-.edit-window-container .update-box .box-one .pulled-data {
-  background-color: #000000;
-  color: white;
-  resize: none;
-  outline: none;
-  margin-bottom: 4px;
-  padding: 0px 0px 0px 0px;
-  cursor: text;
-  height: 148px;
-  white-space: pre-wrap;
-  width: 250px;
-}
-.edit-window-container .update-box .box-one .pulled-data::-moz-selection {
-  background-color: #79674E;
-  color: white;
-}
-.edit-window-container .update-box .box-one .pulled-data::selection {
-  background-color: #79674E;
-  color: white;
-}
-.edit-window-container .update-box .box-one .pulled-data:focus {
-  outline: none;
-}
-.edit-window-container .update-box .box-one .copy-clipboard-button,
-.edit-window-container .update-box .box-one .change-windows {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  cursor: pointer;
-  width: 250px;
-  color: #FABB00;
-  border-radius: 4px;
-  padding: 4px 3px;
-  background-color: #000000;
-  box-shadow: 0px 0px 4px 0px rgba(250, 170, 0, 0.251);
-  border: 2px solid rgba(250, 170, 0, 0.251);
-}
-.edit-window-container .update-box .style-div {
-  width: 1px;
-  background-color: #79674E;
-}
-.edit-window-container .update-box .box-two {
-  width: 250px;
-  font-size: 10px;
-  margin-left: 15px;
-  margin-right: 4px;
-  padding-bottom: 4px;
-}
-.edit-window-container .update-box .box-two .new-linktext .dual-data .box-two-enabled-linkdescription-input-field,
-.edit-window-container .update-box .box-two .new-text .dual-data .box-two-enabled-linkdescription-input-field {
-  background-color: #000000;
-  color: white;
-  overflow-x: hidden;
-  overflow-y: auto;
-  outline: none;
-  cursor: text;
-  height: 20px;
-  white-space: pre-wrap;
-  width: 240px;
-}
-.edit-window-container .update-box .box-two .new-linktext .dual-data .new-data,
-.edit-window-container .update-box .box-two .new-text .dual-data .new-data {
-  background-color: #000000;
-  color: white;
-  width: 250px;
-  resize: none;
-  font-size: 10px;
-  overflow-y: auto;
-  outline: none;
-  padding: 0px 0px 0px 0px;
-  cursor: text;
-  white-space: pre-wrap;
-  height: 136px;
-}
-.edit-window-container .update-box .box-two .new-linktext,
-.edit-window-container .update-box .box-two .new-text {
-  /* Text */
-}
-.edit-window-container .update-box .box-two .new-linktext .new-data,
-.edit-window-container .update-box .box-two .new-text .new-data {
-  height: 152px;
-  background-color: #000000;
-  color: white;
-  width: 250px;
-  resize: none;
-  font-size: 10px;
-  outline: none;
-  padding: 0px 0px 0px 0px;
-  cursor: text;
-  white-space: pre-wrap;
-}
-.edit-window-container .update-box .box-two .new-data::-moz-placeholder {
-  color: #ccc;
-}
-.edit-window-container .update-box .box-two .new-data::placeholder {
-  color: #ccc;
-}
-.edit-window-container .update-box .box-two .new-data:focus {
-  outline: none;
-}
-.edit-window-container .update-box .box-two .new-data::-moz-selection {
-  background-color: #79674E;
-  color: white;
-}
-.edit-window-container .update-box .box-two .new-data::selection {
-  background-color: #79674E;
-  color: white;
-}
-.edit-window-container .update-box .box-two .paste-clipboard-button,
-.edit-window-container .update-box .box-two .update-button {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  cursor: pointer;
-  width: 250px;
-  color: #FABB00;
-  padding: 4px 3px;
-  background-color: #000000;
-  box-shadow: 0px 0px 4px 0px rgba(250, 170, 0, 0.251);
-  border: 2px solid rgba(250, 170, 0, 0.251);
-  border-radius: 4px;
-}/*# sourceMappingURL=modification-window.css.map */

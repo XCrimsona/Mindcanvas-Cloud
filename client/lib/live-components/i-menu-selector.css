@@ -1,16 +1,12 @@
-@use '../../../../../styles/index' as style;
-
 .i-note-drop-down {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
     position: absolute;
     top: 0px;
     left: -30px;
-    cursor: pointer;
-    margin: 0px 0px 0 0px;
-    border: 2px solid #FAAA0040;
-    border-radius: 50%;
     width: 20px;
     height: 20px;
+    border-radius: 50%;
+    border: 2px solid #FAAA0040;
+    cursor: pointer;
 }

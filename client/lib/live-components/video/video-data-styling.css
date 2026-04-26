@@ -1,38 +1,42 @@
 .video-fragment-container {
-  display: block;
-  min-width: 260px;
-  max-width: 480px;
-  padding: 0px;
-  max-height: 400px;
-  overflow: hidden;
+    display: block;
+    min-width: 260px;
+    max-width: 480px;
+    padding: 0px;
+    max-height: 400px;
+    overflow: hidden;
+
+    .video-fragment {
+        margin: 0 auto;
+        cursor: default;
+        background-color: #000000;
+        font-size: 12px;
+        min-width: 260px;
+        max-width: 480px;
+        padding: 10px;
+        box-shadow: inset 0px 0px 4px 2px #FAAA0040, 0px 0px 4px 0px #FAAA0040;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .video-header {
+        font-size: 11px;
+        color: #ccc;
+        word-break: break-word;
+        padding-left: 4px;
+    }
+
+    .video-element {
+        width: 300px;
+        height: auto;
+        max-height: 200px;
+        border-top-left-radius: 4px;
+        object-fit: cover;
+        background-color: #111;
+    }
+
+    .video-element:focus {
+        outline: none;
+    }
 }
-.video-fragment-container .video-fragment {
-  margin: 0 auto;
-  cursor: default;
-  background-color: #000000;
-  min-width: 260px;
-  max-width: 480px;
-  padding: 10px;
-  box-shadow: inset 0px 0px 4px 2px rgba(250, 170, 0, 0.2509803922), 0px 0px 4px 0px rgba(250, 170, 0, 0.2509803922);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.video-fragment-container .video-header {
-  font-size: 11px;
-  color: #ccc;
-  word-break: break-word;
-  padding-left: 4px;
-}
-.video-fragment-container .video-element {
-  width: 300px;
-  height: auto;
-  max-height: 200px;
-  border-top-left-radius: 4px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  background-color: #111;
-}
-.video-fragment-container .video-element:focus {
-  outline: none;
-}/*# sourceMappingURL=video-data-styling.css.map */

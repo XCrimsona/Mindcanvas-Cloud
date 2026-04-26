@@ -1,4 +1,4 @@
-import { DivClass } from "../../../../../../src/ui/Div";
+import { DivClass } from "../ui/Div";
 
 export const ImmutableList = ({ data }: any) => {
   return <p className={"textarea"}>{data.text}</p>;
