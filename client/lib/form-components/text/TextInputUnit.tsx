@@ -119,10 +119,6 @@ const TextInputUnit = () => {
         if (text.ok) {
           toast.success("Text data fragment created");
           updateCanvasData();
-          setNewTextComponent({
-            ...newTextComponent,
-            text: "",
-          });
         } else {
           toast.success("Text fragment was not added!");
         }
@@ -241,6 +237,19 @@ const TextInputUnit = () => {
                 />
                 <DivClass className={"text-btn-container"}>
                   <DivClass className={"text-submit-btn-container"}>
+                    <Button
+                      id="text-btn-clear"
+                      className={"text-btn-clear"}
+                      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                        e.preventDefault();
+                        setNewTextComponent({
+                          ...newTextComponent,
+                          text: "",
+                        });
+                      }}
+                    >
+                      CLEAR
+                    </Button>
                     <Button id="text-btn-submit" className={"text-btn-submit"}>
                       SAVE
                     </Button>

@@ -121,14 +121,10 @@ const ImageInputUnit = () => {
           },
         );
         if (image.ok) {
-          toast.success("Image data fragment created");
+          toast.success("ImageCluster created");
           updateCanvasData();
-          setNewImageComponent({
-            ...newImageComponent,
-            image: "",
-          });
         } else {
-          toast.success("Image fragment was not added!");
+          toast.success("ImageCluster was not added!");
         }
       }
     };
@@ -254,6 +250,19 @@ const ImageInputUnit = () => {
                 />
                 <DivClass className={"image-btn-container"}>
                   <DivClass className={"image-submit-btn-container"}>
+                    <Button
+                      id="image-btn-clear"
+                      className={"image-btn-clear"}
+                      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                        e.preventDefault();
+                        setNewImageComponent({
+                          ...newImageComponent,
+                          imageFolderPath: "",
+                        });
+                      }}
+                    >
+                      Clear
+                    </Button>
                     <Button
                       id="image-btn-submit"
                       className={"image-btn-submit"}

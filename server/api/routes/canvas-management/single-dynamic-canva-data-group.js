@@ -273,105 +273,113 @@ singleDynamicCanvaDataGroupRouter
                                 });
                             }
                         }
+                        // ===============================
+                        // OLD CODE — Image cluster creation. Supported only 4 extensions and used
+                        // a manual for-loop + push pattern. mimeTypes map was incomplete (no gif,
+                        // avif, svg). Error response incorrectly said "Video created!".
+                        //
+                        // else if (pathtoimages && type === "Images" && x >= 0 && y >= 0) {
+                        //     if (!fs.existsSync(pathtoimages)) {
+                        //         return res.status(404).json({ success: false, message: "Directory not found on disk" });
+                        //     } else {
+                        //         const directoryPath = pathtoimages;
+                        //         const files = fs.readdirSync(pathtoimages);
+                        //         const allowedExtensions = [".png", ".jpg", ".jpeg", ".webp"];
+                        //         const imageFiles = files.filter(file => {
+                        //             const ext = path.extname(file).toLowerCase();
+                        //             return allowedExtensions.includes(ext);
+                        //         });
+                        //         const imagesPayload = [];
+                        //         for (const fileName of imageFiles) {
+                        //             const fullPath = path.join(directoryPath, fileName);
+                        //             const ext = path.extname(fileName).toLowerCase();
+                        //             const mimeTypes = {
+                        //                 ".png": "image/png",
+                        //                 ".jpg": "image/jpeg",
+                        //                 ".jpeg": "image/jpeg",
+                        //                 ".webp": "image/webp"
+                        //             };
+                        //             const mime = mimeTypes[ext] || "image/jpeg";
+                        //             imagesPayload.push({ name: fileName, mime, imagepath: fullPath });
+                        //         }
+                        //         const imagecluster = imagesPayload;
+                        //         const createImageComponent = await imageModel.create({
+                        //             pathtoimages, type, imagecluster,
+                        //             position: { x, y }, owner: user._id,
+                        //             createdBy: user._id, workspaceId: canvaid,
+                        //         });
+                        //         if (!createImageComponent) {
+                        //             return res.status(500).json({ success: true, code: "COMPONENT_CREATION_FAILED", message: "Not Created!" });
+                        //         } else {
+                        //             return res.status(201).json({ success: true, code: "COMPONENT_CREATED", message: "Video created!" });
+                        //         }
+                        //     }
+                        // }
+                        // ===============================
+
+                        // NEW CODE — Expanded mime support to match imageModel schema (gif, avif, svg added).
+                        // Uses readdirSync with withFileTypes to skip subdirectories cleanly.
+                        // Guards against an empty directory (no supported files) before hitting the DB.
                         else if (pathtoimages && type === "Images" && x >= 0 && y >= 0) {
-                            // console.log("this Images line works");
-                            // console.log(pathtoimages, type, x, y);
-                            //Ensure directory exists
                             if (!fs.existsSync(pathtoimages)) {
-                                // console.log("dir does not exist");
                                 return res.status(404).json({ success: false, message: "Directory not found on disk" });
                             }
-                            else {
-                                //3. DIRECTORY PATH (THIS is what we scan)
-                                //Example: "C:/uploads/user123/clusterA/"
-                                const directoryPath = pathtoimages;
-                                console.log("directoryPath: ", directoryPath);
 
-                                // 4. READ DIRECTORY (SERVER-ONLY OPERATION)
-                                // This returns ALL files inside the folder
-                                const files = fs.readdirSync(pathtoimages);
-                                // console.log("files: ", files);
+                            const ALLOWED_EXTENSIONS = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".avif", ".svg"]);
+                            const MIME_MAP = {
+                                ".png": "image/png",
+                                ".jpg": "image/jpeg",
+                                ".jpeg": "image/jpeg",
+                                ".webp": "image/webp",
+                                ".gif": "image/gif",
+                                ".avif": "image/avif",
+                                ".svg": "image/svg+xml",
+                            };
 
-                                // 5. FILTER ONLY IMAGE FILES
-                                const allowedExtensions = [".png", ".jpg", ".jpeg", ".webp"];
+                            const entries = fs.readdirSync(pathtoimages, { withFileTypes: true });
 
-                                const imageFiles = files.filter(file => {
-                                    const ext = path.extname(file).toLowerCase();
-                                    console.log("ext: ", ext);
-
-                                    return allowedExtensions.includes(ext);
-                                });
-
-                                // At this point:
-                                // imageFiles.length === number of images found
-                                // console.log("Images found:", imageFiles.length);
-
-                                // 6. CREATE DYNAMIC ARRAY (based on directory contents)
-                                const imagesPayload = [];
-
-                                // 7. LOOP THROUGH EACH IMAGE FILE
-                                for (const fileName of imageFiles) {
-                                    // Build full path
-                                    const fullPath = path.join(directoryPath, fileName);
-                                    // console.log("fullPath: ", fullPath);
-
-                                    // Read file into memory (BUFFER)
-                                    // This loads the entire file as binary data
-                                    // const fileBuffer = fs.readFileSync(fullPath);
-                                    // console.log("fileBuffer: ", fileBuffer);
-
-                                    // Detect MIME type
-                                    const ext = path.extname(fileName).toLowerCase();
-                                    const mimeTypes = {
-                                        ".png": "image/png",
-                                        ".jpg": "image/jpeg",
-                                        ".jpeg": "image/jpeg",
-                                        ".webp": "image/webp"
+                            const imagecluster = entries
+                                .filter(e => e.isFile() && ALLOWED_EXTENSIONS.has(path.extname(e.name).toLowerCase()))
+                                .map(e => {
+                                    const ext = path.extname(e.name).toLowerCase();
+                                    return {
+                                        name: e.name,
+                                        mime: MIME_MAP[ext],
+                                        imagepath: path.join(pathtoimages, e.name),
                                     };
-
-                                    const mime = mimeTypes[ext] || "image/jpeg";
-
-                                    // Convert buffer → base64 (transport format)
-                                    // const base64Data = fileBuffer.toString("base64");
-
-                                    // Push into array (DYNAMIC LENGTH)
-                                    imagesPayload.push({
-                                        name: fileName,
-                                        mime,
-                                        imagepath: fullPath
-                                    });
-                                }
-
-                                // console.log("imagesPayload: ", imagesPayload);
-                                const imagecluster = imagesPayload;
-                                // console.log("imagecluster: ", imagecluster);
-
-                                const createImageComponent = await imageModel.create({
-                                    pathtoimages,
-                                    type: type,
-                                    imagecluster,
-                                    position: { x: x, y: y },
-                                    owner: user._id,
-                                    createdBy: user._id,
-                                    workspaceId: canvaid,
                                 });
-                                // console.log("createImageComponent: ", createImageComponent);
+                            // console.log("typeof imagecluster: ", Array.isArray(imagecluster));
 
-                                if (!createImageComponent) {
-                                    // console.log(createImageComponent);
-                                    return res.status(500).json({
-                                        success: true,
-                                        code: "COMPONENT_CREATION_FAILED",
-                                        message: "Not Created!",
-                                    });
-                                } else {
-                                    console.log(createImageComponent);
-                                    return res.status(201).json({
-                                        success: true,
-                                        code: "COMPONENT_CREATED",
-                                        message: "Video created!",
-                                    });
-                                }
+                            if (imagecluster.length === 0) {
+                                return res.status(400).json({
+                                    success: false,
+                                    code: "NO_SUPPORTED_IMAGES",
+                                    message: "No supported image files found in the specified directory",
+                                });
+                            }
+
+                            const createImageComponent = await imageModel.create({
+                                pathtoimages,
+                                type,
+                                imagecluster,
+                                position: { x, y },
+                                owner: user._id,
+                                createdBy: user._id,
+                                workspaceId: canvaid,
+                            });
+
+                            if (!createImageComponent) {
+                                return res.status(500).json({
+                                    success: false,
+                                    code: "COMPONENT_CREATION_FAILED",
+                                    message: "Image cluster not created",
+                                });
+                            } else {
+                                return res.status(201).json({
+                                    success: true,
+                                    code: "COMPONENT_CREATED",
+                                    message: "Image cluster created",
+                                });
                             }
                         }
                         else {
@@ -430,10 +438,8 @@ singleDynamicCanvaDataGroupRouter
 
                             const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, personalInfo, text, link, type, x, y, options
                             } = req.body;
-                            console.log
-                                ("req.body: ", req.body);
-                            // const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset } = req.body;
-                            // console.log(label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, text, link, type, x, y, options);
+                            // console.log
+                            //     ("req.body: ", req.body);
 
 
                             if (type === "Text") {

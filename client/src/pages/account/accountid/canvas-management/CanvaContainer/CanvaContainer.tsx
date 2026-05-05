@@ -9,6 +9,7 @@ import DoughnutChartInputUnit from "../../../../../../lib/form-components/chart/
 import TextLinkInputUnit from "../../../../../../lib/form-components/link/LinkInputUnit";
 import VideoInputUnit from "../../../../../../lib/form-components/video/VideoInputUnit";
 import ImageInputUnit from "../../../../../../lib/form-components/image/ImageInputUnit";
+// import { ImageQueueProvider } from "../../../../../../lib/Providers/ImageQueueContextProvider";
 const CanvaContainer = () => {
   const { dataScrollBoardRef, canvasData } = useCanvasContext();
   const canvaspaceSize = canvasData.data?.workspaceNameData?.canvaspace?.size;
@@ -32,7 +33,9 @@ const CanvaContainer = () => {
         <VideoInputUnit />
 
         <RepositionLiveData />
-        <CanvasData />
+        {/* <ImageQueueProvider> */}
+          <CanvasData />
+        {/* </ImageQueueProvider> */}
       </div>
     </DivClass>
   );

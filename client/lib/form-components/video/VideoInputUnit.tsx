@@ -122,11 +122,6 @@ const VideoInputUnit = () => {
         if (video.ok) {
           toast.success("Video data fragment created");
           updateCanvasData();
-          setNewVideoComponent({
-            ...newVideoComponent,
-            video: "",
-          });
-          // setSelectedType((prev) => (prev === "Video" ? "Video" : "List"));
         } else {
           toast.success("Video fragment was not added!");
         }
@@ -256,6 +251,19 @@ const VideoInputUnit = () => {
                 />
                 <DivClass className={"video-btn-container"}>
                   <DivClass className={"video-submit-btn-container"}>
+                    <Button
+                      id="video-btn-clear"
+                      className={"video-btn-clear"}
+                      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                        e.preventDefault();
+                        setNewVideoComponent({
+                          ...newVideoComponent,
+                          video: "",
+                        });
+                      }}
+                    >
+                      Clear
+                    </Button>
                     <Button
                       id="video-btn-submit"
                       className={"video-btn-submit"}

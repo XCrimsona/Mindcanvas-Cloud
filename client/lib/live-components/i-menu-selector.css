@@ -1,12 +1,5 @@
+@reference "tailwindcss";
+
 .i-note-drop-down {
-    display: grid;
-    place-items: center;
-    position: absolute;
-    top: 0px;
-    left: -30px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid #FAAA0040;
-    cursor: pointer;
+    @apply grid place-items-center absolute top-0 -left-[30px] w-5 h-5 rounded-full border-2 border-[#FAAA0040] cursor-pointer;
 }

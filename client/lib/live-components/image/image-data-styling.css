@@ -1,38 +1,22 @@
+@reference "tailwindcss";
+
 .image-fragment-container {
-    display: block;
-    min-width: 600px;
-    max-width: 680px;
-    padding: 0px;
-    max-height: 400px;
-    overflow-y: scroll;
+    @apply block w-[330px] p-0 max-h-[400px] overflow-hidden overflow-y-scroll rounded-lg;
 
     .image-fragment {
-        margin: 0 auto;
-        cursor: default;
-        background-color: #000000;
-        min-width: 260px;
-        max-width: 680px;
-        padding: 10px;
-        box-shadow: inset 0px 0px 4px 2px #FAAA0040, 0px 0px 4px 0px #FAAA0040;
-    }
+        @apply mx-auto cursor-default bg-black text-xs w-[320px] p-2.5 flex flex-col;
+        @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
 
-    .image-header {
-        font-size: 11px;
-        color: #ccc;
-        word-break: break-word;
-        padding-left: 4px;
-    }
+        .image-file-name {
+            @apply inline w-50 text-[12px] text-left;
+        }
 
-    .image-element {
-        width: 300px;
-        height: auto;
-        max-height: 200px;
-        border-top-left-radius: 4px;
-        object-fit: cover;
-        background-color: #111;
-    }
+        .image-reveal-btn {
+            @apply inline-block px-3 py-1 w-8 text-[12px] cursor-pointer text-[#FABB00] ml-2 mr-2 rounded-sm hover:bg-[#FABB0060]/20 transition-colors;
+        }
 
-    .image-element:focus {
-        outline: none;
+        .image-reveal-btn:focus {
+            @apply outline-none;
+        }
     }
 }
