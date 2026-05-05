@@ -18,6 +18,9 @@ export default defineConfig({
         // Targets browsers that support nesting (Chrome 111+, etc.)
         chrome: 111,
         safari: 16,
+        firefox: 113, // Firefox added nesting support here
+        edge: 111,
+        ios_saf: 16, // Mobile Safari
       },
       drafts: {
         nesting: true, // Enables the nesting spec

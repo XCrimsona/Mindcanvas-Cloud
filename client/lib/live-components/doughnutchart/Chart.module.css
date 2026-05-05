@@ -1,204 +1,130 @@
+@reference "tailwindcss";
+
 :root {
    --coffeeborder: rgba(250, 170, 0, 0.251);
 }
 
 /* .chartfragmentcontainer { */
 .chartfragmentdashboard {
-   display: block;
+   @apply block p-0 overflow-y-hidden;
+
    /* max-width: 650px; */
-   padding: 0px;
    /* height: 550px; */
-   overflow-y: hidden;
 
    /* .chart-container { */
    /* .doughnutchartfragment { */
    .doughnutchartcontainer {
-      margin: 0px auto;
-      font-size: 10pt;
-      text-align: start;
-      cursor: text;
-      background-color: #000000;
-      font-size: 12px;
-      word-break: keep-all;
-      overflow-x: hidden;
-      overflow-y: auto;
+      @apply mx-auto text-start cursor-text bg-black text-xs break-keep;
+      @apply overflow-x-hidden overflow-y-auto p-2.5 whitespace-pre-wrap;
+      @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
+
       /* this sets the height of the inner chart fragment-ui */
       /* min-width: 350px; */
       /* height: 650px; */
-      padding: 10px;
-      white-space: pre-wrap;
-      box-shadow: inset 0px 0px 4px 2px #FAAA0040, 0px 0px 4px 0px #FAAA0040;
-
 
       .parentchartcontainer {
-         display: flex;
-         justify-content: start;
-         align-items: center;
-         min-width: 320px;
+         @apply flex justify-start items-center min-w-80;
 
          .childchartcontainer {
-            width: 320px;
-            border: 1px solid var(--coffeeborder);
-            border-radius: 8px;
+            @apply w-80 border border-[var(--coffeeborder)] rounded-lg;
 
             .doughnutchart {
-               margin: 10px auto 20px;
-               display: block;
-               /* width: 200px; */
-               /* height: 250px; */
+               @apply mx-auto mt-2.5 mb-5 block;
             }
 
             .chartmetrics {
-               /* border: 1px solid var(--coffeeborder); */
-               max-width: 300px;
-               margin: 10px auto 20px;
-               /* border-radius: 4px; */
+               @apply max-w-[300px] mx-auto mt-2.5 mb-5;
 
                .chartmetric {
-                  display: block;
-                  max-width: 300px;
+                  @apply block max-w-[300px];
 
                   .shortdescription {
-
-                     display: block;
-                     max-width: 300px;
-                     overflow-x: none;
+                     @apply block max-w-[300px];
                   }
                }
             }
 
             .aisummary {
-               max-width: 300px;
-               margin: 10px auto 20px;
+               @apply max-w-[300px] mx-auto mt-2.5 mb-5;
 
                .aisummarytext {
-                  display: block;
-                  max-width: 300px;
-                  margin: 10px auto 20px;
-
+                  @apply block max-w-[300px] mx-auto mt-2.5 mb-5;
                }
             }
-
          }
 
          /* more charts as array data */
          .doughnutchart-input-form {
             .doughnutchart-label-wrapper {
-               margin: 10px 0px 4px 0px;
+               @apply mt-2.5 mb-1;
 
                .list-label,
                .text-label {
-                  text-align: left;
-                  display: block;
-                  margin: 0px 0px 0px 4px;
-                  font-size: 12px;
-                  width: 120px;
-                  cursor: move;
+                  @apply text-left block ml-1 text-xs w-[120px] cursor-move;
                }
             }
 
             .text-container {
-               display: flex;
-               align-items: center;
-               position: relative;
+               @apply flex items-center relative;
 
                .text-input-wrapper {
-                  position: relative;
-                  margin: 10px auto;
+                  @apply relative mx-auto my-2.5;
 
                   .enabled-list-input-field,
                   .enabled-text-input-field {
-                     border-top: 2px solid #FAAA0040;
-                     border-left: 2px solid #FAAA0040;
-                     border-bottom: 2px solid #FAAA0040;
-                     border-right: 2px solid #FAAA0040;
-                     color: #ffffff;
-                     background-color: #000000;
+                     @apply border-2 border-[#FAAA0040] text-white bg-black resize-none cursor-text text-xs m-0 mr-auto w-[250px] h-[30px];
                      transition: height .2s ease-in-out;
-                     resize: none;
-                     cursor: text;
-                     font-size: 12px;
+                     /* no Tailwind equivalent for property-specific transitions */
                      outline: 2px solid #000000;
-                     margin: 0px;
-                     width: 250px;
-                     margin-right: auto;
-                     height: 30px;
+                     /* shorthand kept — @apply outline-2 outline-black omits style declaration */
                   }
 
                   .enabled-text-input-field:nth-child(2) {
-                     height: 60px;
+                     @apply h-[60px];
                   }
 
                   .enabled-list-input-field::selection,
                   .enabled-text-input-field::selection {
-                     background-color: #FBAA0050;
+                     @apply bg-[#FBAA0050];
                   }
 
                   .enabled-list-input-field::placeholder,
                   .enabled-text-input-field::placeholder {
-                     color: #fff;
+                     @apply text-white;
                   }
 
                   .enabled-list-input-field:focus,
                   .enabled-text-input-field:focus {
-                     background-color: #000000;
+                     @apply bg-black;
                   }
 
                   .doughnutchart-btn-container {
-                     display: flex;
-                     flex-wrap: wrap;
-                     justify-content: center;
-                     width: 250px;
-                     z-index: 14;
-                     font-size: 14px;
-
-                     margin: 5px auto 5px auto;
+                     @apply flex flex-wrap justify-center w-[250px] z-14 text-sm mx-auto my-[5px];
 
                      .doughnutchart-submit-btn-container {
-                        display: flex;
-                        flex-wrap: wrap;
-                        margin: 5px auto 5px auto;
+                        @apply flex flex-wrap mx-auto my-[5px];
 
                         .doughnutchart-btn-submit {
-                           cursor: pointer;
-                           height: 20px;
-                           width: 250px;
-                           outline: none;
-                           background-color: #111111;
-                           color: #FBAA00;
-                           border: 1px solid #555555;
+                           @apply cursor-pointer h-5 w-[250px] outline-none bg-[#111111] text-[#FBAA00] border border-[#555555];
                         }
                      }
 
                      .doughnutchart-selection-wrapper {
-                        margin: 5px auto 5px 0px;
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: start;
-                        align-items: center;
+                        @apply mt-[5px] mr-auto mb-[5px] ml-0 flex flex-wrap justify-start items-center;
 
                         .select-doughnutchart-type {
-                           width: 250px;
-                           outline: none;
-                           background-color: #111111;
-                           color: #FBAA00;
-                           border: 1px solid #555555;
+                           @apply w-[250px] outline-none bg-[#111111] text-[#FBAA00] border border-[#555555];
                         }
 
                         .radio-group {
-                           display: flex;
-                           flex-wrap: wrap;
-                           justify-content: center;
-                           align-items: center;
-                           width: 250px;
+                           @apply flex flex-wrap justify-center items-center w-[250px];
 
                            .doughnutchart-type-option-one {
-                              height: 20px;
+                              @apply h-5;
                            }
 
                            .doughnutchart-type-label {
-                              height: 20px;
-                              margin-left: 5px;
+                              @apply h-5 ml-[5px];
                            }
                         }
                      }
@@ -209,146 +135,89 @@
       }
 
       .addchartcontainer {
-         display: block;
-         margin: 16px auto;
-         padding: 10px;
+         @apply block mx-auto my-4 p-2.5;
 
          .addchart {
-            display: block;
-            font-size: 16px;
-            cursor: pointer;
-            border: 1px solid #FAAA0040;
-            border-radius: 6px;
-            width: 26px;
-            text-align: center;
+            @apply block text-base cursor-pointer border border-[#FAAA0040] rounded-md w-[26px] text-center;
          }
       }
 
       .doughnutchartfragment::selection {
-         background-color: #FABB0050;
+         @apply bg-[#FABB0050];
       }
-
    }
 }
 
 .add-extra-doughnutchart-input-form {
 
    .doughnutchart-label-wrapper {
-      margin: 10px 0px 4px 0px;
+      @apply mt-2.5 mb-1;
 
       .list-label,
       .text-label {
-         text-align: left;
-         display: block;
-         margin: 0px 0px 0px 4px;
-         font-size: 12px;
-         width: 120px;
-         cursor: move;
+         @apply text-left block ml-1 text-xs w-[120px] cursor-move;
       }
    }
 
    .text-container {
-      display: flex;
-      align-items: center;
-      position: relative;
+      @apply flex items-center relative;
 
       .text-input-wrapper {
-         position: relative;
-         margin: 10px auto;
+         @apply relative mx-auto my-2.5;
 
          .enabled-list-input-field,
          .enabled-text-input-field {
-            border-top: 2px solid #FAAA0040;
-            border-left: 2px solid #FAAA0040;
-            border-bottom: 2px solid #FAAA0040;
-            border-right: 2px solid #FAAA0040;
-            color: #ffffff;
-            background-color: #000000;
+            @apply border-2 border-[#FAAA0040] text-white bg-black resize-none cursor-text text-xs m-0 mr-auto w-[250px] h-[30px];
             transition: height .2s ease-in-out;
-            resize: none;
-            cursor: text;
-            font-size: 12px;
             outline: 2px solid #000000;
-            margin: 0px;
-            width: 250px;
-            margin-right: auto;
-            height: 30px;
          }
 
          .enabled-text-input-field:nth-child(2) {
-            height: 60px;
+            @apply h-[60px];
          }
 
          .enabled-list-input-field::selection,
          .enabled-text-input-field::selection {
-            background-color: #FBAA0050;
+            @apply bg-[#FBAA0050];
          }
 
          .enabled-list-input-field::placeholder,
          .enabled-text-input-field::placeholder {
-            color: #fff;
+            @apply text-white;
          }
 
          .enabled-list-input-field:focus,
          .enabled-text-input-field:focus {
-            background-color: #000000;
+            @apply bg-black;
          }
 
          .doughnutchart-btn-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 250px;
-            z-index: 14;
-            font-size: 14px;
-
-            margin: 5px auto 5px auto;
+            @apply flex flex-wrap justify-center w-[250px] z-14 text-sm mx-auto my-[5px];
 
             .doughnutchart-submit-btn-container {
-               display: flex;
-               flex-wrap: wrap;
-               margin: 5px auto 5px auto;
+               @apply flex flex-wrap mx-auto my-[5px];
 
                .doughnutchart-btn-submit {
-                  cursor: pointer;
-                  height: 20px;
-                  width: 250px;
-                  outline: none;
-                  background-color: #111111;
-                  color: #FBAA00;
-                  border: 1px solid #555555;
+                  @apply cursor-pointer h-5 w-[250px] outline-none bg-[#111111] text-[#FBAA00] border border-[#555555];
                }
             }
 
             .doughnutchart-selection-wrapper {
-               margin: 5px auto 5px 0px;
-               display: flex;
-               flex-wrap: wrap;
-               justify-content: start;
-               align-items: center;
+               @apply mt-[5px] mr-auto mb-[5px] ml-0 flex flex-wrap justify-start items-center;
 
                .select-doughnutchart-type {
-                  width: 250px;
-                  outline: none;
-                  background-color: #111111;
-                  color: #FBAA00;
-                  border: 1px solid #555555;
+                  @apply w-[250px] outline-none bg-[#111111] text-[#FBAA00] border border-[#555555];
                }
 
                .radio-group {
-                  display: flex;
-                  flex-wrap: wrap;
-                  justify-content: center;
-                  align-items: center;
-                  width: 250px;
+                  @apply flex flex-wrap justify-center items-center w-[250px];
 
                   .doughnutchart-type-option-one {
-                     height: 20px;
+                     @apply h-5;
                   }
 
                   .doughnutchart-type-label {
-                     height: 20px;
-                     margin-left: 5px;
+                     @apply h-5 ml-[5px];
                   }
                }
             }
@@ -358,31 +227,9 @@
 }
 
 .font20 {
-   font-size: 20px;
+   @apply text-xl;
 }
 
 .font14 {
-   font-size: 14px;
+   @apply text-sm;
 }
-
-
-/* background: #000000;
-   border: 1px solid rgba(250, 170, 0, 0.251);
-   box-shadow: 0px 0px 10px 4px rgba(250, 170, 0, 0.251);
-   border-radius: 10px;
-
-   background: rgba(0, 0, 0, 1);
-   border: 1px solid rgba(250, 170, 0, 0.251);
-   border-radius: 20px; */
-
-/* #FAAA00 80 */
-/* #FAAA00 70 */
-/* #FAAA00 50 */
-/* #655126 100 */
-/* Chart Container */
-/* position: absolute;
-   height: 300px;
-   width: 300px;
-   border-radius: 20px; */
-/* z-index: 22; */
-/* } */

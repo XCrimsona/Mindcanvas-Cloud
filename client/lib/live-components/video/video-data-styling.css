@@ -1,42 +1,14 @@
+@reference "tailwindcss";
+
 .video-fragment-container {
-    display: block;
-    min-width: 260px;
-    max-width: 480px;
-    padding: 0px;
-    max-height: 400px;
-    overflow: hidden;
+    @apply block w-[260px] p-0 max-h-[400px] overflow-hidden rounded-lg;
 
     .video-fragment {
-        margin: 0 auto;
-        cursor: default;
-        background-color: #000000;
-        font-size: 12px;
-        min-width: 260px;
-        max-width: 480px;
-        padding: 10px;
-        box-shadow: inset 0px 0px 4px 2px #FAAA0040, 0px 0px 4px 0px #FAAA0040;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
+        @apply mx-auto cursor-default bg-black text-xs w-[260px] p-2.5 flex flex-col;
+        @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
 
-    .video-header {
-        font-size: 11px;
-        color: #ccc;
-        word-break: break-word;
-        padding-left: 4px;
-    }
-
-    .video-element {
-        width: 300px;
-        height: auto;
-        max-height: 200px;
-        border-top-left-radius: 4px;
-        object-fit: cover;
-        background-color: #111;
-    }
-
-    .video-element:focus {
-        outline: none;
+        .video-element {
+            @apply w-[260px] h-auto rounded-tl object-cover bg-[#111];
+        }
     }
 }

@@ -54,6 +54,7 @@ export const Text = ({ data }: { data: any }) => {
               setRepositionWindow(false);
               setModificationWindow(true);
             }}
+            // className="i-note-drop-down"
             className="i-note-drop-down"
           >
             i

@@ -9,10 +9,10 @@ import { TextButton } from "../../form-components/text/TextButton";
 import { LinkButton } from "../../form-components/link/LinkButton";
 // import { AudioButton } from "../live-components/audio/AudioButton";
 // import { VideoButton } from "../live-components/video/VideoButton";
-// import { ImageButton } from "../../live-components/image/ImageButton";
+// import { ImageButton } from "../../lib/live-components/image/ImageButton";
 import { VideoButton } from "../../form-components/video/VideoButton";
 // import { DoughnutChartButton } from "../../form-components/chart/DoughnutChartButton";
-// import { ImageButton } from "../../form-components/image/ImageButton";
+import { ImageButton } from "../../form-components/image/ImageButton";
 const ComponentHub = () => {
   const {
     visbilityState,
@@ -61,7 +61,7 @@ const ComponentHub = () => {
               </ShortText>
               <TextButton />
               <LinkButton />
-              {/* <ImageButton /> */}
+              <ImageButton />
               <ShortText className={"fragment-heading-text"}>
                 Analytic Fragments - Track and visualize data
               </ShortText>

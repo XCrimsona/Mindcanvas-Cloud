@@ -281,6 +281,20 @@ const TextLinkInputUnit = () => {
                 />
                 <DivClass className={"link-btn-container"}>
                   <DivClass className={"link-submit-btn-container"}>
+                    <Button
+                      id="link-btn-clear"
+                      className={"link-btn-clear"}
+                      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                        e.preventDefault();
+                        setNewTextLinkComponent({
+                          ...newTextLinkComponent,
+                          link: "",
+                          text: "",
+                        });
+                      }}
+                    >
+                      CLEAR
+                    </Button>
                     <Button id="link-btn-submit" className={"link-btn-submit"}>
                       SAVE
                     </Button>

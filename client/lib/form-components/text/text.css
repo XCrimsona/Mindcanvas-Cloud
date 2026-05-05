@@ -83,12 +83,14 @@
                     font-size: 14px;
 
                     .text-submit-btn-container {
-                        display: flex;
+                        display: block;
                         justify-content: right;
                         margin: 5px auto 5px auto;
 
+                        .text-btn-clear,
                         .text-btn-submit {
                             cursor: pointer;
+                            margin: 0px auto 5px auto;
                             height: 20px;
                             width: 80px;
                             outline: none;

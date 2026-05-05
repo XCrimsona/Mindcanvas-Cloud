@@ -1,22 +1,14 @@
+@reference "tailwindcss";
 /* setup css of absolute 20px from top; left -30px */
 
 .is-note-state {
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    margin: 0px auto 10px;
-    /* how do I change the background color of the check box? */
-    appearance: none;
-    /* background-color: #FAAA0080; */
+    @apply grid place-items-center cursor-pointer mx-auto mb-2.5 appearance-none rounded-[20px] w-[170px] h-5;
     accent-color: #FAAA0040;
-    border-radius: 20px;
-    width: 170px;
-    height: 20px;
+    /* no Tailwind utility — kept as raw CSS */
 }
 
 .is-note-state:checked {
-    background-color: #FAAA0080;
-    /* accent-color: #FAAA0080; */
+    @apply bg-[#FAAA0080];
 }
 
 /* .is-note-checkbox */

@@ -1,32 +1,16 @@
+@reference "tailwindcss";
+
 .text-fragment-container {
-    display: block;
-    min-width: 200px;
-    max-width: 450px;
-    padding: 0px;
-    max-height: 250px;
-    overflow-y: hidden;
+    @apply block min-w-50 max-w-[450px] p-0 max-h-[250px] overflow-y-hidden;
 
     .text-fragment {
-        margin: 0px auto;
-        text-align: start;
-        cursor: text;
-        font-size: 12px;
-        word-break: keep-all;
-        background-color: #000000;
-        min-width: 200px;
-        max-width: 450px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        min-height: 20px;
-        max-height: 200px;
-        padding: 10px;
-        white-space: pre-wrap;
-        box-shadow: inset 0px 0px 4px 2px #FAAA0040, 0px 0px 4px 0px #FAAA0040;
+        @apply mx-auto text-start cursor-text text-xs break-keep bg-black;
+        @apply min-w-50 max-w-[450px] overflow-x-hidden overflow-y-auto min-h-5 max-h-50;
+        @apply p-2.5 whitespace-pre-wrap;
+        @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
     }
-
 
     .text-fragment::selection {
-        background-color: #FABB0050;
+        @apply bg-[#FABB0050];
     }
-
 }
