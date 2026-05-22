@@ -1,41 +1,48 @@
 .zoom-controls-container {
-  margin: 0px auto 0px auto;
-  width: 120px;
-  height: 70px;
-  display: block;
+    margin: 0px auto;
+    width: 120px;
+    height: 70px;
+    display: block;
+
+    .zoom-controls {
+        height: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        margin: 0px auto;
+
+        .zoom-in-wrapper {
+            margin: 0px auto;
+            width: 50px;
+
+            .btn-zoom-in {
+                height: 30px;
+                width: 30px;
+                cursor: pointer;
+            }
+        }
+
+        .zoom-out-wrapper {
+            margin: 0px auto;
+            width: 50px;
+
+            .btn-zoom-out {
+                height: 30px;
+                width: 30px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .zoom-controls-text-wrapper {
+        display: block;
+        margin: 10px auto 0px auto;
+        height: 20px;
+
+        .zoom-controls-text {
+            display: block;
+            text-align: center;
+            margin: 0px auto;
+        }
+    }
 }
-.zoom-controls-container .zoom-controls {
-  height: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  position: relative;
-  margin: 0px auto 0px auto;
-}
-.zoom-controls-container .zoom-controls .zoom-in-wrapper {
-  margin: 0px auto 0px auto;
-  width: 50px;
-}
-.zoom-controls-container .zoom-controls .zoom-in-wrapper .btn-zoom-in {
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-}
-.zoom-controls-container .zoom-controls .zoom-out-wrapper {
-  margin: 0px auto 0px auto;
-  width: 50px;
-}
-.zoom-controls-container .zoom-controls .zoom-out-wrapper .btn-zoom-out {
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-}
-.zoom-controls-container .zoom-controls-text-wrapper {
-  display: block;
-  margin: 10px auto 0px auto;
-  height: 20px;
-}
-.zoom-controls-container .zoom-controls-text-wrapper .zoom-controls-text {
-  display: block;
-  text-align: center;
-  margin: 0px auto 0px auto;
-}/*# sourceMappingURL=zoom-controls.css.map */

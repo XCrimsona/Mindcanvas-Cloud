@@ -1,63 +1,72 @@
 .work-workspace-management-main-container {
-  margin: 0px auto 0px auto;
-}
-.work-workspace-management-main-container .work-workspace-management-container-wrapper {
-  margin: 0px auto 0px auto;
-  position: relative;
-  display: flex;
-  background-color: rgba(0, 0, 0, 0.7);
-  justify-content: start;
-}
-.work-workspace-management-main-container .work-workspace-management-container-wrapper .canva-properties-wrapper {
-  position: absolute;
-  background-color: #000;
-  border-right: 1px solid #daa520;
-  border-bottom: 1px solid #daa520;
-  border-bottom-right-radius: 4px;
-  transition: left 0.2s ease-in-out, top 0.2s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out, opacity 0.8s;
-  height: -moz-fit-content;
-  height: fit-content;
-  top: 0px;
-  left: 0px;
-  z-index: 20;
-}
-.work-workspace-management-main-container .work-workspace-management-container-wrapper .canva-properties-wrapper .work-workspace-management-container {
-  justify-content: start;
-  flex-wrap: wrap;
-  text-align: center;
-  border-radius: 4px;
-}
-.work-workspace-management-main-container .work-workspace-management-container-wrapper .canva-properties-wrapper .work-workspace-management-container:nth-child(1) {
-  width: auto;
-}
-.work-workspace-management-main-container .work-workspace-management-container-wrapper .work-workspace-management-container {
-  justify-content: start;
-  flex-wrap: wrap;
-  text-align: center;
-  border-radius: 4px;
-}
-.work-workspace-management-main-container .work-workspace-management-container-wrapper .work-workspace-management-container:nth-child(2) {
-  margin: 0px auto 0px auto;
+    margin: 0px auto;
+
+    .work-workspace-management-container-wrapper {
+        margin: 0px auto;
+        position: relative;
+        display: flex;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: start;
+
+        .canva-properties-wrapper {
+            position: absolute;
+            background-color: #000;
+            border-right: 1px solid #daa520;
+            border-bottom: 1px solid #daa520;
+            border-bottom-right-radius: 4px;
+            transition: left 0.2s ease-in-out, top 0.2s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out, opacity 0.8s;
+            height: fit-content;
+            top: 0px;
+            left: 0px;
+            z-index: 20;
+
+            .work-workspace-management-container {
+                justify-content: start;
+                flex-wrap: wrap;
+                text-align: center;
+                border-radius: 4px;
+            }
+
+            .work-workspace-management-container:nth-child(1) {
+                width: auto;
+            }
+        }
+
+        .work-workspace-management-container {
+            justify-content: start;
+            flex-wrap: wrap;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .work-workspace-management-container:nth-child(2) {
+            margin: 0px auto;
+        }
+    }
 }
 
 @media screen and (min-width: 320px) and (max-width: 600.9px) {
-  .work-workspace-management-main-container .work-workspace-management-container-wrapper {
-    height: 100%;
-    width: 100%;
-  }
-  .work-workspace-management-main-container .work-workspace-management-container-wrapper .work-workspace-management-container {
-    width: 98%;
-    height: 100%;
-  }
-  .work-workspace-management-main-container .work-workspace-management-container-wrapper .work-workspace-management-container:nth-child(2) {
-    min-height: 420px;
-  }
+    .work-workspace-management-main-container .work-workspace-management-container-wrapper {
+        height: 100%;
+        width: 100%;
+
+        .work-workspace-management-container {
+            width: 98%;
+            height: 100%;
+        }
+
+        .work-workspace-management-container:nth-child(2) {
+            min-height: 420px;
+        }
+    }
 }
+
 @media screen and (min-width: 601px) {
-  .work-workspace-management-main-container {
-    display: block;
-  }
-  .work-workspace-management-main-container .work-workspace-management-container-wrapper .work-workspace-management-container {
-    width: 98%;
-  }
-}/*# sourceMappingURL=CanvaWrapper.css.map */
+    .work-workspace-management-main-container {
+        display: block;
+
+        .work-workspace-management-container-wrapper .work-workspace-management-container {
+            width: 98%;
+        }
+    }
+}

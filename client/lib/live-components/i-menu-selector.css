@@ -1,5 +1,7 @@
 @reference "tailwindcss";
 
 .i-note-drop-down {
-    @apply grid place-items-center absolute top-0 -left-[30px] w-5 h-5 rounded-full border-2 border-[#FAAA0040] cursor-pointer;
+    @apply grid place-items-center absolute top-0 -left-[30px] w-5 h-5 rounded-full border-2 border-[#FAAA0040] cursor-pointer text-neutral-300;
+    @apply hover:bg-[#FABB0015] transition-colors duration-150;
+    font-family: "Fira Code", monospace;
 }

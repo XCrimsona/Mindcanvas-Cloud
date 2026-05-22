@@ -26,7 +26,7 @@
          @apply flex justify-start items-center min-w-80;
 
          .childchartcontainer {
-            @apply w-80 border border-[var(--coffeeborder)] rounded-lg;
+            @apply w-80 border border-(--coffeeborder) rounded-lg;
 
             .doughnutchart {
                @apply mx-auto mt-2.5 mb-5 block;

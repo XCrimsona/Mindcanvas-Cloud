@@ -62,9 +62,10 @@ const ComponentHub = () => {
               <TextButton />
               <LinkButton />
               <ImageButton />
-              <ShortText className={"fragment-heading-text"}>
+              {/* Analytic Fragments section hidden until at least one button is enabled */}
+              {/* <ShortText className={"fragment-heading-text"}>
                 Analytic Fragments - Track and visualize data
-              </ShortText>
+              </ShortText> */}
               {/* <DoughnutChartButton /> */}
               {/* <ImageButton /> */}
               {/* <AudioButton /> */}

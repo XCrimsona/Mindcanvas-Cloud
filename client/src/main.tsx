@@ -12,12 +12,16 @@ import ProtectedRoute from "./ProtectedRoute.tsx";
 import AccountPage from "./pages/account/accountid/account-info/AccountPage.tsx";
 import { InfoProvider } from "./pages/account/accountid/account-info/InfoContext.tsx";
 import LearnToUseMindCanvas from "./pages/account/accountid/canvas-management/academy/LearnToUseMindCanvas.tsx";
+import Trust from "./pages/trust/Trust.tsx";
+import About from "./pages/about/About.tsx";
 
 createRoot(document.getElementById("root") as HTMLDivElement).render(
   // <StrictMode>
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/trust" element={<Trust />} />
+      <Route path="/about" element={<About />} />
       <Route path="/signin-portal" element={<SignInPage />} />
       <Route path="/signup-portal" element={<SignUpPage />} />
       {/* <CanvaDataProvider> */}

@@ -1,70 +1,77 @@
 .workspace-deletion-interface {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  height: 180px;
-  margin: auto auto auto auto;
-  background-color: #000;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  z-index: 5;
-}
-.workspace-deletion-interface .text-deletion-warning {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  margin: 20px auto 20px auto;
-  text-align: center;
-}
-.workspace-deletion-interface .workspace-caution-ops {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.workspace-deletion-interface .workspace-caution-ops .delete-workspace-btn-wrapper,
-.workspace-deletion-interface .workspace-caution-ops .cancel-workspace-btn-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0px auto 0px auto;
-  height: 40px;
-}
-.workspace-deletion-interface .workspace-caution-ops .delete-workspace-btn-wrapper .cancel-workspace-btn,
-.workspace-deletion-interface .workspace-caution-ops .cancel-workspace-btn-wrapper .cancel-workspace-btn {
-  background-color: #090;
-  font-weight: 600;
-  border: 2px solid #000;
-  padding: 4px 10px 4px 10px;
-  color: #fff;
-  cursor: pointer;
-}
-.workspace-deletion-interface .workspace-caution-ops .delete-workspace-btn-wrapper .delete-workspace-btn,
-.workspace-deletion-interface .workspace-caution-ops .cancel-workspace-btn-wrapper .delete-workspace-btn {
-  background-color: #900;
-  font-weight: 600;
-  border: 2px solid #000;
-  padding: 4px 10px 4px 10px;
-  color: #fff;
-  cursor: pointer;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 180px;
+    margin: auto;
+    background-color: #000;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    z-index: 5;
+
+    .text-deletion-warning {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .workspace-caution-ops {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .delete-workspace-btn-wrapper,
+        .cancel-workspace-btn-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0px auto;
+            height: 40px;
+
+            .cancel-workspace-btn {
+                background-color: #090;
+                font-weight: 600;
+                border: 2px solid #000;
+                padding: 4px 10px;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .delete-workspace-btn {
+                background-color: #900;
+                font-weight: 600;
+                border: 2px solid #000;
+                padding: 4px 10px;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 320px) {
-  .workspace-deletion-interface {
-    width: 300px;
-  }
-  .workspace-deletion-interface .text-deletion-warning {
-    width: 250px;
-  }
-  .workspace-deletion-interface .workspace-caution-ops {
-    width: 300px;
-  }
-  .workspace-deletion-interface .workspace-caution-ops .cancel-workspace-btn-wrapper {
-    width: 80px;
-  }
-  .workspace-deletion-interface .workspace-caution-ops .delete-workspace-btn-wrapper {
-    width: 80px;
-  }
-}/*# sourceMappingURL=deletecanva.css.map */
+    .workspace-deletion-interface {
+        width: 300px;
+
+        .text-deletion-warning {
+            width: 250px;
+        }
+
+        .workspace-caution-ops {
+            width: 300px;
+
+            .cancel-workspace-btn-wrapper {
+                width: 80px;
+            }
+
+            .delete-workspace-btn-wrapper {
+                width: 80px;
+            }
+        }
+    }
+}

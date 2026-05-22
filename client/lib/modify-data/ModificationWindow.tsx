@@ -20,6 +20,7 @@ export const ModificationWindow = ({ componentData }: any) => {
     deleteLiveDataElement,
     antiDeleteLock,
     toggleDeleteLock,
+    openReadingPage,
   } = useModificationContext();
   const { setRepositionWindow } = useCanvasContext();
   const { owner, _id, workspaceId, type, personalInfo } = componentData;
@@ -95,6 +96,27 @@ export const ModificationWindow = ({ componentData }: any) => {
           marginRight: "auto",
         }}
       />
+      {type === "Text" && (
+        <>
+          <Button
+            className={"open-a4-view-button"}
+            id={`open-a4-view-${_id}`}
+            onClick={() => {
+              openReadingPage(_id, componentData);
+              setModificationWindow(false);
+            }}
+          >
+            Open as A4 view
+          </Button>
+          <hr
+            style={{
+              width: "94%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          />
+        </>
+      )}
       <Button
         className={"component-reposition-button"}
         id="component-reposition-button"

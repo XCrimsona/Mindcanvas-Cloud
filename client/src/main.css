@@ -1,16 +1,32 @@
-:root {
-    --darkAsdhBlack: #000000;
-    --Gold: #fabb00;
-    background: linear-gradient(90deg, var(--darkAsdhBlack) 20%, var(--Gold), var(--darkAsdhBlack) 80%);
-    --font10: 10px;
-    --font12: 12px;
-    --font14: 14px
+@import "tailwindcss";
+
+@theme {
+    /* Brand palette */
+    --color-black: #000000;
+    --color-gold: #FABB00;
+    --color-gold-soft: #FAAA00;
+    --color-gold-ring: rgb(250 187 0 / 0.25);
+    --color-gold-hover: rgb(250 187 0 / 0.08);
+    --color-gold-strong: rgb(250 187 0 / 0.6);
+
+    /* Surfaces */
+    --color-dark-ash: #1a1a1a;
+    --color-dark-ash-deep: #111111;
+    --color-smoke: #d4d4d4;
+
+    /* Typography */
+    --font-ui: "Fira Code", monospace;
+    --font-read: "Inter", system-ui, -apple-system, sans-serif;
+    --font-size-xs: 10px;
+    --font-size-sm: 12px;
+    --font-size-base: 14px;
 }
 
 html,
 body {
     margin: 0;
     padding: 0;
-    font-family: "Fira Code";
+    font-family: var(--font-ui);
     letter-spacing: 1px;
+    background: linear-gradient(90deg, var(--color-black) 20%, var(--color-gold), var(--color-black) 80%);
 }

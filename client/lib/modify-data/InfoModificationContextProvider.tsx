@@ -5,6 +5,7 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
@@ -107,6 +108,13 @@ interface IModificationUseStateContextType {
   setPinnedText: React.Dispatch<React.SetStateAction<boolean>>;
   toggleTextPin: () => void;
   PinToScreen: (e: React.MouseEvent<HTMLButtonElement>) => void;
+
+  //A4 reading page — data is written to a ref synchronously so the first
+  //render of ReadingPage already has the payload (no second-click race).
+  readingPageOpen: boolean;
+  readingPageDataRef: React.MutableRefObject<{ id: string; data: any } | null>;
+  openReadingPage: (id: string, data: any) => void;
+  closeReadingPage: () => void;
 
   // pinnedAudio: Record<string, boolean>;
   // setPinnedAudio: React.Dispatch<React.SetStateAction<string>>;
@@ -406,6 +414,20 @@ const InfoModificationContextProvider = ({
     return;
   };
 
+  //A4 reading page — imperative open. Writes payload to ref first (synchronous),
+  //then flips the visibility flag in the same event so the first render of
+  //<ReadingPage /> already has data — no extra click, no stale state.
+  const readingPageDataRef = useRef<{ id: string; data: any } | null>(null);
+  const [readingPageOpen, setReadingPageOpen] = useState<boolean>(false);
+  const openReadingPage = (id: string, data: any) => {
+    readingPageDataRef.current = { id, data };
+    setReadingPageOpen(true);
+  };
+  const closeReadingPage = () => {
+    setReadingPageOpen(false);
+    readingPageDataRef.current = null;
+  };
+
   //executes when the user interacts with the i icon and passes data to the next function
   const moveFragment = (e: React.MouseEvent<HTMLButtonElement>) => {
     // const dataFragmentId = String((e.target as HTMLElement).id);
@@ -475,6 +497,11 @@ const InfoModificationContextProvider = ({
         pinnedText,
         setPinnedText,
         toggleTextPin,
+
+        readingPageOpen,
+        readingPageDataRef,
+        openReadingPage,
+        closeReadingPage,
       }}
     >
       {children}

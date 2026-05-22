@@ -1,91 +1,122 @@
+/* file may be unused */
 .account-dashboard {
-  background-color: #222;
-  height: 100%;
-  display: flex;
-  position: relative;
-}
-.account-dashboard .dashboard-footer {
-  margin: 0px auto 0px auto;
-  display: block;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
-  background-color: #222;
-}
-.account-dashboard .dashboard-footer .project-creator {
-  margin: 0px auto 0px auto;
-}
-.account-dashboard .dashboard-footer .project-creator .creator {
-  text-align: center;
-  color: #fff;
+    background-color: #222;
+    height: 100%;
+    display: flex;
+    position: relative;
+
+    .dashboard-footer {
+        margin: 0px auto;
+        display: block;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        background-color: #222;
+
+        .project-creator {
+            margin: 0px auto;
+
+            .creator {
+                text-align: center;
+                color: #fff;
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 320px) and (max-width: 425.9px) {
-  .account-dashboard .account-dashboard-content {
-    width: 300px;
-  }
-  .account-dashboard .account-dashboard-content .heading-one {
-    width: 200px;
-  }
-  .account-dashboard .account-dashboard-content .dashboard-link-component {
-    width: 200px;
-  }
-  .account-dashboard .dashboard-footer {
-    width: 300px;
-  }
-  .account-dashboard .dashboard-footer .project-creator {
-    width: 250px;
-  }
+    .account-dashboard {
+        .account-dashboard-content {
+            width: 300px;
+
+            .heading-one {
+                width: 200px;
+            }
+
+            .dashboard-link-component {
+                width: 200px;
+            }
+        }
+
+        .dashboard-footer {
+            width: 300px;
+
+            .project-creator {
+                width: 250px;
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 426px) and (max-width: 600.9px) {
-  .account-dashboard .account-dashboard-content {
-    width: 400px;
-  }
-  .account-dashboard .account-dashboard-content .heading-one {
-    width: 300px;
-  }
-  .account-dashboard .account-dashboard-content .dashboard-link-component {
-    width: 300px;
-  }
-  .account-dashboard .dashboard-footer {
-    width: 400px;
-  }
-  .account-dashboard .dashboard-footer .project-creator {
-    width: 300px;
-  }
+    .account-dashboard {
+        .account-dashboard-content {
+            width: 400px;
+
+            .heading-one {
+                width: 300px;
+            }
+
+            .dashboard-link-component {
+                width: 300px;
+            }
+        }
+
+        .dashboard-footer {
+            width: 400px;
+
+            .project-creator {
+                width: 300px;
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 601px) and (max-width: 768.9px) {
-  .account-dashboard .account-dashboard-content {
-    width: 500px;
-  }
-  .account-dashboard .account-dashboard-content .heading-one {
-    width: 400px;
-  }
-  .account-dashboard .account-dashboard-content .dashboard-link-component {
-    width: 400px;
-  }
-  .account-dashboard .dashboard-footer {
-    width: 500px;
-  }
-  .account-dashboard .dashboard-footer .project-creator {
-    width: 400px;
-  }
+    .account-dashboard {
+        .account-dashboard-content {
+            width: 500px;
+
+            .heading-one {
+                width: 400px;
+            }
+
+            .dashboard-link-component {
+                width: 400px;
+            }
+        }
+
+        .dashboard-footer {
+            width: 500px;
+
+            .project-creator {
+                width: 400px;
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 769px) {
-  .account-dashboard .account-dashboard-content {
-    width: 500px;
-  }
-  .account-dashboard .account-dashboard-content .heading-one {
-    width: 400px;
-  }
-  .account-dashboard .account-dashboard-content .dashboard-link-component {
-    width: 400px;
-  }
-  .account-dashboard .dashboard-footer {
-    width: 500px;
-  }
-  .account-dashboard .dashboard-footer .project-creator {
-    width: 400px;
-  }
-}/*# sourceMappingURL=dashboard.css.map */
+    .account-dashboard {
+        .account-dashboard-content {
+            width: 500px;
+
+            .heading-one {
+                width: 400px;
+            }
+
+            .dashboard-link-component {
+                width: 400px;
+            }
+        }
+
+        .dashboard-footer {
+            width: 500px;
+
+            .project-creator {
+                width: 400px;
+            }
+        }
+    }
+}

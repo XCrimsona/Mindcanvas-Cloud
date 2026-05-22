@@ -1,89 +1,49 @@
+@reference "tailwindcss";
+
 .reposition-fragment-container {
-    display: flex;
-    flex-wrap: wrap;
-    position: absolute;
-    padding: 5px 5px 0px 5px;
-    max-height: 300px;
-    background-color: #000000;
-    box-shadow: 0px 0px 4px 2px #FAAA0040;
-    cursor: move;
-    z-index: 11;
-    /* --- DataComponent mixin inlined --- */
-    justify-content: center;
-    border-bottom: 2px solid #FAAA0040;
+    @apply flex flex-wrap absolute p-[5px] pb-0 max-h-[300px] bg-black cursor-move z-[11] justify-center border-b-2 border-b-[#FAAA0040];
+    @apply shadow-[0_0_4px_2px_#FAAA0040];
     transition: height .2s ease-in-out, width .2s ease-in-out, translate ease;
 }
 
 .reposition-fragment-container .reposition-fragment {
-    top: 0;
-    position: relative;
+    @apply top-0 relative mx-auto text-xs text-start break-keep overflow-x-hidden overflow-y-auto whitespace-pre-wrap p-[5px] cursor-text border-b border-b-[#FAAA0040];
     content: "";
-    margin: 0px auto;
-    font-size: 12px;
-    text-align: start;
-    word-break: keep-all;
-    overflow-x: hidden;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    padding: 5px;
-    cursor: text;
-    border-bottom: 1px solid #FAAA0040;
 }
 
 .reposition-fragment-container .text-fragment::selection {
-    background-color: transparent;
+    @apply bg-transparent;
 }
 
 .reposition-fragment-container .reposition-fragment-button {
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 12px;
-    padding-bottom: 0px;
-    background-color: #000000;
-    color: #FAAA00;
-    cursor: pointer;
-    box-shadow: 0px 0px 4px 0px #FAAA0040;
-    border-radius: 4px;
-    border-top: 2px solid #FAAA0040;
-    border-left: 2px solid #FAAA0040;
-    border-right: 2px solid #FAAA0040;
-    border-bottom: 2px solid #FAAA0040;
+    @apply block my-2.5 mx-auto text-xs pb-0 bg-black text-[#FAAA00] cursor-pointer rounded border-2 border-[#FAAA0040];
+    @apply shadow-[0_0_4px_0_#FAAA0040];
 }
 
 @media screen and (min-width:320px) and (max-width:600.9px) {
     .reposition-fragment-container {
-        min-width: 250px;
-        max-width: 280px;
+        @apply min-w-[250px] max-w-[280px];
     }
 
     .reposition-fragment-container .reposition-fragment {
-        width: 250px;
-        min-height: 200px;
-        max-height: 200px;
+        @apply w-[250px] min-h-[200px] max-h-[200px];
     }
 
     .reposition-fragment-container .reposition-fragment-button {
-        width: 250px;
+        @apply w-[250px];
     }
 }
 
 @media screen and (min-width:601px) {
     .reposition-fragment-container {
-        width: 450px;
-        max-width: 600px;
+        @apply w-[450px] max-w-[600px];
     }
 
     .reposition-fragment-container .reposition-fragment {
-        min-width: 400px;
-        max-width: 450px;
-        min-height: 20px;
-        max-height: 200px;
+        @apply min-w-[400px] max-w-[450px] min-h-5 max-h-[200px];
     }
 
     .reposition-fragment-container .reposition-fragment-button {
-        width: 180px;
+        @apply w-[180px];
     }
 }

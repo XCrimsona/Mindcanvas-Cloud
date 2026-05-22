@@ -8,7 +8,7 @@
         @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
 
         .video-element {
-            @apply w-[260px] h-auto rounded-tl object-cover bg-[#111];
+            @apply w-[260px] h-auto rounded-sm object-cover bg-[#111];
         }
     }
 }

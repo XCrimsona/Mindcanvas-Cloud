@@ -1,162 +1,191 @@
 .main-workspace-management-container {
-  margin: 0px auto 0px auto;
-}
-.main-workspace-management-container .workspace-dashboard {
-  overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  margin: 0px auto 0px auto;
-  position: relative;
-  border-radius: 10px;
-  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-  overflow-y: auto;
-}
-.main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .page-info-container {
-  display: inline-flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 4px 0 0 20px;
-  color: #ffffff;
-  gap: 16px;
-  /*spacing between items */
-}
-.main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .page-info-container .canva-management-heading-one {
-  text-align: center;
-  font-size: 32px;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .page-info-container .add-canvaspace {
-  cursor: help;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 240px;
-  border-radius: 10px;
-  border: 1px solid var(--Gold);
-  font-size: var(--font12);
-  height: 30px;
-  background-color: rgba(0, 0, 0, 0.5333333333);
-}
-.main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .page-info-container .new-canvaspace {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 180px;
-  border-radius: 10px;
-  border: 1px solid var(--Gold);
-  font-size: var(--font12);
-  height: 30px;
-  background-color: rgba(0, 0, 0, 0.5333333333);
-}
-.main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper {
-  border-radius: 10px;
-  display: block;
-  background-color: rgba(0, 0, 0, 0.85);
-  position: relative;
-  margin: 0px auto 0px auto;
-  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-}
-.main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .workspace-sheets {
-  overflow-x: hidden;
-  overflow-y: scroll;
-  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0px auto 0px auto;
-  justify-content: center;
-  align-content: flex-start;
+    margin: 0px auto;
+
+    .workspace-dashboard {
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+        margin: 0px auto;
+        position: relative;
+        border-radius: 10px;
+        transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+
+        .workspace-sheets-wrapper {
+            border-radius: 10px;
+            display: block;
+            background-color: rgba(0, 0, 0, 0.85);
+            position: relative;
+            margin: 0px auto;
+            transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+
+            .page-info-container {
+                display: inline-flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin: 4px 0 0 20px;
+                color: #ffffff;
+                gap: 16px;
+
+                .canva-management-heading-one {
+                    text-align: center;
+                    font-size: 32px;
+                    width: fit-content;
+                }
+
+                .add-canvaspace {
+                    cursor: help;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 240px;
+                    border-radius: 10px;
+                    border: 1px solid var(--color-gold);
+                    font-size: var(--font-size-sm);
+                    height: 30px;
+                    background-color: rgba(0, 0, 0, 0.53);
+                }
+
+                .new-canvaspace {
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 180px;
+                    border-radius: 10px;
+                    border: 1px solid var(--color-gold);
+                    font-size: var(--font-size-sm);
+                    height: 30px;
+                    background-color: rgba(0, 0, 0, 0.53);
+                }
+            }
+
+            .workspace-sheets {
+                overflow-x: hidden;
+                overflow-y: scroll;
+                transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0px auto;
+                justify-content: center;
+                align-content: flex-start;
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 320px) and (max-width: 425.9px) {
-  .main-workspace-management-container .heading-one {
-    width: 300px;
-  }
-  .main-workspace-management-container .workspace-dashboard {
-    width: 300px;
-    height: auto;
-    height: 90vh;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper {
-    width: 98%;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .workspace-sheets {
-    width: 98%;
-    height: 60vh;
-  }
+    .main-workspace-management-container {
+        .heading-one {
+            width: 300px;
+        }
+
+        .workspace-dashboard {
+            width: 300px;
+            height: auto;
+            height: 90vh;
+
+            .workspace-sheets-wrapper {
+                width: 98%;
+
+                .workspace-sheets {
+                    width: 98%;
+                    height: 60vh;
+                }
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 426px) and (max-width: 600.9px) {
-  .main-workspace-management-container .heading-one {
-    width: 400px;
-  }
-  .main-workspace-management-container .workspace-dashboard {
-    width: 98%;
-    min-height: 550px;
-    max-height: 800px;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper {
-    width: 98%;
-    height: 90vh;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .workspace-sheets {
-    width: 98%;
-    min-height: 40vh;
-    height: 70vh;
-  }
+    .main-workspace-management-container {
+        .heading-one {
+            width: 400px;
+        }
+
+        .workspace-dashboard {
+            width: 98%;
+            min-height: 550px;
+            max-height: 800px;
+
+            .workspace-sheets-wrapper {
+                width: 98%;
+                height: 90vh;
+
+                .workspace-sheets {
+                    width: 98%;
+                    min-height: 40vh;
+                    height: 70vh;
+                }
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 601px) and (max-width: 768.9px) {
-  .main-workspace-management-container .heading-one {
-    width: 400px;
-  }
-  .main-workspace-management-container .workspace-dashboard {
-    width: 98%;
-    min-height: 550px;
-    max-height: 800px;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper {
-    width: 98%;
-    height: 90vh;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .workspace-sheets {
-    width: 98%;
-    min-height: 40vh;
-    height: 70vh;
-  }
+    .main-workspace-management-container {
+        .heading-one {
+            width: 400px;
+        }
+
+        .workspace-dashboard {
+            width: 98%;
+            min-height: 550px;
+            max-height: 800px;
+
+            .workspace-sheets-wrapper {
+                width: 98%;
+                height: 90vh;
+
+                .workspace-sheets {
+                    width: 98%;
+                    min-height: 40vh;
+                    height: 70vh;
+                }
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 769px) and (max-width: 1440.9px) {
-  .main-workspace-management-container .heading-one {
-    width: 400px;
-  }
-  .main-workspace-management-container .workspace-dashboard {
-    width: 650px;
-    width: 100%;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper {
-    width: 98%;
-    height: 93vh;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .workspace-sheets {
-    width: 620px;
-    height: 740px;
-    width: 98%;
-  }
+    .main-workspace-management-container {
+        .heading-one {
+            width: 400px;
+        }
+
+        .workspace-dashboard {
+            width: 100%;
+
+            .workspace-sheets-wrapper {
+                width: 98%;
+                height: 93vh;
+
+                .workspace-sheets {
+                    height: 740px;
+                    width: 98%;
+                }
+            }
+        }
+    }
 }
-@media screen and (min-width: 1440px) {
-  .main-workspace-management-container .heading-one {
-    width: 400px;
-  }
-  .main-workspace-management-container .workspace-dashboard {
-    width: 650px;
-    width: 100%;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper {
-    width: 98%;
-    height: 93vh;
-  }
-  .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .workspace-sheets {
-    width: 620px;
-    height: 760px;
-    width: 98%;
-  }
-}/*# sourceMappingURL=management.css.map */
+
+@media screen and (min-width: 1441px) {
+    .main-workspace-management-container {
+        .heading-one {
+            width: 400px;
+        }
+
+        .workspace-dashboard {
+            width: 100%;
+
+            .workspace-sheets-wrapper {
+                width: 98%;
+                height: 93vh;
+
+                .workspace-sheets {
+                    height: 760px;
+                    width: 98%;
+                }
+            }
+        }
+    }
+}
