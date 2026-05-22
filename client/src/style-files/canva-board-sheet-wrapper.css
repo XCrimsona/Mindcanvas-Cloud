@@ -1,358 +1,378 @@
+/* the canva block that carry data */
 .workspace-sheet-wrapper {
-  display: block;
-  background-color: #000000;
-  border-radius: 4px;
-  box-shadow: 0px 0px 10px 0px rgba(250, 187, 0, 0.6980392157), inset 0px 0px 8px 0px rgba(250, 187, 0, 0.6980392157);
-  margin: 20px auto 20px auto;
-  padding: 2px 0px 2px 0px;
-  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-  min-height: 160px;
-  height: auto;
-}
-.workspace-sheet-wrapper .workspace-sheet {
-  margin: 0px auto 0px auto;
-  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data {
-  margin: 0px auto 0px auto;
-  display: block;
-  position: relative;
-  color: #fff;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data button {
-  margin: 0px 0px 0px auto;
-  float: right;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data button .dynamic-workspace-route {
-  display: block;
-  float: right;
-  transform: rotate(136deg);
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data button .dynamic-workspace-route .forward-to-workspace-icon {
-  margin: 0px auto 0px auto;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .new-temp-update-description-field-workspace-name,
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .workspace-name {
-  height: 20px;
-  display: block;
-  transition: border 0.2s ease-in-out, height 0.2s ease-in-out, width 0.2s ease-in-out;
-  border-top: 2px solid #000000;
-  border-left: 2px solid #000000;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid rgba(250, 187, 0, 0.8666666667);
-  margin: 20px 0px 4px 0px;
-  outline: 2px solid #000000;
-  font-size: 12px;
-  background-color: #000000;
-  color: #fff;
-  cursor: pointer;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .new-temp-update-description-field-workspace-name::-moz-placeholder, .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .workspace-name::-moz-placeholder {
-  color: #fff;
-  font-size: 12px;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .new-temp-update-description-field-workspace-name::placeholder,
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .workspace-name::placeholder {
-  color: #fff;
-  font-size: 12px;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .new-temp-update-description-field-workspace-name:focus,
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .workspace-name:focus {
-  border-top: 2px solid #000000;
-  border-left: 2px solid #000000;
-  border-right: 2px solid rgba(250, 187, 0, 0.8666666667);
-  border-bottom: 2px solid rgba(250, 187, 0, 0.8666666667);
-  margin: 20px 0px 4px 0px;
-  outline: 2px solid #000000;
-  font-size: 12px;
-  background-color: #000000;
-  color: #fff;
-  cursor: pointer;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .new-temp-update-description-field-workspace-description,
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .workspace-description {
-  height: 60px;
-  max-height: 100px;
-  transition: border 0.2s ease-in-out, height 0.2s ease-in-out;
-  border-top: 2px solid transparent;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
-  border-bottom: 2px solid rgba(250, 187, 0, 0.8666666667);
-  margin: 2px 0px 4px 0px;
-  outline: 2px solid #000000;
-  font-size: 12px;
-  background-color: #000000;
-  color: #fff;
-  resize: none;
-  cursor: pointer;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .new-temp-update-description-field-workspace-description::-moz-placeholder, .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .workspace-description::-moz-placeholder {
-  color: #fff;
-  font-size: 12px;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .new-temp-update-description-field-workspace-description::placeholder,
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .workspace-description::placeholder {
-  color: #fff;
-  font-size: 12px;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .new-temp-update-description-field-workspace-description:focus,
-.workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .workspace-description:focus {
-  border-top: 2px solid #000000;
-  border-left: 2px solid #000000;
-  border-right: 2px solid rgba(250, 187, 0, 0.8666666667);
-  margin: 2px 0px 4px 0px;
-  outline: 2px solid #000000;
-  font-size: 12px;
-  background-color: #000000;
-  color: #fff;
-  cursor: pointer;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-buttons-container {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-buttons-container .workspace-toggle-edit-btns {
-  margin: 0px auto 0px auto;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-buttons-container .workspace-toggle-edit-btns .edit-mode,
-.workspace-sheet-wrapper .workspace-sheet .workspace-buttons-container .workspace-toggle-edit-btns .view-mode {
-  margin: 2px auto 2px auto;
-  color: #FABB00;
-  text-align: center;
-  background-color: #000000;
-  border: 2px solid #000000;
-  font-size: 14px;
-  text-transform: uppercase;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.workspace-sheet-wrapper .workspace-sheet .workspace-buttons-container .update-workspace-sheet {
-  margin: 2px auto 2px auto;
-  color: #FABB00;
-  text-align: center;
-  background-color: #000000;
-  border: 2px solid #000000;
-  font-size: 14px;
-  text-transform: uppercase;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.workspace-sheet-wrapper .workspace-sheet-temp-field {
-  margin: 20px auto 20px auto;
-  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-}
-.workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name,
-.workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description {
-  border-top: 2px solid #000000;
-  border-left: 2px solid #000000;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid rgba(250, 187, 0, 0.8666666667);
-  resize: none;
-  margin: 20px auto 4px 10px;
-  outline: 2px solid #000000;
-  font-size: 12px;
-  background-color: #000000;
-  color: #fff;
-  cursor: pointer;
-  transition: border 0.2s ease-in-out;
-}
-.workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name:focus,
-.workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description:focus {
-  outline: 2px solid #000000;
-  border-right: 2px solid rgba(250, 187, 0, 0.8666666667);
-}
-.workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-sheet-forefront-data {
-  margin: 0px auto 0px auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  justify-content: left;
-  color: #fff;
-}
-.workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-sheet-forefront-data .create-workspace-sheet {
-  margin: 10px auto 10px auto;
-  color: #FABB00;
-  text-align: center;
-  background-color: #000000;
-  border: 2px solid #000000;
-  text-transform: uppercase;
-  text-decoration: underline;
+    display: block;
+    background-color: var(--color-black);
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(250, 187, 0, 0.7), inset 0px 0px 8px 0px rgba(250, 187, 0, 0.7);
+    margin: 20px auto;
+    padding: 2px 0px;
+    transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+    min-height: 160px;
+    height: auto;
+
+    .workspace-sheet {
+        margin: 0px auto;
+        transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+
+        .workspace-sheet-forefront-data {
+            margin: 0px auto;
+            display: block;
+            position: relative;
+            color: #fff;
+
+            button {
+                margin: 0px 0px 0px auto;
+                float: right;
+
+                .dynamic-workspace-route {
+                    display: block;
+                    float: right;
+                    transform: rotate(136deg);
+
+                    .forward-to-workspace-icon {
+                        margin: 0px auto;
+                    }
+                }
+            }
+
+            .new-temp-update-description-field-workspace-name,
+            .workspace-name {
+                height: 20px;
+                display: block;
+                transition: border 0.2s ease-in-out, height 0.2s ease-in-out, width 0.2s ease-in-out;
+                border-top: 2px solid #000000;
+                border-left: 2px solid #000000;
+                border-right: 2px solid #000000;
+                border-bottom: 2px solid rgba(250, 187, 0, 0.87);
+                margin: 20px 0px 4px 0px;
+                outline: 2px solid #000000;
+                font-size: 12px;
+                background-color: #000000;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .new-temp-update-description-field-workspace-name::placeholder,
+            .workspace-name::placeholder {
+                color: #fff;
+                font-size: 12px;
+            }
+
+            .new-temp-update-description-field-workspace-name:focus,
+            .workspace-name:focus {
+                border-top: 2px solid #000000;
+                border-left: 2px solid #000000;
+                border-right: 2px solid rgba(250, 187, 0, 0.87);
+                border-bottom: 2px solid rgba(250, 187, 0, 0.87);
+                margin: 20px 0px 4px 0px;
+                outline: 2px solid #000000;
+                font-size: 12px;
+                background-color: #000000;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .new-temp-update-description-field-workspace-description,
+            .workspace-description {
+                height: 60px;
+                max-height: 100px;
+                transition: border 0.2s ease-in-out, height 0.2s ease-in-out;
+                border-top: 2px solid transparent;
+                border-left: 2px solid transparent;
+                border-right: 2px solid transparent;
+                border-bottom: 2px solid rgba(250, 187, 0, 0.87);
+                margin: 2px 0px 4px 0px;
+                outline: 2px solid #000000;
+                font-size: 12px;
+                background-color: #000000;
+                color: #fff;
+                resize: none;
+                cursor: pointer;
+            }
+
+            .new-temp-update-description-field-workspace-description::placeholder,
+            .workspace-description::placeholder {
+                color: #fff;
+                font-size: 12px;
+            }
+
+            .new-temp-update-description-field-workspace-description:focus,
+            .workspace-description:focus {
+                border-top: 2px solid #000000;
+                border-left: 2px solid #000000;
+                border-right: 2px solid rgba(250, 187, 0, 0.87);
+                margin: 2px 0px 4px 0px;
+                outline: 2px solid #000000;
+                font-size: 12px;
+                background-color: #000000;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+
+        .workspace-buttons-container {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+
+            .workspace-toggle-edit-btns {
+                margin: 0px auto;
+
+                .edit-mode,
+                .view-mode {
+                    margin: 2px auto;
+                    color: var(--color-gold);
+                    text-align: center;
+                    background-color: #000000;
+                    border: 2px solid #000000;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+
+            .update-workspace-sheet {
+                margin: 2px auto;
+                color: var(--color-gold);
+                text-align: center;
+                background-color: #000000;
+                border: 2px solid #000000;
+                font-size: 14px;
+                text-transform: uppercase;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .workspace-sheet-temp-field {
+        margin: 20px auto;
+        transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+
+        .workspace-name,
+        .workspace-description {
+            border-top: 2px solid #000000;
+            border-left: 2px solid #000000;
+            border-right: 2px solid #000000;
+            border-bottom: 2px solid rgba(250, 187, 0, 0.87);
+            resize: none;
+            margin: 20px auto 4px 10px;
+            outline: 2px solid #000000;
+            font-size: 12px;
+            background-color: #000000;
+            color: #fff;
+            cursor: pointer;
+            transition: border 0.2s ease-in-out;
+        }
+
+        .workspace-name:focus,
+        .workspace-description:focus {
+            outline: 2px solid #000000;
+            border-right: 2px solid rgba(250, 187, 0, 0.87);
+        }
+
+        .workspace-sheet-forefront-data {
+            margin: 0px auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            justify-content: left;
+            color: #fff;
+
+            .create-workspace-sheet {
+                margin: 10px auto;
+                color: var(--color-gold);
+                text-align: center;
+                background-color: #000000;
+                border: 2px solid #000000;
+                text-transform: uppercase;
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 320px) and (max-width: 425.9px) {
-  .workspace-sheet-wrapper {
-    width: 260px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet {
-    width: 240px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .dynamic-workspace-route {
-    width: 40px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .dynamic-workspace-route .forward-to-workspace-icon {
-    width: 20px;
-    height: 30px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-name,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-name {
-    width: 214px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-name:focus,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-name:focus {
-    width: 214px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-description,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-description {
-    width: 214px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-description:focus,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-description:focus {
-    width: 214px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name,
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description {
-    width: 214px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name:focus,
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description:focus {
-    width: 214px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-sheet-forefront-data .create-workspace-sheet {
-    width: 214px;
-  }
+    .workspace-sheet-wrapper {
+        width: 260px;
+
+        .workspace-sheet {
+            width: 240px;
+
+            .workspace-sheet-forefront-data .dynamic-workspace-route {
+                width: 40px;
+
+                .forward-to-workspace-icon {
+                    width: 20px;
+                    height: 30px;
+                }
+            }
+
+            .new-temp-update-description-field-workspace-name,
+            .workspace-name,
+            .new-temp-update-description-field-workspace-name:focus,
+            .workspace-name:focus,
+            .new-temp-update-description-field-workspace-description,
+            .workspace-description,
+            .new-temp-update-description-field-workspace-description:focus,
+            .workspace-description:focus {
+                width: 214px;
+            }
+        }
+
+        .workspace-sheet-temp-field {
+            .workspace-name,
+            .workspace-description,
+            .workspace-name:focus,
+            .workspace-description:focus {
+                width: 214px;
+            }
+
+            .workspace-sheet-forefront-data .create-workspace-sheet {
+                width: 214px;
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 426px) and (max-width: 600.9px) {
-  .workspace-sheet-wrapper {
-    width: 370px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet {
-    width: 360px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .dynamic-workspace-route {
-    width: 40px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .dynamic-workspace-route .forward-to-workspace-icon {
-    width: 20px;
-    height: 30px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-name,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-name {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-name:focus,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-name:focus {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-description,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-description {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-description:focus,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-description:focus {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name,
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name:focus,
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description:focus {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-sheet-forefront-data .create-workspace-sheet {
-    width: 290px;
-  }
+    .workspace-sheet-wrapper {
+        width: 370px;
+
+        .workspace-sheet {
+            width: 360px;
+
+            .workspace-sheet-forefront-data .dynamic-workspace-route {
+                width: 40px;
+
+                .forward-to-workspace-icon {
+                    width: 20px;
+                    height: 30px;
+                }
+            }
+
+            .new-temp-update-description-field-workspace-name,
+            .workspace-name,
+            .new-temp-update-description-field-workspace-name:focus,
+            .workspace-name:focus,
+            .new-temp-update-description-field-workspace-description,
+            .workspace-description,
+            .new-temp-update-description-field-workspace-description:focus,
+            .workspace-description:focus {
+                width: 290px;
+            }
+        }
+
+        .workspace-sheet-temp-field {
+            .workspace-name,
+            .workspace-description,
+            .workspace-name:focus,
+            .workspace-description:focus {
+                width: 290px;
+            }
+
+            .workspace-sheet-forefront-data .create-workspace-sheet {
+                width: 290px;
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 601px) and (max-width: 768.9px) {
-  .workspace-sheet-wrapper {
-    width: 400px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet {
-    width: 360px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .dynamic-workspace-route {
-    width: 40px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .dynamic-workspace-route .forward-to-workspace-icon {
-    width: 20px;
-    height: 30px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-name,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-name {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-name:focus,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-name:focus {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-description,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-description {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-description:focus,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-description:focus {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name,
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name:focus,
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description:focus {
-    width: 290px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-sheet-forefront-data .create-workspace-sheet {
-    width: 290px;
-  }
+    .workspace-sheet-wrapper {
+        width: 400px;
+
+        .workspace-sheet {
+            width: 360px;
+
+            .workspace-sheet-forefront-data .dynamic-workspace-route {
+                width: 40px;
+
+                .forward-to-workspace-icon {
+                    width: 20px;
+                    height: 30px;
+                }
+            }
+
+            .new-temp-update-description-field-workspace-name,
+            .workspace-name,
+            .new-temp-update-description-field-workspace-name:focus,
+            .workspace-name:focus,
+            .new-temp-update-description-field-workspace-description,
+            .workspace-description,
+            .new-temp-update-description-field-workspace-description:focus,
+            .workspace-description:focus {
+                width: 290px;
+            }
+        }
+
+        .workspace-sheet-temp-field {
+            .workspace-name,
+            .workspace-description,
+            .workspace-name:focus,
+            .workspace-description:focus {
+                width: 290px;
+            }
+
+            .workspace-sheet-forefront-data .create-workspace-sheet {
+                width: 290px;
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 769px) {
-  .workspace-sheet-wrapper {
-    width: 300px;
-    margin: 20px auto 20px auto;
-  }
-  .workspace-sheet-wrapper .workspace-sheet {
-    width: 280px;
-    margin: 20px auto 20px auto;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .dynamic-workspace-route {
-    width: 32px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-sheet-forefront-data .dynamic-workspace-route .forward-to-workspace-icon {
-    height: 20px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-name,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-name {
-    width: 250px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-name:focus,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-name:focus {
-    width: 250px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-description,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-description {
-    width: 250px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .new-temp-update-description-field-workspace-description:focus,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-description:focus {
-    width: 250px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-buttons-container {
-    width: 250px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet .workspace-buttons-container .workspace-toggle-edit-btns .edit-mode,
-  .workspace-sheet-wrapper .workspace-sheet .workspace-buttons-container .workspace-toggle-edit-btns .view-mode {
-    width: 100px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name,
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description {
-    width: 250px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-name:focus,
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-description:focus {
-    width: 250px;
-  }
-  .workspace-sheet-wrapper .workspace-sheet-temp-field .workspace-sheet-forefront-data .create-workspace-sheet {
-    width: 250px;
-  }
-}/*# sourceMappingURL=canva-board-sheet-wrapper.css.map */
+    .workspace-sheet-wrapper {
+        width: 300px;
+        margin: 20px auto;
+
+        .workspace-sheet {
+            width: 280px;
+            margin: 20px auto;
+
+            .workspace-sheet-forefront-data .dynamic-workspace-route {
+                width: 32px;
+
+                .forward-to-workspace-icon {
+                    height: 20px;
+                }
+            }
+
+            .new-temp-update-description-field-workspace-name,
+            .workspace-name,
+            .new-temp-update-description-field-workspace-name:focus,
+            .workspace-name:focus,
+            .new-temp-update-description-field-workspace-description,
+            .workspace-description,
+            .new-temp-update-description-field-workspace-description:focus,
+            .workspace-description:focus {
+                width: 250px;
+            }
+
+            .workspace-buttons-container {
+                width: 250px;
+
+                .workspace-toggle-edit-btns {
+                    .edit-mode,
+                    .view-mode {
+                        width: 100px;
+                    }
+                }
+            }
+        }
+
+        .workspace-sheet-temp-field {
+            .workspace-name,
+            .workspace-description,
+            .workspace-name:focus,
+            .workspace-description:focus {
+                width: 250px;
+            }
+
+            .workspace-sheet-forefront-data .create-workspace-sheet {
+                width: 250px;
+            }
+        }
+    }
+}

@@ -4,6 +4,7 @@ import TextInputUnit from "../../../../../../lib/form-components/text/TextInputU
 import { useCanvasContext } from "../../../../../../lib/form-components/canva-data-provider/CanvasDataContextProvider";
 import CanvasData from "../../../../../../lib/canvas-data/CanvasData";
 import RepositionLiveData from "../../../../../../lib/form-components/mediaReposition/RepositionLiveData";
+import ReadingPage from "../../../../../../lib/components/perception/ReadingPage";
 // import AudioInputUnit from "./form-components/audio/AudioInputUnit";
 import DoughnutChartInputUnit from "../../../../../../lib/form-components/chart/DoughnutChartInputUnit";
 import TextLinkInputUnit from "../../../../../../lib/form-components/link/LinkInputUnit";
@@ -33,9 +34,8 @@ const CanvaContainer = () => {
         <VideoInputUnit />
 
         <RepositionLiveData />
-        {/* <ImageQueueProvider> */}
-          <CanvasData />
-        {/* </ImageQueueProvider> */}
+        <ReadingPage />
+        <CanvasData />
       </div>
     </DivClass>
   );

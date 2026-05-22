@@ -1,76 +1,103 @@
+/* Component Hub child component functionality properties */
 .comp-hub-data-fragment-container {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0px;
-  left: 0px;
-  height: 300px;
-  width: 350px;
-  background-color: #000000;
-  margin: 0px auto 0px auto;
-  z-index: 4;
-  border-top: 2px solid rgba(250, 187, 0, 0.2509803922);
-  border-bottom: 2px solid rgba(250, 187, 0, 0.2509803922);
-  border-left: 2px solid rgba(250, 187, 0, 0.2509803922);
-  border-right: 2px solid rgba(250, 187, 0, 0.2509803922);
-  box-shadow: 0px 0px 4px 2px rgba(250, 187, 0, 0.2509803922);
-  border-radius: 4px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    height: 280px;
+    width: 280px;
+    background-color: var(--color-black);
+    margin: 0px auto;
+    z-index: 4;
+    border: 2px solid var(--color-gold-ring);
+    box-shadow: 0px 0px 4px 2px var(--color-gold-ring);
+    border-radius: 4px;
+
+    .center-comp-hub-component {
+        position: relative;
+        height: 280px;
+        width: 280px;
+        margin: 0px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 18px 24px;
+        box-sizing: border-box;
+
+        .close-icon-wrapper {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 10px;
+            right: 6px;
+            width: 28px;
+            height: 28px;
+            border: 2px solid #000;
+            background-color: #000;
+            transform: rotate(45deg);
+            cursor: pointer;
+
+            .close-icon {
+                display: block;
+                width: 20px;
+                height: 20px;
+                border-radius: 8px;
+            }
+        }
+
+        .comp-hub-data-fragment-components {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+
+            .fragment-heading-text {
+                display: block;
+                font-size: 10px;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                color: #a3a3a3;
+                margin-top: 10px;
+                margin-bottom: 2px;
+            }
+
+            .fragment-heading-text:first-child {
+                margin-top: 0;
+            }
+
+            .textlink-comp,
+            .text-comp,
+            .audio-comp,
+            .image-comp,
+            .video-comp,
+            .doughnut-chart-comp {
+                width: 150px;
+                margin-left: auto;
+                margin-right: auto;
+                background-color: rgba(20, 20, 20, 0.7);
+                color: var(--color-smoke);
+                border: 2px solid var(--color-gold-ring);
+                border-radius: 4px;
+                font-size: 13px;
+                padding: 4px 8px;
+                cursor: pointer;
+                transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+            }
+
+            .textlink-comp:hover,
+            .text-comp:hover,
+            .audio-comp:hover,
+            .image-comp:hover,
+            .video-comp:hover,
+            .doughnut-chart-comp:hover {
+                background-color: var(--color-gold-hover);
+                border-color: var(--color-gold-strong);
+                color: #ffffff;
+            }
+        }
+    }
 }
-.comp-hub-data-fragment-container .center-comp-hub-component {
-  position: relative;
-  height: 300px;
-  width: 330px;
-  margin: 0px auto 0px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.comp-hub-data-fragment-container .center-comp-hub-component .close-icon-wrapper {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 10px;
-  right: 6px;
-  width: 28px;
-  height: 28px;
-  border: 2px solid #000;
-  background-color: #000;
-  transform: rotate(45deg);
-  cursor: pointer;
-}
-.comp-hub-data-fragment-container .center-comp-hub-component .close-icon-wrapper .close-icon {
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-radius: 8px;
-}
-.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .fragment-heading-text {
-  display: block;
-  font-size: 14px;
-  color: #fff;
-}
-.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .textlink-comp,
-.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .text-comp,
-.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .audio-comp,
-.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .image-comp,
-.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .video-comp,
-.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .doughnut-chart-comp {
-  width: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: rgba(20, 20, 20, 0.7019607843);
-  color: #ffffff;
-  border-top: 2px solid rgba(0, 0, 0, 0.7019607843);
-  border-bottom: 2px solid rgba(250, 187, 0, 0.7019607843);
-  border-left: 2px solid rgba(0, 0, 0, 0.7019607843);
-  border-right: 2px solid rgba(0, 0, 0, 0.7019607843);
-  border-radius: 4px;
-  font-size: 13px;
-  cursor: pointer;
-}
-.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .text-comp {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}/*# sourceMappingURL=comp-hub-data-components.css.map */

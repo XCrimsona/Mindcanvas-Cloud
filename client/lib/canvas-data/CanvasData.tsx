@@ -23,20 +23,16 @@ const CanvasData = () => {
       //   return <ImmutableList data={data} />;
       // case "listitem":
       //   return <ImmutableList data={data} />;
-      // case "audio":
-      //   return <ImmutableAudio data={data} />;
       case "Images":
         return <ImageCluster data={data} />;
       case "Video":
         return <Video data={data} />;
+      // case "Audio":
+      // return <Audio data={data} />;
 
       //Analytic Data Structures
       case "DoughnutChart":
-        return (
-          <>
-            <DoughnutChart data={data} />
-          </>
-        );
+        return <DoughnutChart data={data} />;
       default:
         return (
           <ShortText className={"unsupported-type-text"}>

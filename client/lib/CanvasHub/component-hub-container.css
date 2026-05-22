@@ -1,26 +1,27 @@
 .component-hub-container {
-  margin: auto auto;
-  width: 140px;
-  display: block;
-  text-align: center;
-  margin-left: 0px;
+    margin: auto;
+    width: 140px;
+    display: block;
+    text-align: center;
+    margin-left: 0px;
+
+    .component-hub-btn {
+        letter-spacing: 1px;
+        background-color: #1C1C1C;
+        border-radius: 4px;
+        border: 2px solid #555555;
+        cursor: pointer;
+        width: 140px;
+
+        .longtext {
+            display: block;
+            padding: 4px;
+            color: #f0f;
+            width: 130px;
+            cursor: pointer;
+            margin: 0px auto;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+    }
 }
-.component-hub-container .component-hub-btn {
-  letter-spacing: 1px;
-  background-color: #1C1C1C;
-  border-radius: 4px;
-  border: 2px solid #555555;
-  cursor: pointer;
-  width: 140px;
-}
-.component-hub-container .component-hub-btn .longtext {
-  display: block;
-  padding: 4px 4px;
-  color: #f0f;
-  width: 130px;
-  cursor: pointer;
-  display: block;
-  margin: 0px auto 0px auto;
-  font-size: 12px;
-  text-transform: uppercase;
-}/*# sourceMappingURL=component-hub-container.css.map */

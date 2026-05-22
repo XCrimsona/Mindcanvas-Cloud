@@ -1,208 +1,200 @@
 .account-info {
-  position: relative;
-  margin: auto auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .account-info-content {
+        display: block;
+        margin: 0px auto;
+        background-color: rgba(0, 0, 0, 0.6);
+        border: 1px solid var(--color-gold);
+        border-radius: 10px;
+        box-shadow:
+            0px 4px 4px 0px rgba(0, 0, 0, 0.25),
+            0px 0px 8px 3px rgba(250, 187, 0, 0.25);
+
+        .nav-link {
+            color: #fff;
+            font-size: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 14px;
+            margin-bottom: 14px;
+            justify-content: center;
+            cursor: pointer;
+
+            .nav-image {
+                margin-right: 10px;
+            }
+        }
+
+        .heading-one {
+            color: #fff;
+            text-align: center;
+            font-size: 24px;
+            margin: 0px auto;
+        }
+
+        .account-info-form {
+            display: block;
+            margin: 60px auto 0px auto;
+
+            div {
+                .update-firstname,
+                .update-lastname,
+                .update-gender,
+                .update-dob,
+                .update-email,
+                .current-password,
+                .new-password,
+                .confirm-new-password {
+                    color: #fff;
+                }
+
+                div {
+                    .firstname-input,
+                    .lastname-input,
+                    .gender-input,
+                    .gender-input-disabled,
+                    .dob-input,
+                    .email-input {
+                        background-color: rgba(0, 0, 0, 0.65);
+                        color: #ffffff;
+                        border: none;
+                        border-radius: 4px;
+                        border-left: 1px solid var(--color-gold);
+                        border-bottom: 1px solid var(--color-gold);
+                        padding: 4px 0 4px 2px;
+                    }
+
+                    .firstname-input:focus,
+                    .lastname-input:focus,
+                    .gender-input:focus,
+                    .dob-input:focus,
+                    .email-input:focus {
+                        outline: 2px solid transparent;
+                    }
+
+                    .firstname-input::placeholder,
+                    .lastname-input::placeholder,
+                    .gender-input::placeholder,
+                    .dob-input::placeholder,
+                    .email-input::placeholder {
+                        margin: 0 auto;
+                        color: #ffffff;
+                        padding: 3px 0;
+                    }
+
+                    .form-pipe-span {
+                        width: 20px;
+                        color: #fff;
+                        margin: auto;
+                        text-align: center;
+                    }
+
+                    .disable-firstname-editing,
+                    .enable-firstname-editing,
+                    .disable-lastname-editing,
+                    .enable-lastname-editing,
+                    .disable-gender-editing,
+                    .enable-gender-editing,
+                    .disable-dob-editing,
+                    .enable-dob-editing,
+                    .disable-email-editing,
+                    .enable-email-editing {
+                        background-color: rgba(0, 0, 0, 0.65);
+                        color: #ffffff;
+                        border: none;
+                        border-radius: 4px;
+                        text-decoration: underline;
+                        cursor: pointer;
+                        border-top: 1px solid var(--color-gold);
+                        border-right: 1px solid var(--color-gold);
+                        padding: 4px 0 4px 2px;
+                    }
+
+                    .current-password-input,
+                    .new-password-input,
+                    .confirm-new-password-input {
+                        display: block;
+                        padding: 4px 0 4px 2px;
+                        margin: 0 2px 0 0;
+                        background-color: rgba(0, 0, 0, 0.65);
+                        color: #ffffff;
+                        border: none;
+                        border-radius: 4px;
+                        border-bottom: 1px solid var(--color-gold);
+                    }
+
+                    .current-password-input::placeholder,
+                    .new-password-input::placeholder,
+                    .confirm-new-password-input::placeholder {
+                        display: block;
+                        margin: 0px 2px;
+                        padding: 3px 0 3px 1px;
+                        color: #ffffff;
+                    }
+
+                    .current-password-input:focus,
+                    .new-password-input:focus,
+                    .confirm-new-password-input:focus {
+                        outline: 2px solid transparent;
+                    }
+                }
+            }
+
+            .form-processing-btn,
+            .delete-container {
+                .submit-container,
+                .cancel-container {
+                    display: block;
+
+                    .cancel-submit,
+                    .submit-btn {
+                        border-radius: 6px;
+                        padding: 10px 25px;
+                        background-color: #111111;
+                    }
+
+                    .cancel-submit {
+                        color: var(--color-gold);
+                        cursor: pointer;
+                        border: 1px solid var(--color-gold);
+                    }
+
+                    .submit-btn {
+                        color: #FA00BB;
+                        border: 1px solid #FA00BB;
+                    }
+                }
+
+                .toggle-account-deletion-lock-container,
+                .delete-btn-container {
+                    display: block;
+
+                    .toggle-account-deletion-lock,
+                    .delete-btn {
+                        border-radius: 6px;
+                        padding: 10px 25px;
+                        background-color: #111111;
+                    }
+
+                    .toggle-account-deletion-lock {
+                        color: var(--color-gold);
+                        cursor: pointer;
+                        border: 1px solid var(--color-gold);
+                    }
+
+                    .delete-btn {
+                        color: #FA00BB;
+                        border: 1px solid #FA00BB;
+                    }
+                }
+            }
+        }
+    }
 }
-.account-info .account-info-content {
-  display: block;
-  margin: 0px auto;
-  background-color: rgba(0, 0, 0, 0.6);
-  border: 1px solid #FABB00;
-  border-radius: 10px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 0px 8px 3px rgba(250, 187, 0, 0.25);
-}
-.account-info .account-info-content .nav-link {
-  color: #fff;
-  font-size: 18px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 14px;
-  margin-bottom: 14px;
-  justify-content: center;
-  cursor: pointer;
-}
-.account-info .account-info-content .nav-link .nav-image {
-  margin-right: 10px;
-}
-.account-info .account-info-content .heading-one {
-  color: #fff;
-  text-align: center;
-  font-size: 24px;
-  margin: 0px auto 0px auto;
-}
-.account-info .account-info-content .account-info-form {
-  display: block;
-  margin: 60px auto 0px auto;
-}
-.account-info .account-info-content .account-info-form div .update-firstname,
-.account-info .account-info-content .account-info-form div .update-lastname,
-.account-info .account-info-content .account-info-form div .update-gender,
-.account-info .account-info-content .account-info-form div .update-dob,
-.account-info .account-info-content .account-info-form div .update-email,
-.account-info .account-info-content .account-info-form div .current-password,
-.account-info .account-info-content .account-info-form div .new-password,
-.account-info .account-info-content .account-info-form div .confirm-new-password {
-  color: #fff;
-}
-.account-info .account-info-content .account-info-form div div .firstname-input,
-.account-info .account-info-content .account-info-form div div .lastname-input,
-.account-info .account-info-content .account-info-form div div .gender-input,
-.account-info .account-info-content .account-info-form div div .gender-input-disabled,
-.account-info .account-info-content .account-info-form div div .dob-input,
-.account-info .account-info-content .account-info-form div div .email-input {
-  background-color: rgba(0, 0, 0, 0.65);
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  border-left: 1px solid #FABB00;
-  border-bottom: 1px solid #FABB00;
-  padding: 4px 0 4px 2px;
-}
-.account-info .account-info-content .account-info-form div div .firstname-input:focus,
-.account-info .account-info-content .account-info-form div div .lastname-input:focus,
-.account-info .account-info-content .account-info-form div div .gender-input:focus,
-.account-info .account-info-content .account-info-form div div .dob-input:focus,
-.account-info .account-info-content .account-info-form div div .email-input:focus {
-  outline: 2px solid transparent;
-}
-.account-info .account-info-content .account-info-form div div .firstname-input::-moz-placeholder, .account-info .account-info-content .account-info-form div div .lastname-input::-moz-placeholder, .account-info .account-info-content .account-info-form div div .gender-input::-moz-placeholder, .account-info .account-info-content .account-info-form div div .dob-input::-moz-placeholder, .account-info .account-info-content .account-info-form div div .email-input::-moz-placeholder {
-  margin: 0 auto;
-  color: #ffffff;
-  padding: 3px 0 3px 0;
-}
-.account-info .account-info-content .account-info-form div div .firstname-input::placeholder,
-.account-info .account-info-content .account-info-form div div .lastname-input::placeholder,
-.account-info .account-info-content .account-info-form div div .gender-input::placeholder,
-.account-info .account-info-content .account-info-form div div .dob-input::placeholder,
-.account-info .account-info-content .account-info-form div div .email-input::placeholder {
-  margin: 0 auto;
-  color: #ffffff;
-  padding: 3px 0 3px 0;
-}
-.account-info .account-info-content .account-info-form div div .form-pipe-span {
-  width: 20px;
-  color: #fff;
-  margin: auto;
-  text-align: center;
-}
-.account-info .account-info-content .account-info-form div div .disable-firstname-editing,
-.account-info .account-info-content .account-info-form div div .enable-firstname-editing,
-.account-info .account-info-content .account-info-form div div .disable-lastname-editing,
-.account-info .account-info-content .account-info-form div div .enable-lastname-editing,
-.account-info .account-info-content .account-info-form div div .disable-gender-editing,
-.account-info .account-info-content .account-info-form div div .enable-gender-editing,
-.account-info .account-info-content .account-info-form div div .disable-dob-editing,
-.account-info .account-info-content .account-info-form div div .enable-dob-editing,
-.account-info .account-info-content .account-info-form div div .disable-email-editing,
-.account-info .account-info-content .account-info-form div div .enable-email-editing {
-  background-color: rgba(0, 0, 0, 0.65);
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  text-decoration: underline;
-  cursor: pointer;
-  border-top: 1px solid #FABB00;
-  border-right: 1px solid #FABB00;
-  padding: 4px 0 4px 2px;
-}
-.account-info .account-info-content .account-info-form div div .current-password-input,
-.account-info .account-info-content .account-info-form div div .new-password-input,
-.account-info .account-info-content .account-info-form div div .confirm-new-password-input {
-  display: block;
-  padding: 4px 0 4px 2px;
-  margin: 0 2px 0 0;
-  background-color: rgba(0, 0, 0, 0.65);
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  border-bottom: 1px solid #FABB00;
-}
-.account-info .account-info-content .account-info-form div div .current-password-input::-moz-placeholder, .account-info .account-info-content .account-info-form div div .new-password-input::-moz-placeholder, .account-info .account-info-content .account-info-form div div .confirm-new-password-input::-moz-placeholder {
-  display: block;
-  margin: 0px 2px;
-  padding: 3px 0 3px 1px;
-  color: #ffffff;
-}
-.account-info .account-info-content .account-info-form div div .current-password-input::placeholder,
-.account-info .account-info-content .account-info-form div div .new-password-input::placeholder,
-.account-info .account-info-content .account-info-form div div .confirm-new-password-input::placeholder {
-  display: block;
-  margin: 0px 2px;
-  padding: 3px 0 3px 1px;
-  color: #ffffff;
-}
-.account-info .account-info-content .account-info-form div div .current-password-input:focus,
-.account-info .account-info-content .account-info-form div div .new-password-input:focus,
-.account-info .account-info-content .account-info-form div div .confirm-new-password-input:focus {
-  outline: 2px solid transparent;
-}
-.account-info .account-info-content .account-info-form .form-processing-btn .submit-container,
-.account-info .account-info-content .account-info-form .form-processing-btn .cancel-container,
-.account-info .account-info-content .account-info-form .delete-container .submit-container,
-.account-info .account-info-content .account-info-form .delete-container .cancel-container {
-  display: block;
-}
-.account-info .account-info-content .account-info-form .form-processing-btn .submit-container .cancel-submit,
-.account-info .account-info-content .account-info-form .form-processing-btn .submit-container .submit-btn,
-.account-info .account-info-content .account-info-form .form-processing-btn .cancel-container .cancel-submit,
-.account-info .account-info-content .account-info-form .form-processing-btn .cancel-container .submit-btn,
-.account-info .account-info-content .account-info-form .delete-container .submit-container .cancel-submit,
-.account-info .account-info-content .account-info-form .delete-container .submit-container .submit-btn,
-.account-info .account-info-content .account-info-form .delete-container .cancel-container .cancel-submit,
-.account-info .account-info-content .account-info-form .delete-container .cancel-container .submit-btn {
-  border-radius: 6px;
-  padding: 10px 25px;
-  background-color: #111111;
-}
-.account-info .account-info-content .account-info-form .form-processing-btn .submit-container .cancel-submit,
-.account-info .account-info-content .account-info-form .form-processing-btn .cancel-container .cancel-submit,
-.account-info .account-info-content .account-info-form .delete-container .submit-container .cancel-submit,
-.account-info .account-info-content .account-info-form .delete-container .cancel-container .cancel-submit {
-  color: #FABB00;
-  cursor: pointer;
-  border: 1px solid #FABB00;
-}
-.account-info .account-info-content .account-info-form .form-processing-btn .submit-container .submit-btn,
-.account-info .account-info-content .account-info-form .form-processing-btn .cancel-container .submit-btn,
-.account-info .account-info-content .account-info-form .delete-container .submit-container .submit-btn,
-.account-info .account-info-content .account-info-form .delete-container .cancel-container .submit-btn {
-  color: #FA00BB;
-  border: 1px solid #FA00BB;
-}
-.account-info .account-info-content .account-info-form .form-processing-btn .toggle-account-deletion-lock-container,
-.account-info .account-info-content .account-info-form .form-processing-btn .delete-btn-container,
-.account-info .account-info-content .account-info-form .delete-container .toggle-account-deletion-lock-container,
-.account-info .account-info-content .account-info-form .delete-container .delete-btn-container {
-  display: block;
-}
-.account-info .account-info-content .account-info-form .form-processing-btn .toggle-account-deletion-lock-container .toggle-account-deletion-lock,
-.account-info .account-info-content .account-info-form .form-processing-btn .toggle-account-deletion-lock-container .delete-btn,
-.account-info .account-info-content .account-info-form .form-processing-btn .delete-btn-container .toggle-account-deletion-lock,
-.account-info .account-info-content .account-info-form .form-processing-btn .delete-btn-container .delete-btn,
-.account-info .account-info-content .account-info-form .delete-container .toggle-account-deletion-lock-container .toggle-account-deletion-lock,
-.account-info .account-info-content .account-info-form .delete-container .toggle-account-deletion-lock-container .delete-btn,
-.account-info .account-info-content .account-info-form .delete-container .delete-btn-container .toggle-account-deletion-lock,
-.account-info .account-info-content .account-info-form .delete-container .delete-btn-container .delete-btn {
-  border-radius: 6px;
-  padding: 10px 25px;
-  background-color: #111111;
-}
-.account-info .account-info-content .account-info-form .form-processing-btn .toggle-account-deletion-lock-container .toggle-account-deletion-lock,
-.account-info .account-info-content .account-info-form .form-processing-btn .delete-btn-container .toggle-account-deletion-lock,
-.account-info .account-info-content .account-info-form .delete-container .toggle-account-deletion-lock-container .toggle-account-deletion-lock,
-.account-info .account-info-content .account-info-form .delete-container .delete-btn-container .toggle-account-deletion-lock {
-  color: #FABB00;
-  cursor: pointer;
-  border: 1px solid #FABB00;
-}
-.account-info .account-info-content .account-info-form .form-processing-btn .toggle-account-deletion-lock-container .delete-btn,
-.account-info .account-info-content .account-info-form .form-processing-btn .delete-btn-container .delete-btn,
-.account-info .account-info-content .account-info-form .delete-container .toggle-account-deletion-lock-container .delete-btn,
-.account-info .account-info-content .account-info-form .delete-container .delete-btn-container .delete-btn {
-  color: #FA00BB;
-  border: 1px solid #FA00BB;
-}/*# sourceMappingURL=info.css.map */

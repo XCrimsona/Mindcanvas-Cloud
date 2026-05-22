@@ -1,62 +1,85 @@
 .auth-footer {
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.4392156863);
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  height: 60px;
-  position: absolute;
-}
-.auth-footer .creator {
-  position: relative;
-  margin: 0px auto 0px auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  height: inherit;
-}
-.auth-footer .creator .project-creator {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin: 0px auto 0px auto;
-  color: #ffffff;
+    width: 100%;
+    background-color: #00000070;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 60px;
+    position: absolute;
+
+    .creator {
+        position: relative;
+        margin: 0px auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        height: inherit;
+
+        .project-creator {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin: 0px auto;
+            color: #ffffff;
+        }
+    }
 }
 
 @media screen and (min-width: 320px) and (max-width: 425.9px) {
-  .auth-footer .auth-route .auth-go-back-route {
-    font-size: 20px;
-  }
-  .auth-footer .auth-route .auth-go-back-route .auth-route-icon {
-    height: 20px;
-    width: 20px;
-  }
+    .auth-footer {
+        .auth-route {
+            .auth-go-back-route {
+                font-size: 20px;
+
+                .auth-route-icon {
+                    height: 20px;
+                    width: 20px;
+                }
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 426px) and (max-width: 600.9px) {
-  .auth-footer .auth-route .auth-go-back-route {
-    font-size: 20px;
-  }
-  .auth-footer .auth-route .auth-go-back-route .auth-route-icon {
-    height: 20px;
-    width: 20px;
-  }
+    .auth-footer {
+        .auth-route {
+            .auth-go-back-route {
+                font-size: 20px;
+
+                .auth-route-icon {
+                    height: 20px;
+                    width: 20px;
+                }
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 601px) and (max-width: 768.9px) {
-  .auth-footer .auth-route .auth-go-back-route {
-    font-size: 20px;
-  }
-  .auth-footer .auth-route .auth-go-back-route .auth-route-icon {
-    height: 20px;
-    width: 20px;
-  }
+    .auth-footer {
+        .auth-route {
+            .auth-go-back-route {
+                font-size: 20px;
+
+                .auth-route-icon {
+                    height: 20px;
+                    width: 20px;
+                }
+            }
+        }
+    }
 }
+
 @media screen and (min-width: 769px) {
-  .auth-footer .creator {
-    width: 500px;
-  }
-  .auth-footer .creator .project-creator {
-    width: 500px;
-  }
-}/*# sourceMappingURL=auth-footer.css.map */
+    .auth-footer {
+        .creator {
+            width: 500px;
+
+            .project-creator {
+                width: 500px;
+            }
+        }
+    }
+}

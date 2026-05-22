@@ -1,18 +1,22 @@
 @reference "tailwindcss";
 
 .image-fragment-container {
-    @apply block w-[330px] p-0 max-h-[400px] overflow-hidden overflow-y-scroll rounded-lg;
+    @apply block w-fit max-w-[300px] sm:max-w-[380px] md:max-w-[450px] p-0 max-h-[200px] overflow-hidden overflow-y-auto rounded-lg;
 
     .image-fragment {
-        @apply mx-auto cursor-default bg-black text-xs w-[320px] p-2.5 flex flex-col;
+        @apply mx-auto cursor-default bg-black text-xs w-fit max-w-[300px] sm:max-w-[380px] md:max-w-[450px] p-2.5 flex flex-row flex-wrap gap-x-2 gap-y-1 content-start;
         @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
 
+        .image-file-row {
+            @apply inline-flex items-center max-w-full;
+        }
+
         .image-file-name {
-            @apply inline w-50 text-[12px] text-left;
+            @apply inline-block text-[12px] text-left whitespace-nowrap max-w-[160px] overflow-hidden text-ellipsis;
         }
 
         .image-reveal-btn {
-            @apply inline-block px-3 py-1 w-8 text-[12px] cursor-pointer text-[#FABB00] ml-2 mr-2 rounded-sm hover:bg-[#FABB0060]/20 transition-colors;
+            @apply inline-block px-3 py-1 w-8 text-[12px] cursor-pointer text-[#FABB00] ml-1 rounded-sm hover:bg-[#FABB0060]/20 transition-colors shrink-0;
         }
 
         .image-reveal-btn:focus {

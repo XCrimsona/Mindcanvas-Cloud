@@ -1,132 +1,75 @@
+@reference "tailwindcss";
+
 .data-video-component {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    box-shadow: inset 0px 0px 4px 2px #FAAA0040, 0px 0px 4px 0px #FAAA0040;
-    margin: 0px auto 0px auto;
-    background-color: #000000;
-    border: 2px solid #FAAA0040;
-    height: 120px;
-    transition: height .2s ease-in-out, width .2s ease-in-out;
-    cursor: move;
-    position: relative;
+    @apply flex justify-center items-start mx-auto bg-black border-8 border-[#FAAA0040] h-[120px] ease-in-out cursor-move relative z-[4] rounded-lg;
+    @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
 
     .video-input-form {
+
         .video-label-wrapper {
-            margin: 10px 0px 4px 0px;
+            @apply mt-2.5 mx-0 mb-1;
 
             .list-label,
             .video-label {
-                text-align: left;
-                display: block;
-                margin: 0px 0px 0px 4px;
-                font-size: 12px;
-                width: 120px;
-                cursor: move;
+                @apply text-left block ml-1 text-xs w-[120px] cursor-move;
             }
         }
 
         .video-container {
-            display: flex;
-            align-items: flex-start;
-            position: relative;
+            @apply flex items-start relative;
 
             .video-input-wrapper {
-                display: flex;
-                position: relative;
+                @apply flex relative;
 
                 .enabled-list-input-field,
                 .enabled-video-input-field {
-                    display: flex;
-                    justify-content: left;
-                    border-top: 2px solid #FAAA0040;
-                    border-left: 2px solid #FAAA0040;
-                    border-bottom: 2px solid #FAAA0040;
-                    border-right: 2px solid #FAAA0040;
-                    color: #ffffff;
-                    background-color: #000000;
-                    transition: height .2s ease-in-out;
-                    resize: none;
-                    cursor: text;
-                    font-size: 12px;
+                    @apply flex justify-start border-2 border-[#FAAA0040] text-white bg-black transition-[height] duration-200 ease-in-out resize-none cursor-text text-xs m-0 mr-auto h-[60px];
                     outline: 2px solid #000000;
-                    margin: 0px;
-                    margin-right: auto;
-                    height: 60px;
                 }
 
                 .enabled-list-input-field::selection,
                 .enabled-video-input-field::selection {
-                    background-color: #FBAA0050;
+                    @apply bg-[#FBAA0050];
                 }
 
                 .enabled-list-input-field::placeholder,
                 .enabled-video-input-field::placeholder {
-                    color: #fff;
+                    @apply text-white;
                 }
 
                 .enabled-list-input-field:focus,
                 .enabled-video-input-field:focus {
-                    height: 200px;
-                    background-color: #000000;
+                    @apply h-[200px] bg-black;
                 }
 
                 .video-btn-container {
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: center;
-                    width: 100px;
-                    height: 24px;
-                    z-index: 14;
-                    font-size: 14px;
+                    @apply flex flex-wrap justify-center w-[100px] h-6 z-[14] text-sm;
 
                     .video-submit-btn-container {
-                        display: block;
-                        justify-content: right;
-                        margin: 5px auto 5px auto;
+                        @apply block my-[5px] mx-auto;
 
                         .video-btn-clear,
                         .video-btn-submit {
-                            cursor: pointer;
-                            margin: 0px auto 5px auto;
-                            height: 20px;
-                            width: 80px;
-                            outline: none;
-                            background-color: #111111;
-                            color: #FBAA00;
-                            border: 1px solid #555555;
+                            @apply cursor-pointer mt-0 mb-[5px] mx-auto h-5 w-20 outline-none bg-[#111] text-[#FBAA00] border border-[#555];
                         }
                     }
 
                     .video-selection-wrapper {
-                        margin: 5px auto 5px 0px;
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: start;
-                        align-items: center;
+                        @apply my-[5px] ml-0 mr-auto flex flex-wrap justify-start items-center;
 
                         .select-video-type {
-                            width: 80px;
-                            outline: none;
-                            background-color: #111111;
-                            color: #FBAA00;
-                            border: 1px solid #555555;
+                            @apply w-20 outline-none bg-[#111] text-[#FBAA00] border border-[#555];
                         }
 
                         .radio-group {
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: center;
-                            align-items: center;
-                            width: 80px;
+                            @apply flex flex-wrap justify-center items-center w-20;
 
                             .video-type-option-one {
-                                height: 20px;
+                                @apply h-5;
                             }
 
                             .video-type-label {
-                                height: 20px;
-                                margin-left: 5px;
+                                @apply h-5 ml-[5px];
                             }
                         }
                     }
@@ -137,24 +80,23 @@
 }
 
 @media screen and (min-width:320px) and (max-width:600.9px) {
-
     .data-video-component {
-        width: 300px;
+        @apply w-[300px];
 
         .enabled-list-input-field,
         .enabled-video-input-field {
-            width: 180px;
+            @apply w-[180px];
         }
     }
 }
 
 @media screen and (min-width:601px) {
     .data-video-component {
-        width: 380px;
+        @apply w-[380px];
 
         .enabled-list-input-field,
         .enabled-video-input-field {
-            width: 250px;
+            @apply w-[250px];
         }
     }
 }

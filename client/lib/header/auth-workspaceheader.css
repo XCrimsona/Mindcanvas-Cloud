@@ -1,82 +1,94 @@
 .auth-canva-header {
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.9333333333);
-  height: 60px;
-  position: relative;
-  border-bottom: 2px solid #333333;
-}
-.auth-canva-header .auth-canva-route {
-  display: flex;
-  top: 0px;
-  bottom: 0px;
-  align-items: center;
-  left: 10px;
-  height: 60px;
-}
-.auth-canva-header .auth-canva-route .auth-go-back-route {
-  position: relative;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  text-decoration: none;
-}
-.auth-canva-header .auth-canva-route .auth-go-back-route .auth-route-icon {
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 0px 0px 0px 10px;
-}
-.auth-canva-header .auth-canva-route .auth-go-back-route .auth-route-icon .canva-management-backward-arrow-nav-icon {
-  display: block;
-  margin-right: 10px;
-  width: 20px;
-  height: 20px;
-}
-.auth-canva-header .log-out {
-  display: flex;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  align-items: center;
-  right: 10px;
-  color: #fff;
-  cursor: pointer;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.93);
+    height: 60px;
+    position: relative;
+    border-bottom: 2px solid #333333;
+
+    .auth-canva-route {
+        display: flex;
+        top: 0px;
+        bottom: 0px;
+        align-items: center;
+        left: 10px;
+        height: 60px;
+
+        .auth-go-back-route {
+            position: relative;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+
+            .auth-route-icon {
+                display: flex;
+                align-items: center;
+                position: relative;
+                padding: 0px 0px 0px 10px;
+
+                .canva-management-backward-arrow-nav-icon {
+                    display: block;
+                    margin-right: 10px;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    .log-out {
+        display: flex;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        align-items: center;
+        right: 10px;
+        color: #fff;
+        cursor: pointer;
+    }
 }
 
 @media screen and (min-width: 320px) and (max-width: 425.9px) {
-  .auth-header .auth-route .auth-go-back-route {
-    font-size: 20px;
-  }
-  .auth-header .auth-route .auth-go-back-route .auth-route-icon {
-    height: 20px;
-    width: 20px;
-  }
+    .auth-header .auth-route .auth-go-back-route {
+        font-size: 20px;
+
+        .auth-route-icon {
+            height: 20px;
+            width: 20px;
+        }
+    }
 }
+
 @media screen and (min-width: 426px) and (max-width: 600.9px) {
-  .auth-header .auth-route .auth-go-back-route {
-    font-size: 20px;
-  }
-  .auth-header .auth-route .auth-go-back-route .auth-route-icon {
-    height: 20px;
-    width: 20px;
-  }
+    .auth-header .auth-route .auth-go-back-route {
+        font-size: 20px;
+
+        .auth-route-icon {
+            height: 20px;
+            width: 20px;
+        }
+    }
 }
+
 @media screen and (min-width: 601px) and (max-width: 768.9px) {
-  .auth-header .auth-route .auth-go-back-route {
-    font-size: 20px;
-  }
-  .auth-header .auth-route .auth-go-back-route .auth-route-icon {
-    height: 20px;
-    width: 20px;
-  }
+    .auth-header .auth-route .auth-go-back-route {
+        font-size: 20px;
+
+        .auth-route-icon {
+            height: 20px;
+            width: 20px;
+        }
+    }
 }
+
 @media screen and (min-width: 769px) {
-  .auth-header .auth-route .auth-go-back-route {
-    font-size: 20px;
-  }
-  .auth-header .auth-route .auth-go-back-route .auth-route-icon {
-    height: 20px;
-    width: 20px;
-  }
-}/*# sourceMappingURL=auth-workspaceheader.css.map */
+    .auth-header .auth-route .auth-go-back-route {
+        font-size: 20px;
+
+        .auth-route-icon {
+            height: 20px;
+            width: 20px;
+        }
+    }
+}

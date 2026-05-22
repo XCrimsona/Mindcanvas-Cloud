@@ -1,13 +1,15 @@
 @reference "tailwindcss";
 
 .text-fragment-container {
-    @apply block min-w-50 max-w-[450px] p-0 max-h-[250px] overflow-y-hidden;
+    @apply block w-fit min-w-50 max-w-[260px] sm:max-w-[380px] md:max-w-[450px] p-0 max-h-[200px] sm:max-h-[220px] md:max-h-[250px] overflow-y-hidden rounded-lg;
 
     .text-fragment {
-        @apply mx-auto text-start cursor-text text-xs break-keep bg-black;
-        @apply min-w-50 max-w-[450px] overflow-x-hidden overflow-y-auto min-h-5 max-h-50;
+        @apply mx-auto text-start cursor-text break-keep bg-black text-neutral-300;
+        @apply text-xs;
+        @apply w-fit min-w-50 max-w-[300px] sm:max-w-[380px] md:max-w-[450px] overflow-x-hidden overflow-y-auto min-h-5 max-h-[180px] sm:max-h-[200px] md:max-h-[230px];
         @apply p-2.5 whitespace-pre-wrap;
         @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
     }
 
     .text-fragment::selection {
