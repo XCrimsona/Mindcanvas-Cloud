@@ -1,3 +1,13 @@
+// =========================================================================
+// AUTH AUDIT — CanvasDataContextProvider
+// Workspace-level data refresh. Any auth failure should evict the user
+// rather than render stale data behind a "Not Authenticated" toast.
+//
+//   updateCanvasData   GET  /account/:userid/canvas-management/:canvaid   auth: YES (UNAUTHENTICATED code → redirectToSignIn)
+//
+// If you add create/update/delete handlers here, append them above and
+// keep the redirectToSignIn check in their `!ok` branch.
+// =========================================================================
 import {
   createContext,
   MutableRefObject,
@@ -8,6 +18,7 @@ import {
   useState,
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 
 //component hub button toggling core definitions
 //component hub text button toggler values
@@ -213,8 +224,8 @@ const CanvasDataContextProvider = ({
     if (!response.success) {
       switch (response.code) {
         case "UNAUTHENTICATED":
-          router("/signin-portal");
-          break;
+          return redirectToSignIn();
+        // break;
         default:
           console.log("route error");
 

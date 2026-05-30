@@ -1,4 +1,16 @@
+// =========================================================================
+// AUTH AUDIT — FetchCanvaContext
+// Read-side handlers. A failed fetch here means the dashboard / workspace
+// can't render, so an auth boundary check is mandatory.
+//
+//   fetchEssentialData    GET  /account/:userid/canvas-management              auth: YES
+//   fetchWorkspaceData    GET  /account/:userid/canvas-management/:workspaceid auth: YES (via UNAUTHENTICATED code)
+//
+// Pattern: when !response.ok, parse body and call redirectToSignIn() if the
+// message/code indicates auth failure.
+// =========================================================================
 import { createContext, ReactNode, useContext, useState } from "react";
+import { redirectToSignIn } from "../auth-redirect/AuthRedirectContext";
 
 //for toggling
 interface ICanvaDataContextType {
@@ -34,6 +46,8 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
       // console.log("frontend dashboard initial user data: ", data);
     } else {
       const issue = await response.json();
+      if (issue.message === "Not Authenticated")
+        redirectToSignIn();
       console.log(issue);
 
       console.log("frontend dashboard initial user data: ", issue);
@@ -53,6 +67,8 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
     if (!response.ok) {
       const data = await response.json();
       switch (data.code) {
+        case "UNAUTHENTICATED":
+          return redirectToSignIn();
         case "NO_WORKSPACE_DATA":
           return {
             status: "empty",

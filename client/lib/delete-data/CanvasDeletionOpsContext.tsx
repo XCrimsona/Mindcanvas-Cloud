@@ -1,7 +1,18 @@
+// =========================================================================
+// AUTH AUDIT — CanvasDeletionOpsContext
+// Destructive op. If the session expired between opening the delete modal
+// and confirming, the call must boot to /signin instead of silently failing.
+//
+//   hitClickDelete   DELETE /account/:userid/canvas-management/:canvaid   auth: YES
+//
+// Note: the success path uses `router(...)` (useNavigate) intentionally —
+// that's an in-session SPA nav to the canvas list, not an auth boundary.
+// =========================================================================
 import { ReactNode, createContext, useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import canvaNotification_Delete from "../notifications/canva-deletes/CanvaNotification_Delete";
 import { toast } from "react-toastify";
+import { redirectToSignIn } from "../auth-redirect/AuthRedirectContext";
 
 type TypeCanvasDeletionOpsContext = true | false;
 
@@ -52,6 +63,7 @@ export const CanvasContextDeletionProvider = ({
       router(`/account/${userid!}/canvas-management`);
     } else {
       const res = await response.json();
+      if (res.message === "Not Authenticated") redirectToSignIn();
       toast.error(`Canvaspace failed to delete: ${res.message}`);
     }
   };

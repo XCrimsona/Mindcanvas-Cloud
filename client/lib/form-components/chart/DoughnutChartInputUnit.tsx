@@ -7,6 +7,7 @@ import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvid
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./doughnutchart.css";
+import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 
 const DoughnutChartInputUnit = () => {
   try {
@@ -199,7 +200,9 @@ const DoughnutChartInputUnit = () => {
           updateCanvasData();
         } else {
           const errorData = await text.json();
-          toast.success(
+          if (errorData.message === "Not Authenticated")
+            redirectToSignIn();
+          toast.error(
             "DoughnutChart fragment was not added: " + errorData.message,
           );
         }

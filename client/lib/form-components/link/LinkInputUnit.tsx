@@ -7,6 +7,7 @@ import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvid
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./link.css";
+import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 
 const TextLinkInputUnit = () => {
   try {
@@ -134,6 +135,8 @@ const TextLinkInputUnit = () => {
             updateCanvasData();
           } else {
             const response = await link.json();
+            if (response.message === "Not Authenticated")
+              redirectToSignIn();
             toast.error(response.message, { autoClose: 4000 });
           }
         }

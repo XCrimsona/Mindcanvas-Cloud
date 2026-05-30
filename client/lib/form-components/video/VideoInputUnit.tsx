@@ -7,6 +7,7 @@ import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvid
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./video.css";
+import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 
 const VideoInputUnit = () => {
   try {
@@ -123,7 +124,10 @@ const VideoInputUnit = () => {
           toast.success("Video data fragment created");
           updateCanvasData();
         } else {
-          toast.success("Video fragment was not added!");
+          const response = await video.json();
+          if (response.message === "Not Authenticated")
+            redirectToSignIn();
+          toast.error("Video fragment was not added!");
         }
       }
     };

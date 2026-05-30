@@ -14,10 +14,12 @@ import { InfoProvider } from "./pages/account/accountid/account-info/InfoContext
 import LearnToUseMindCanvas from "./pages/account/accountid/canvas-management/academy/LearnToUseMindCanvas.tsx";
 import Trust from "./pages/trust/Trust.tsx";
 import About from "./pages/about/About.tsx";
+import { AuthRedirectProvider } from "../lib/auth-redirect/AuthRedirectContext.tsx";
 
 createRoot(document.getElementById("root") as HTMLDivElement).render(
   // <StrictMode>
   <BrowserRouter>
+    <AuthRedirectProvider>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/trust" element={<Trust />} />
@@ -61,6 +63,7 @@ createRoot(document.getElementById("root") as HTMLDivElement).render(
       />
     </Routes>
     {/* </CanvaDataProvider> */}
+    </AuthRedirectProvider>
   </BrowserRouter>
   // </StrictMode>
 );

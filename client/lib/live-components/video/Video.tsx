@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./video-data-styling.css";
 import "../i-menu-selector.css";
+import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 
 export const Video = ({ data }: { data: any }) => {
   const { userid, canvaid } = useParams();
@@ -101,8 +102,13 @@ export const Video = ({ data }: { data: any }) => {
       // but in fetch() form, matching how ImageCluster authenticates its image requests
       const response = await fetch(url, { credentials: "include" });
 
-      if (!response.ok) throw new Error(`Server responded ${response.status}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (errorData.message === "Not Authenticated")
+          redirectToSignIn();
 
+        toast.error(`${response.status}`);
+      }
       const blob = await response.blob();
       const localUrl = URL.createObjectURL(blob);
 
