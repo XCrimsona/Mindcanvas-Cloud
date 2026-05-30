@@ -21,8 +21,7 @@ const AuthHeader = () => {
     if (!logoutRes.ok) {
       new Notification("Could not log you out, try again");
     } else {
-      // window.location.reload();
-      navigate("/signin-portal");
+      window.location.assign("/signin-portal");
     }
   };
   return (

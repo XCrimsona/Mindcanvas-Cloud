@@ -1,3 +1,17 @@
+// =========================================================================
+// AUTH AUDIT — InfoModificationContextProvider
+// Every async handler below that hits the API must redirect on auth expiry.
+// When you add a new handler, append it to this list. If a row says "no",
+// the user will be stranded on a dead session.
+//
+//   updateFragmentPrivacy   PATCH  /account/:userid/canvas-management/:canvaid   auth: YES
+//   editLiveDataElement     PATCH  /account/:userid/canvas-management/:canvaid   auth: YES
+//   deleteLiveDataElement   DELETE /account/:userid/canvas-management/:canvaid   auth: YES
+//
+// Pattern: in the `else` branch, parse the body and:
+//   if (body.message === "Not Authenticated") { redirectToSignIn(); return; }
+// =========================================================================
+//
 //This file is used to toggle the element based on its id and location selected on the canvas workspace
 //double click or doubletap to toggle the window to view or modify data
 import {
@@ -16,6 +30,7 @@ import { useCanvasContext } from "../form-components/canva-data-provider/CanvasD
 // import canvaNotification_TextFragmentDeletedFailed from "../notifications/fragment-deletes/CanvaNotification_TextFragmentDeleteFailed";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { redirectToSignIn } from "../auth-redirect/AuthRedirectContext";
 
 type TypeModificationContext = true | false;
 interface IModificationUseStateContextType {
@@ -236,6 +251,10 @@ const InfoModificationContextProvider = ({
         toast.success(fragmentresp.message, { autoClose: 4000 });
       } else {
         const fragmentError = await setFragmentPriv.json();
+        if (fragmentError.message === "Not Authenticated") {
+          redirectToSignIn();
+          return;
+        }
         toast.error("Update not successful: " + fragmentError.message, {
           autoClose: 4000,
         });
@@ -280,6 +299,10 @@ const InfoModificationContextProvider = ({
         updateCanvasData();
       } else {
         const response = await editedRequest.json();
+        if (response.message === "Not Authenticated") {
+          redirectToSignIn();
+          return;
+        }
         toast.error(`${type} fragment was not updated: ${response.message}`);
       }
     } catch (error: any) {
@@ -333,6 +356,10 @@ const InfoModificationContextProvider = ({
         updateCanvasData();
       } else {
         const err = await deleteRequest.json();
+        if (err.message === "Not Authenticated") {
+          redirectToSignIn();
+          return;
+        }
         toast.error(err.message, { autoClose: 4000 });
       }
     } catch (error: any) {

@@ -7,6 +7,7 @@ import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvid
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./text.css";
+import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 
 const TextInputUnit = () => {
   try {
@@ -120,7 +121,10 @@ const TextInputUnit = () => {
           toast.success("Text data fragment created");
           updateCanvasData();
         } else {
-          toast.success("Text fragment was not added!");
+          const response = await text.json();
+          if (response.message === "Not Authenticated")
+            redirectToSignIn();
+          toast.error("Text fragment was not added!");
         }
       }
     };

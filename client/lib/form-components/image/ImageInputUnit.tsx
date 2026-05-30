@@ -7,6 +7,7 @@ import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvid
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./image.css";
+import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 
 const ImageInputUnit = () => {
   try {
@@ -124,7 +125,10 @@ const ImageInputUnit = () => {
           toast.success("ImageCluster created");
           updateCanvasData();
         } else {
-          toast.success("ImageCluster was not added!");
+          const response = await image.json();
+          if (response.message === "Not Authenticated")
+            redirectToSignIn();
+          toast.error("ImageCluster was not added!");
         }
       }
     };

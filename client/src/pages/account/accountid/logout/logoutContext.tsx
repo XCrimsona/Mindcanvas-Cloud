@@ -35,14 +35,14 @@ export const AuthLogoutProvider = ({ children, userid }: AuthLogoutProps) => {
 
       if (!logoutRes.ok) {
         new Notification("Could not log you out, try again");
-        window.location.reload();
+        window.location.assign("/signin-portal");
       } else {
-        window.location.reload();
+        window.location.assign("/signin-portal");
       }
     } catch (error) {
       console.error("Logout error:", error);
       new Notification("An error occurred during logout");
-      window.location.reload();
+      window.location.assign("/signin-portal");
     }
   };
 

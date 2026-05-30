@@ -10,10 +10,12 @@ import DoughnutChartInputUnit from "../../../../../../lib/form-components/chart/
 import TextLinkInputUnit from "../../../../../../lib/form-components/link/LinkInputUnit";
 import VideoInputUnit from "../../../../../../lib/form-components/video/VideoInputUnit";
 import ImageInputUnit from "../../../../../../lib/form-components/image/ImageInputUnit";
+import { redirectToSignIn } from "../../../../../../lib/auth-redirect/AuthRedirectContext";
 // import { ImageQueueProvider } from "../../../../../../lib/Providers/ImageQueueContextProvider";
 const CanvaContainer = () => {
   const { dataScrollBoardRef, canvasData } = useCanvasContext();
   const canvaspaceSize = canvasData.data?.workspaceNameData?.canvaspace?.size;
+  if (canvasData.message === "Not Authenticated") redirectToSignIn();
   return (
     <DivClass className={"data-container"}>
       <div

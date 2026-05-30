@@ -14,17 +14,16 @@ import { EnabledTextAreaInput } from "../lib/components/media-retrieved-componen
 import { useParams } from "react-router-dom";
 import HeadingOne from "../lib/ui/HeadingOne";
 import { toast } from "react-toastify";
-
+import { redirectToSignIn } from "../lib/auth-redirect/AuthRedirectContext";
 const DataManagement = ({ source }: { source: any }) => {
   //pull latest data from the cloud
   const { userid } = useParams();
-  if (!userid) return;
   //NOTE: the workspace data usestate variable needs to change to canva data
   const [canvaData, setCanvaData] = useState<any>([]);
 
   const fetchMoreData = async () => {
     const response = await fetch(
-      `http://localhost:5000/api/account/${userid}/canvas-management`,
+      `http://localhost:5000/api/account/${userid!}/canvas-management`,
       {
         method: "GET",
         credentials: "include",
@@ -46,6 +45,8 @@ const DataManagement = ({ source }: { source: any }) => {
     } else {
       const issue = await response.json();
       // setCanvaData(issue);
+      if (issue.message === "Not Authenticated")
+        redirectToSignIn();
       return {
         status: "false",
         message: issue,
@@ -89,6 +90,8 @@ const DataManagement = ({ source }: { source: any }) => {
         setResults(data.results);
       } else {
         const data = await res.json();
+        if (data.message === "Not Authenticated")
+          redirectToSignIn();
         setResults(data.results);
       }
     }, 800);
@@ -153,12 +156,11 @@ const DataManagement = ({ source }: { source: any }) => {
       // console.log("updateFields: ", updateFields);
 
       const response = await fetch(
-        `http://localhost:5000/api/account/${userid}/canvas-management`,
+        `http://localhost:5000/api/account/${userid!}/canvas-management`,
         {
           method: "PATCH",
           credentials: "include",
           headers: {
-            "x-active-user": userid,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(updateFields),
@@ -182,6 +184,8 @@ const DataManagement = ({ source }: { source: any }) => {
         const data = await response.json();
         if (!data.success) {
           switch (data.code) {
+            case "UNAUTHENTICATED":
+              return redirectToSignIn();
             case "MISSING_WORKSPACE_DATA":
               toast.info(data.code);
               return {
@@ -289,25 +293,27 @@ const DataManagement = ({ source }: { source: any }) => {
         setDisplayNewWorkspace((prev) => !prev);
       } else {
         const getError = await response.json();
+        if (getError.message === "Not Authenticated")
+          redirectToSignIn();
         toast.error(`Failed to create Canvaspace: ${getError.message}`);
       }
     }
   };
 
-  const [canvaCreateSubmitLock, setCanvaCreateSubmitLock] =
-    useState<boolean>(true);
+  // const [canvaCreateSubmitLock, setCanvaCreateSubmitLock] =
+  //   useState<boolean>(true);
 
-  useEffect(() => {
-    if (newWorkspace.workspacename && newWorkspace.description) {
-      setCanvaCreateSubmitLock(false);
-    } else {
-      setCanvaCreateSubmitLock(true);
-    }
-  }, [
-    canvaCreateSubmitLock,
-    newWorkspace.workspacename,
-    newWorkspace.description,
-  ]);
+  // useEffect(() => {
+  //   if (newWorkspace.workspacename && newWorkspace.description) {
+  //     setCanvaCreateSubmitLock(false);
+  //   } else {
+  //     setCanvaCreateSubmitLock(true);
+  //   }
+  // }, [
+  //   canvaCreateSubmitLock,
+  //   newWorkspace.workspacename,
+  //   newWorkspace.description,
+  // ]);
 
   const Canvasses = ({ Canvases }: { Canvases: any[] }) => {
     return (
@@ -343,17 +349,17 @@ const DataManagement = ({ source }: { source: any }) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                           e.preventDefault();
                           // updating a specific workspace description
-                          setCurrentWorkspacePreEdits((previous: any) => ({
-                            ...previous,
-                            [canvaSpace._id]: {
-                              ...previous[canvaSpace._id],
-                              workspacename: canvaSpace.workspacename,
-                            },
-                          }));
+                          // setCurrentWorkspacePreEdits((previous: any) => ({
+                          //   ...previous,
+                          //   [canvaSpace._id]: {
+                          //     ...previous[canvaSpace._id],
+                          //     workspacename: canvaSpace.workspacename,
+                          //   },
+                          // }));
                           setWorkspaceEdits((previous: any) => ({
                             ...previous,
                             [canvaSpace._id]: {
-                              ...previous[canvaSpace._id],
+                              ...previous,
                               workspacename: e.target.value,
                             },
                           }));
