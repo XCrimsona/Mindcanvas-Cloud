@@ -24,10 +24,16 @@
 <a target="_blank"  href="https://www.mongodb.com/try/download/community">www.mongodb.com/try/download/community</a> 
 </p>
 </div>
-<h2>Download & Install Nodejs via<a href=https://www.nodejs.org target="_blank">www.nodejs.org</a> software to create a runtime(backend server) environment to run javascript code.</h2>
+<h2>Download & Install Nodejs via <a href=https://www.nodejs.org target="_blank">www.nodejs.org</a> software to create a runtime(backend server) environment to run javascript code.</h2>
 
 ### Missing config | You need to create this yourself since .env uploads are dangerous</p>
-
+<pre><code><p>SECURE=false</p>
+<p>SESSION_SECRET=&lt;your-session-secret(128 character(string) value)&gt;</p>
+<p>JWT=&lt;your-jwt-secret(128 character(string) value)&gt;</p>
+<p>DB_CONNECTION_STRING="mongodb://127.0.0.1:27017/mind-canvas?appName=mind-canvas"</p>
+<p>LOCAL_URL=http://localhost:3176</p>
+<p>PORT=5176</p>
+</code></pre>
 <p>============================================================================</p>
 <h2>Prerequisite: Install PowerShell 7 (The "One-Command" Way)</h2>
 <p>To ensure MindCanvas automation works correctly, you need PowerShell 7. Select your Operating System below and run the command in your terminal.</p>
