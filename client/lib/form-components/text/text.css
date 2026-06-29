@@ -20,10 +20,11 @@
 
             .text-input-wrapper {
                 @apply flex relative;
+                font-family: "Inter", system-ui, -apple-system, sans-serif;
 
                 .enabled-list-input-field,
                 .enabled-text-input-field {
-                    @apply flex justify-start border-2 border-[#FAAA0040] text-white bg-black duration-200 ease-in-out resize-none cursor-text text-xs m-0 mr-auto h-[60px];
+                    @apply flex justify-start border-2 border-[#FAAA0040] text-white bg-black duration-200 ease-in-out resize-none text-xs cursor-text m-0 mr-auto h-[60px];
                     outline: 2px solid #000000;
                 }
 

@@ -25,6 +25,13 @@ const textlinkSchema = new mongoose.Schema(
             enum: ["TextLink"],
             required: [true, "component type is required"],
         },
+        // NEW — viewMode for link navigation: "_self" scrolls within the same canvaspace,
+        // "_blank" opens a new browser tab. Toggled from the ModificationWindow.
+        target: {
+            type: String,
+            enum: ["_self", "_blank"],
+            default: "_self",
+        },
         position: {
             x: {
                 type: Number,

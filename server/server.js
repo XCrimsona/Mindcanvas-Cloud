@@ -17,6 +17,7 @@ import morgan from "morgan";
 import searchRouter from "./api/routes/canvas-management/canvas-search.js";
 import videoLoader from "./api/routes/canvas-management/videoLoader.js";
 import imageLoader from "./api/routes/canvas-management/imageLoader.js";
+import tableManagementRouter from "./api/routes/canvas-management/table-management.js";
 const port = process.env.PORT;
 const app = express();
 
@@ -57,6 +58,7 @@ try {
     //router endpoint called loader for simplicity
     app.use("/api/account", isAuthenticated, videoLoader);//router endpoint called loader for simplicity
     app.use("/api/account", isAuthenticated, imageLoader);//router endpoint called loader for simplicity
+    app.use("/api/account", isAuthenticated, tableManagementRouter);
     app.use("/api/account", isAuthenticated, signOut);
 
     //becomes dynamic when deployed to a backend node hosting service and when offlines it switches to localhost

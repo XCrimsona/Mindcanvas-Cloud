@@ -1,0 +1,126 @@
+@reference "tailwindcss";
+
+/* ============================
+   Creation form (TableInputUnit)
+   ============================ */
+.data-table-component {
+    @apply flex flex-col mx-auto bg-black border-2 border-[#FAAA0040] ease-in-out cursor-move relative z-[4] rounded-lg p-3 w-[420px];
+    @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
+
+    .table-input-form {
+        @apply flex flex-col gap-2;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+
+        .table-label {
+            @apply text-xs text-white cursor-move;
+        }
+
+        .table-text-input {
+            @apply w-full bg-black border border-[#FAAA0040] text-white text-xs px-2 py-1 outline-none focus:border-[#FBAA00];
+        }
+
+        .table-col-row {
+            @apply flex gap-2 items-center;
+        }
+
+        .table-col-name {
+            @apply flex-1 bg-black border border-[#FAAA0040] text-white text-xs px-2 py-1 outline-none focus:border-[#FBAA00];
+        }
+
+        .table-col-type {
+            @apply w-24 bg-[#111] text-[#FBAA00] border border-[#555] text-xs px-1 py-1 outline-none;
+        }
+
+        .table-col-remove {
+            @apply text-red-500 text-xs cursor-pointer w-5 text-center;
+        }
+
+        .table-add-col-btn {
+            @apply text-[#FBAA00] text-xs cursor-pointer bg-[#111] border border-[#555] py-1 px-2 w-full;
+        }
+
+        .table-btn-row {
+            @apply flex justify-end gap-2 mt-2;
+
+            .table-btn-clear,
+            .table-btn-submit {
+                @apply cursor-pointer h-6 w-20 outline-none bg-[#111] text-[#FBAA00] border border-[#555] text-xs;
+            }
+        }
+    }
+}
+
+/* ============================
+   Live Table fragment
+   ============================ */
+.live-table-fragment {
+    @apply bg-black border-2 border-[#FAAA0040] rounded-lg relative z-[3] cursor-move min-w-[360px] max-w-[700px];
+    @apply shadow-[inset_0_0_4px_2px_#FAAA0040] shadow-[0_0_4px_0_#FAAA0040];
+
+    .live-table-header {
+        @apply flex items-center justify-between px-3 py-2 border-b border-[#FAAA0040] cursor-move;
+
+        .live-table-name {
+            @apply text-[#FBAA00] text-sm font-semibold truncate;
+        }
+
+        .live-table-header-actions {
+            @apply flex gap-2;
+
+            .live-table-icon-btn {
+                @apply text-white text-xs cursor-pointer bg-transparent border-none;
+            }
+
+            .live-table-icon-btn-danger {
+                @apply text-red-500 text-xs cursor-pointer bg-transparent border-none;
+            }
+        }
+    }
+
+    .live-table-scroll {
+        @apply overflow-x-auto max-h-[420px] overflow-y-auto;
+    }
+
+    .live-table-grid {
+        @apply w-full text-xs text-white border-collapse;
+        font-family: var(--font-read);
+
+        thead th {
+            @apply bg-[#111] text-[#FBAA00] text-left px-2 py-1 border-b border-[#FAAA0040] sticky top-0;
+            font-family: var(--font-read);
+        }
+
+        tbody td {
+            @apply px-2 py-1 border-b border-[#222] align-top text-left whitespace-pre-wrap;
+        }
+
+        tbody tr:hover {
+            @apply bg-[#0d0d0d];
+        }
+
+        .live-table-cell-input {
+            @apply w-full bg-transparent border border-[#FAAA0040] text-white text-xs px-1 py-0.5 outline-none focus:border-[#FBAA00];
+            font-family: var(--font-read);
+        }
+
+        .live-table-row-actions {
+            @apply flex gap-2 whitespace-nowrap;
+        }
+    }
+
+    .live-table-footer {
+        @apply flex items-center justify-between px-3 py-2 border-t border-[#FAAA0040] text-[10px] text-[#d4d4d4];
+
+        .live-table-paginator {
+            @apply flex gap-1 flex-wrap;
+
+            .live-table-page-chip {
+                @apply cursor-pointer px-2 py-0.5 bg-[#111] border border-[#555] text-[#FBAA00];
+            }
+
+            .live-table-page-chip-active {
+                @apply cursor-default px-2 py-0.5 bg-[#FBAA00] border border-[#FBAA00] text-black;
+            }
+        }
+    }
+}

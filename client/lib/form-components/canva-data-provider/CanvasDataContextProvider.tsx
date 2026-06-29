@@ -1,13 +1,4 @@
-// =========================================================================
-// AUTH AUDIT — CanvasDataContextProvider
-// Workspace-level data refresh. Any auth failure should evict the user
-// rather than render stale data behind a "Not Authenticated" toast.
 //
-//   updateCanvasData   GET  /account/:userid/canvas-management/:canvaid   auth: YES (UNAUTHENTICATED code → redirectToSignIn)
-//
-// If you add create/update/delete handlers here, append them above and
-// keep the redirectToSignIn check in their `!ok` branch.
-// =========================================================================
 import {
   createContext,
   MutableRefObject,
@@ -27,26 +18,27 @@ type TypeBooleanContext = true | false;
 //Canvas data text input component types
 type TypeCanvasInputContext = string | null;
 
+//This interface is used to define the context type for the canvas data provider. It includes various references and state variables that are used throughout the application.
 interface ICanvasContextType {
   hasInitializedPositionRef: MutableRefObject<boolean>;
   dataScrollBoardRef: MutableRefObject<HTMLDivElement | null>;
   globalDraggingRef: MutableRefObject<TypeBooleanContext>;
 
-  //Global Text Component for data input
+  //Global Text component for text data input from the user
   textInputOffSet: MutableRefObject<{ x: number; y: number }>;
   textToggle: TypeBooleanContext;
   setTextToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
   textInputCompRef: MutableRefObject<HTMLDivElement | null>;
   textInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
-  //Global Text Component for data input
+  //Global TextLink component for text link data input from the user
   textLinkInputOffSet: MutableRefObject<{ x: number; y: number }>;
   textLinkToggle: TypeBooleanContext;
   setTextLinkToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
   textLinkInputCompRef: MutableRefObject<HTMLDivElement | null>;
   textLinkInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
-  //Global Doughnut Chart Component for data input
+  //Global Doughnut Chart component for doughnut chart data input from the user
   doughnutChartInputOffSet: MutableRefObject<{ x: number; y: number }>;
   doughnutChartToggle: TypeBooleanContext;
   setDoughnutChartToggle: React.Dispatch<
@@ -57,40 +49,47 @@ interface ICanvasContextType {
   doughnutChartInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
   //upcoming list feature
-  //Global Doughnut Chart Component for data input
+  //Global List component for list data input from the user
   listInputOffSet: MutableRefObject<{ x: number; y: number }>;
   listToggle: TypeBooleanContext;
   setListToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
   listInputCompRef: MutableRefObject<HTMLDivElement | null>;
   listInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
-  //Global Doughnut Chart Component for data input
+  //Global ListItem component for list data input from the user
   listItemInputOffSet: MutableRefObject<{ x: number; y: number }>;
   listItemToggle: TypeBooleanContext;
   setListItemToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
   listItemInputCompRef: MutableRefObject<HTMLDivElement | null>;
   listItemInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
-  //Global Audio Component for data input
+  //Global Audio Component for audio data input from the user
   audioInputOffSet: MutableRefObject<{ x: number; y: number }>;
   audioToggle: TypeBooleanContext;
   setAudioToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
   audioInputCompRef: MutableRefObject<HTMLDivElement | null>;
   audioInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
-  //Global Image Component for data input
+  //Global Image Component for image data input from the user
   imageInputOffSet: MutableRefObject<{ x: number; y: number }>;
   imageToggle: TypeBooleanContext;
   setImageToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
   imageInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
   imageInputCompRef: MutableRefObject<HTMLDivElement | null>;
 
-  //Global Video Component for data input
+  //Global Video Component for video data input from the user
   videoInputOffSet: MutableRefObject<{ x: number; y: number }>;
   videoToggle: TypeBooleanContext;
   setVideoToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
   videoInputCompRef: MutableRefObject<HTMLDivElement | null>;
   videoInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+
+  //Global Table Component for table data input from the user
+  tableInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  tableToggle: TypeBooleanContext;
+  setTableToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
+  tableInputCompRef: MutableRefObject<HTMLDivElement | null>;
+  tableInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
   //Global Data Component
   //Element used to carry database and responsible for mapping
@@ -98,7 +97,7 @@ interface ICanvasContextType {
   setCanvasData: React.Dispatch<React.SetStateAction<any | null>>;
   updateCanvasData: () => void;
 
-  //Canvas size, height and width
+  //Global Canvas Size Properties Component
   canvasSizePropertiesToggle: boolean;
   setCanvasSizePropertiesToggle: React.Dispatch<React.SetStateAction<boolean>>;
   canvasWidth: string | null;
@@ -106,6 +105,7 @@ interface ICanvasContextType {
   canvasHeight: string | null;
   setCanvasSizeWidth: React.Dispatch<React.SetStateAction<string | null>>;
 
+  //Global Reposition Component for moving existing user data to a new position on the canvas.
   repositionInputOffSet: MutableRefObject<{ x: number; y: number }>;
   repositionData: any;
   setRepositionData: React.Dispatch<React.SetStateAction<{}>>;
@@ -128,9 +128,10 @@ const CanvasDataContextProvider = ({
   children: ReactNode;
 }) => {
   const hasInitializedPositionRef = useRef<TypeBooleanContext>(false);
-  //globally assigned window
+  //globally canvas div component that holds the users data
   const dataScrollBoardRef = useRef<HTMLDivElement>(null);
-  //used as failsafe to prevent accidental drags====this one may not be necessary
+  //used as failsafe to prevent accidental dragging that pairs up with the context file from CanvasContextProvider.tsx
+
   const globalDraggingRef = useRef<TypeBooleanContext>(false);
 
   //Text Component
@@ -203,6 +204,13 @@ const CanvasDataContextProvider = ({
   const videoInputCompRef = useRef<HTMLDivElement>(null);
   //for position reference
   let videoInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+
+  //TABLE Component
+  //Canvas Table Button toggle logic on the ComponentHub popup box
+  const tableInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const [tableToggle, setTableToggle] = useState<TypeBooleanContext>(false);
+  const tableInputCompRef = useRef<HTMLDivElement>(null);
+  let tableInputCompPosRef = useRef<any>({ x: 0, y: 0 });
 
   //Element used to carry database user data and responsible for mapping with an addtional
   //'data' object to ensure the data is mappable from all fetches since the backend uses a
@@ -284,6 +292,9 @@ const CanvasDataContextProvider = ({
     if (videoToggle === false) {
       hasInitializedPositionRef.current = false;
     }
+    if (tableToggle === false) {
+      hasInitializedPositionRef.current = false;
+    }
     if (repositionWindow === false) {
       hasInitializedPositionRef.current = false;
     }
@@ -293,6 +304,7 @@ const CanvasDataContextProvider = ({
     textLinkToggle,
     imageToggle,
     videoToggle,
+    tableToggle,
     repositionWindow,
   ]);
   return (
@@ -357,6 +369,13 @@ const CanvasDataContextProvider = ({
         setVideoToggle,
         videoInputCompRef,
         videoInputCompPosRef,
+
+        //Table Button toggle functions
+        tableInputOffSet,
+        tableToggle,
+        setTableToggle,
+        tableInputCompRef,
+        tableInputCompPosRef,
 
         //data
         canvasData,

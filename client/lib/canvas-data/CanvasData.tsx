@@ -9,6 +9,7 @@ import DoughnutChart from "../live-components/doughnutchart/DoughnutChart";
 import TextLink from "../live-components/link/TextLink";
 import { Video } from "../live-components/video/Video";
 import { ImageCluster } from "../live-components/image/Image";
+import { Table } from "../live-components/table/Table";
 const CanvasData = () => {
   // Display all workspace data including text, list, audio, image, video once submitted
   const { canvasData } = useCanvasContext();
@@ -30,6 +31,8 @@ const CanvasData = () => {
       // case "Audio":
       // return <Audio data={data} />;
 
+      case "Table":
+        return <Table data={data} />;
       //Analytic Data Structures
       case "DoughnutChart":
         return <DoughnutChart data={data} />;
@@ -49,6 +52,7 @@ const CanvasData = () => {
   const linkData = workspaceInformation?.links || [];
   const videoData = workspaceInformation?.videos || [];
   const imageData = workspaceInformation?.images || [];
+  const tableData = workspaceInformation?.tables || [];
 
   //old code that needs to be refactored to accomodate new data structure for charts and other components. Refactor this in one day max including testing.
   const components = [
@@ -57,6 +61,7 @@ const CanvasData = () => {
     ...linkData,
     ...videoData,
     ...imageData,
+    ...tableData,
   ];
   const userData = components.map((data: any) => {
     return (
