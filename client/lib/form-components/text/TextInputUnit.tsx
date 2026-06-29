@@ -107,7 +107,7 @@ const TextInputUnit = () => {
         return;
       } else {
         const text = await fetch(
-          `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+          `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
           {
             method: "POST",
             credentials: "include",
@@ -122,8 +122,7 @@ const TextInputUnit = () => {
           updateCanvasData();
         } else {
           const response = await text.json();
-          if (response.message === "Not Authenticated")
-            redirectToSignIn();
+          if (response.message === "Not Authenticated") redirectToSignIn();
           toast.error("Text fragment was not added!");
         }
       }

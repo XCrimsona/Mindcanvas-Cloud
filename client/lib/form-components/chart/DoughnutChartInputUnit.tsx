@@ -185,7 +185,7 @@ const DoughnutChartInputUnit = () => {
         return;
       } else {
         const text = await fetch(
-          `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+          `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
           {
             method: "POST",
             credentials: "include",
@@ -200,8 +200,7 @@ const DoughnutChartInputUnit = () => {
           updateCanvasData();
         } else {
           const errorData = await text.json();
-          if (errorData.message === "Not Authenticated")
-            redirectToSignIn();
+          if (errorData.message === "Not Authenticated") redirectToSignIn();
           toast.error(
             "DoughnutChart fragment was not added: " + errorData.message,
           );

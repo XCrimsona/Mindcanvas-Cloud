@@ -27,7 +27,7 @@ const LearnToUseMindCanvas = () => {
       <Header id="auth-canva-header" className={"auth-canva-header"}>
         <DivClass className={"auth-canva-route"}>
           <RouteLink
-            href={`http://localhost:5176/account/${userid}/canvas-management/${canvaid}`}
+            href={`http://localhost:3176/account/${userid}/canvas-management/${canvaid}`}
             className={"auth-go-back-route"}
           >
             <i className={"auth-route-icon"}>

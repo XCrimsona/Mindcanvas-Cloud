@@ -110,7 +110,7 @@ const VideoInputUnit = () => {
         // console.log(videoFormData);
         // console.log("source data from VideoInputUnit: ", source);
         const video = await fetch(
-          `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+          `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
           {
             method: "POST",
             credentials: "include",
@@ -125,8 +125,7 @@ const VideoInputUnit = () => {
           updateCanvasData();
         } else {
           const response = await video.json();
-          if (response.message === "Not Authenticated")
-            redirectToSignIn();
+          if (response.message === "Not Authenticated") redirectToSignIn();
           toast.error("Video fragment was not added!");
         }
       }

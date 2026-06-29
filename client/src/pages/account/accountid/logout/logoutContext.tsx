@@ -23,7 +23,7 @@ export const AuthLogoutProvider = ({ children, userid }: AuthLogoutProps) => {
   const logout = async () => {
     try {
       const logoutRes = await fetch(
-        `http://localhost:5000/api/account/${userid}/logout`,
+        `http://localhost:5176/api/account/${userid}/logout`,
         {
           method: "POST",
           credentials: "include",

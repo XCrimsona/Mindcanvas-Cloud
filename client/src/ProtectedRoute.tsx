@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!userid) return;
-    fetch("http://localhost:5000/api/auth-check", {
+    fetch("http://localhost:5176/api/auth-check", {
       method: "GET",
       credentials: "include", //allow cookies to be sent
     })

@@ -119,7 +119,7 @@ const TextLinkInputUnit = () => {
           return;
         } else {
           const link = await fetch(
-            `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+            `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
             {
               method: "POST",
               credentials: "include",
@@ -135,8 +135,7 @@ const TextLinkInputUnit = () => {
             updateCanvasData();
           } else {
             const response = await link.json();
-            if (response.message === "Not Authenticated")
-              redirectToSignIn();
+            if (response.message === "Not Authenticated") redirectToSignIn();
             toast.error(response.message, { autoClose: 4000 });
           }
         }

@@ -10,7 +10,7 @@ const AuthHeader = () => {
   if (!userid) return;
   const logout = async () => {
     const logoutRes = await fetch(
-      `http://localhost:5000/api/account/${userid}/logout`,
+      `http://localhost:5176/api/account/${userid}/logout`,
       {
         method: "POST",
         credentials: "include",

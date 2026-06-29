@@ -22,14 +22,18 @@ const port = process.env.PORT;
 const app = express();
 
 try {
-    const allowedOrigins = process.env.LOCAL_URL || process.env.CLOUD_URL;//the frontend port location
-    //allow frontend communication
+    const isSecure = process.env.SECURE === "true";
+    const allowedOrigins = Object.freeze({
+        origin: isSecure ? process.env.CLOUD_URL : process.env.LOCAL_URL
+    });
+    console.log(allowedOrigins.origin);
+
     app.set("trust proxy", 1);
     app.use(cookieParser())
     app.use(morgan('dev'))
     app.use(helmet())
     app.use(cors({
-        origin: allowedOrigins,
+        origin: allowedOrigins.origin,
         credentials: true//allow cookies to be sent
     }))
 
@@ -62,8 +66,8 @@ try {
     app.use("/api/account", isAuthenticated, signOut);
 
     //becomes dynamic when deployed to a backend node hosting service and when offlines it switches to localhost
-    if (allowedOrigins === process.env.LOCAL_URL) {
-        app.listen(port, () => console.log(`http://localhost:${port}`));
+    if (allowedOrigins.origin === process.env.LOCAL_URL) {
+        app.listen(port, () => console.log(`${port}`));
     }
 }
 catch (err) {

@@ -31,7 +31,7 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
   //Carry canva data between pages by fetching canva space mandatory data for preview name and description and then the actual data to allow the 2nd functionbelow this one to collect workspace data
   const fetchEssentialData = async (userid: string) => {
     const response = await fetch(
-      `http://localhost:5000/api/account/${userid}/canvas-management`,
+      `http://localhost:5176/api/account/${userid}/canvas-management`,
       {
         method: "GET",
         credentials: "include",
@@ -46,8 +46,7 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
       // console.log("frontend dashboard initial user data: ", data);
     } else {
       const issue = await response.json();
-      if (issue.message === "Not Authenticated")
-        redirectToSignIn();
+      if (issue.message === "Not Authenticated") redirectToSignIn();
       console.log(issue);
 
       console.log("frontend dashboard initial user data: ", issue);
@@ -58,7 +57,7 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchWorkspaceData = async (userid: string, workspaceid: string) => {
     const response = await fetch(
-      `http://localhost:5000/api/account/${userid}/canvas-management/${workspaceid}`,
+      `http://localhost:5176/api/account/${userid}/canvas-management/${workspaceid}`,
       {
         method: "GET",
         credentials: "include",

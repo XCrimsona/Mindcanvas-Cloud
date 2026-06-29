@@ -111,7 +111,7 @@ const ImageInputUnit = () => {
         return;
       } else {
         const image = await fetch(
-          `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+          `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
           {
             method: "POST",
             credentials: "include",
@@ -126,8 +126,7 @@ const ImageInputUnit = () => {
           updateCanvasData();
         } else {
           const response = await image.json();
-          if (response.message === "Not Authenticated")
-            redirectToSignIn();
+          if (response.message === "Not Authenticated") redirectToSignIn();
           toast.error("ImageCluster was not added!");
         }
       }

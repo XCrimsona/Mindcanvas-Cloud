@@ -19,7 +19,7 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUserInfo = async () => {
     const response: any = await fetch(
-      `http://localhost:5000/api/account/${userid!}/account-info`,
+      `http://localhost:5176/api/account/${userid!}/account-info`,
       {
         method: "GET",
         credentials: "include",
@@ -38,7 +38,7 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
 
   const requestAccountDeletion = async () => {
     const response: any = await fetch(
-      `http://localhost:5000/api/account/${userid!}/account-info`,
+      `http://localhost:5176/api/account/${userid!}/account-info`,
       {
         method: "DELETE",
         credentials: "include",

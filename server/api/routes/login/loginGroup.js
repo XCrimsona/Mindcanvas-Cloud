@@ -90,7 +90,7 @@ loginRouter
 
       //signedToken created and sent to front for including credentials
       res.cookie("mc_authtoken", token, {
-        secure: process.env.SECURE || false,//have an alternative or the if t he env doesnt see it directly it can fall back. if that is missing you may get kicked out
+        secure: process.env.SECURE === "true",//have an alternative or the if t he env doesnt see it directly it can fall back. if that is missing you may get kicked out
         httpOnly: true,
         sameSite: "lax",
         maxAge: 1 * 60 * 60 * 1000,
