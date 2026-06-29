@@ -45,8 +45,7 @@ const DataManagement = ({ source }: { source: any }) => {
     } else {
       const issue = await response.json();
       // setCanvaData(issue);
-      if (issue.message === "Not Authenticated")
-        redirectToSignIn();
+      if (issue.message === "Not Authenticated") redirectToSignIn();
       return {
         status: "false",
         message: issue,
@@ -60,44 +59,46 @@ const DataManagement = ({ source }: { source: any }) => {
     fetchMoreData();
   }, []);
 
-  const [query, setQuery] = useState("");
+  // ?
+  // const [query, setQuery] = useState("");
   // can be replaced with canvaData
-  const [results, setResults] = useState([]);
+  // const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    const delay = setTimeout(async () => {
-      if (!query.trim()) return;
+  // useEffect(() => {
+  //   const delay = setTimeout(async () => {
+  //     if (!query.trim()) return;
 
-      const res = await fetch(
-        `/api/account/${userid}/canvas-management/search`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            query,
-            page: 0,
-            limit: 10,
-            userId: userid,
-          }),
-        },
-      );
+  //     const res = await fetch(
+  //       `/api/account/${userid}/canvas-management/search`,
+  //       {
+  //         method: "POST",
+  //         credentials: "include",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           query,
+  //           page: 0,
+  //           limit: 10,
+  //           userId: userid,
+  //         }),
+  //       },
+  //     );
 
-      if (!res.ok) {
-        const data = await res.json();
-        setResults(data.results);
-      } else {
-        const data = await res.json();
-        if (data.message === "Not Authenticated")
-          redirectToSignIn();
-        setResults(data.results);
-      }
-    }, 800);
+  //     if (!res.ok) {
+  //       const data = await res.json();
+  //       setResults(data.results);
+  //     } else {
+  //       const data = await res.json();
+  //       if (data.message === "Not Authenticated") redirectToSignIn();
+  //       setResults(data.results);
+  //     }
+  //   }, 800);
 
-    return () => clearTimeout(delay);
-  }, [query]);
+  //   return () => clearTimeout(delay);
+  // }, [query]);
+
+  // function to toggle a single workspace view mode
   const toggleASingleWorkspace = (id: string) => {
     setCanvaData((prev: any) =>
       prev.map((workspace: any) =>
@@ -293,8 +294,7 @@ const DataManagement = ({ source }: { source: any }) => {
         setDisplayNewWorkspace((prev) => !prev);
       } else {
         const getError = await response.json();
-        if (getError.message === "Not Authenticated")
-          redirectToSignIn();
+        if (getError.message === "Not Authenticated") redirectToSignIn();
         toast.error(`Failed to create Canvaspace: ${getError.message}`);
       }
     }

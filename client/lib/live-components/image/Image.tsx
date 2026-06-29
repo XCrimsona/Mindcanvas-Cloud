@@ -86,7 +86,9 @@ export const ImageCluster = ({ data }: { data: any }) => {
           {imagecluster.map((img: any, index: number) => (
             <div key={index} className="image-file-row">
               {/* Image Data */}
-              <p className="image-file-name">{img.name}</p>
+              <p className="image-file-name" title={img.name}>
+                {img.name}
+              </p>
               {/* button uses a rest api call,sending along the name of the image and the id of the image cluster, finding the name of the file in the file system and opening its file location in fiile explorer on all OS systems(app is multi-platform) */}
               <button
                 className="image-reveal-btn"

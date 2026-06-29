@@ -7,6 +7,7 @@
 }
 
 .reposition-fragment-container .reposition-fragment {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
     @apply top-0 relative mx-auto text-xs text-start break-keep overflow-x-hidden overflow-y-auto whitespace-pre-wrap p-[5px] cursor-text border-b border-b-[#FAAA0040];
     content: "";
 }

@@ -92,6 +92,9 @@ interface IModificationUseStateContextType {
     personalInfo: boolean,
   ) => void;
 
+  //TextLink viewMode (_self | _blank) — toggled from the ModificationWindow
+  updateTextLinkViewMode: (_id: string, target: "_self" | "_blank") => Promise<void>;
+
   editLiveDataElement: (
     _id: string,
     userid: string,
@@ -109,6 +112,12 @@ interface IModificationUseStateContextType {
     // workspacename: string,
     componentType: string,
   ) => void;
+
+  //Table fragment uses dedicated endpoints under /table-management.
+  //These bypass the canvas-management dispatcher so the embedded rows + columns
+  //don't collide with the generic fragment update path.
+  editTableFragment: (_id: string, tableName: string) => Promise<void>;
+  deleteTableFragment: (_id: string) => Promise<void>;
 
   updateComponentData: (text: string, link: string) => void;
 
@@ -262,6 +271,46 @@ const InfoModificationContextProvider = ({
     }
   }
 
+  //Toggle TextLink viewMode. Hits the dedicated ViewMode dispatcher and refreshes
+  //canvas data so the live TextLink picks up the new target on next render.
+  const updateTextLinkViewMode = async (
+    _id: string,
+    target: "_self" | "_blank",
+  ) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            _id,
+            type: "TextLink",
+            updateType: "ViewMode",
+            target,
+          }),
+        },
+      );
+      if (res.ok) {
+        const json = await res.json().catch(() => ({}));
+        toast.success(json.message || `Link viewMode → ${target}`, {
+          autoClose: 2500,
+        });
+        updateCanvasData();
+      } else {
+        const err = await res.json().catch(() => ({}));
+        if (err.message === "Not Authenticated") {
+          redirectToSignIn();
+          return;
+        }
+        toast.error(err.message || "ViewMode update failed", { autoClose: 4000 });
+      }
+    } catch (error: any) {
+      console.warn("updateTextLinkViewMode error: ", error.message);
+    }
+  };
+
   // const { updateWorkspaceData } = useWorkspaceContext();
   //find the double clicked element and modify data
   const editLiveDataElement = async (
@@ -365,6 +414,58 @@ const InfoModificationContextProvider = ({
     } catch (error: any) {
       console.warn("Delete error: ", error.message);
       return;
+    }
+  };
+
+  //Table fragment uses its own router. Both handlers refresh canvas data on success
+  //so the live list reflects the change without a manual reload.
+  const editTableFragment = async (_id: string, tableName: string) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/account/${userid}/table-management/${canvaid}/${_id}`,
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ tableName }),
+        },
+      );
+      if (res.ok) {
+        toast.warning("Table fragment has been updated!");
+        updateCanvasData();
+      } else {
+        const response = await res.json().catch(() => ({}));
+        if (response.message === "Not Authenticated") {
+          redirectToSignIn();
+          return;
+        }
+        toast.error(`Table fragment was not updated: ${response.message || ""}`);
+      }
+    } catch (error: any) {
+      console.warn("editTableFragment error: ", error.message);
+    }
+  };
+
+  const deleteTableFragment = async (_id: string) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/account/${userid}/table-management/${canvaid}/${_id}`,
+        { method: "DELETE", credentials: "include" },
+      );
+      if (res.ok) {
+        const json = await res.json().catch(() => ({}));
+        toast.success(json.message || "Table deleted");
+        updateCanvasData();
+      } else {
+        const err = await res.json().catch(() => ({}));
+        if (err.message === "Not Authenticated") {
+          redirectToSignIn();
+          return;
+        }
+        toast.error(err.message || "Could not delete table", { autoClose: 4000 });
+      }
+    } catch (error: any) {
+      console.warn("deleteTableFragment error: ", error.message);
     }
   };
 
@@ -503,9 +604,12 @@ const InfoModificationContextProvider = ({
         setNote,
         isPersonalNote,
         updateFragmentPrivacy,
+        updateTextLinkViewMode,
         editLiveDataElement,
 
         deleteLiveDataElement,
+        editTableFragment,
+        deleteTableFragment,
         updateComponentData,
 
         selectedComp,

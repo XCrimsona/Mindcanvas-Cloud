@@ -20,6 +20,7 @@
 
             .text-input-wrapper {
                 @apply relative my-2.5 mx-auto;
+                font-family: "Inter", system-ui, -apple-system, sans-serif;
 
                 .enabled-list-input-field,
                 .enabled-text-input-field {

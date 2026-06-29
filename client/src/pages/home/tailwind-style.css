@@ -40,11 +40,11 @@
     transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
 }
 
-.feature-tile:hover {
+/* .feature-tile:hover {
     border-color: rgba(250, 170, 0, 0.45);
     box-shadow: 0 0 12px 1px rgba(250, 170, 0, 0.12);
     transform: translateY(-1px);
-}
+} */
 
 .box-heading {
     font-size: var(--Twenty-pixel);

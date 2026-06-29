@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .modifications-window-container {
     display: block;
     position: absolute;
@@ -62,6 +64,7 @@
     .edit-button,
     .open-a4-view-button,
     .component-reposition-button,
+    .copy-fragment-anchor-button,
     .delete-button {
         background-color: #000000;
         border: 2px solid #FAAA0040;
@@ -79,12 +82,32 @@
         margin-bottom: 10px;
     }
 
-    .component-reposition-button {
+    .component-reposition-button,
+    .copy-fragment-anchor-button {
         width: 170px;
         cursor: pointer;
         color: #fa0;
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+
+    /* TextLink viewMode toggle — only rendered for TextLink fragments.
+       Holds the heading + the two radio options ("_self" / "_blank").
+       Width matches the action buttons above and below for a clean column. */
+    .textlink-viewmode-toggle {
+        @apply mx-auto mt-2 mb-2 flex w-[170px] flex-col items-stretch text-[11px] text-white;
+
+        .textlink-viewmode-heading {
+            @apply mx-auto mb-1 text-center;
+        }
+
+        .textlink-viewmode-options {
+            @apply flex items-center justify-around;
+        }
+
+        .textlink-viewmode-option {
+            @apply flex cursor-pointer items-center gap-1;
+        }
     }
 
     .delete-container {

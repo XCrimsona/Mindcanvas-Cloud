@@ -20,6 +20,7 @@
 
             .image-input-wrapper {
                 @apply flex relative;
+                font-family: "Inter", system-ui, -apple-system, sans-serif;
 
                 .enabled-list-input-field,
                 .enabled-image-input-field {

@@ -13,6 +13,7 @@ import { LinkButton } from "../../form-components/link/LinkButton";
 import { VideoButton } from "../../form-components/video/VideoButton";
 // import { DoughnutChartButton } from "../../form-components/chart/DoughnutChartButton";
 import { ImageButton } from "../../form-components/image/ImageButton";
+import { TableButton } from "../../form-components/table/TableButton";
 const ComponentHub = () => {
   const {
     visbilityState,
@@ -62,6 +63,7 @@ const ComponentHub = () => {
               <TextButton />
               <LinkButton />
               <ImageButton />
+              <TableButton />
               {/* Analytic Fragments section hidden until at least one button is enabled */}
               {/* <ShortText className={"fragment-heading-text"}>
                 Analytic Fragments - Track and visualize data

@@ -10,6 +10,7 @@ import Router from "express";
 import textLinkModel from "../../../models/multi-media/textLinkmodel.js";
 import videoModel from "../../../models/multi-media/videoModel.js";
 import imageModel from "../../../models/multi-media/imageModel.js";
+import tableModel from "../../../models/multi-media/tableModel.js";
 import fs from 'fs';
 import path from "path";
 import { get } from "http";
@@ -18,6 +19,26 @@ import { get } from "http";
 //loads all canva data depending on id access
 const singleDynamicCanvaDataGroupRouter = Router();
 singleDynamicCanvaDataGroupRouter
+    // NEW — GET#2: fetch only the current `target` (_self | _blank) for a single TextLink fragment.
+    // Used by the ModificationWindow to hydrate the radio toggle without refetching the whole canvas.
+    .get("/:userid/canvas-management/:canvaid/textlink/:fragmentid/viewmode", async (req, res) => {
+        try {
+            await getDB();
+            const userid = req.user?.sub;
+            const { canvaid, fragmentid } = req.params;
+            if (!userid) {
+                return res.status(401).json({ success: false, code: "NOT_AUTHENTICATED", message: "Not Authenticated" });
+            }
+            const link = await textLinkModel.findOne({ _id: fragmentid, workspaceId: canvaid, createdBy: userid })
+                .select("target");
+            if (!link) {
+                return res.status(404).json({ success: false, code: "TEXTLINK_NOT_FOUND", message: "Link fragment not found" });
+            }
+            return res.status(200).json({ success: true, code: "TEXTLINK_VIEWMODE_FETCHED", target: link.target || "_self" });
+        } catch (err) {
+            return res.status(500).json({ success: false, code: "SERVER_WORKSPACE_ERROR", message: err.message });
+        }
+    })
     //below code runs when data inside a canva is made after its creation
     .get("/:userid/canvas-management/:canvaid", async (req, res) => {
 
@@ -38,7 +59,7 @@ singleDynamicCanvaDataGroupRouter
                     _id: canvaid,
                 });
                 if (canvaspace) {
-                    const [texts, links, charts, images, videos
+                    const [texts, links, charts, images, videos, tables
                         // , audios, images, videos
                     ] = await Promise.all([
                         textModel.find({ workspaceId: canvaspace._id, createdBy: user._id }),
@@ -47,6 +68,22 @@ singleDynamicCanvaDataGroupRouter
                         // audioModel.find({ workspaceId: canvaspace._id, createdBy: user._id }),
                         imageModel.find({ workspaceId: canvaspace._id, createdBy: user._id }),
                         videoModel.find({ workspaceId: canvaspace._id, createdBy: user._id }),
+                        // tables: metadata + rowCount only. Rows are loaded on demand via
+                        // /table-management/:canvaid/:tableid/rows?skip=&limit= so big tables
+                        // don't bloat the initial canvas payload.
+                        tableModel.aggregate([
+                            { $match: { workspaceId: canvaspace._id, createdBy: user._id } },
+                            {
+                                $project: {
+                                    tableName: 1,
+                                    columns: 1,
+                                    position: 1,
+                                    type: 1,
+                                    personalInfo: 1,
+                                    rowCount: { $size: { $ifNull: ["$rows", []] } },
+                                },
+                            },
+                        ]),
                     ]);
                     // console.log("images from get req: ", images);
 
@@ -57,6 +94,7 @@ singleDynamicCanvaDataGroupRouter
                         // audios,
                         images,
                         videos,
+                        tables,
                     };
 
                     const empty =
@@ -64,7 +102,8 @@ singleDynamicCanvaDataGroupRouter
                         links.length === 0 &&
                         charts.length === 0 &&
                         images.length === 0 &&
-                        videos.length === 0;
+                        videos.length === 0 &&
+                        tables.length === 0;
                     // &&
                     // audios.length === 0 &&
                     // images.length === 0 &&
@@ -139,7 +178,7 @@ singleDynamicCanvaDataGroupRouter
                     if (canvaspace) {
                         const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, text, link, video, pathtoimages, type, x, y, options
                         } = req.body;
-                        console.log("req.body: ", req.body);
+                        // console.log("req.body: ", req.body);
                         // const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset } = req.body;
                         // console.log(label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, text, type, x, y, options);
 
@@ -580,6 +619,99 @@ singleDynamicCanvaDataGroupRouter
                                 }
                             }
 
+                            //Table fragment uses the same dispatcher for XY repositioning and sharing
+                            //settings so RepositionLiveData and updateFragmentPrivacy work unchanged.
+                            //Row/column edits live on the dedicated /table-management router.
+                            else if (type === "Table") {
+                                if (updateType === "XY_POSITIONS") {
+                                    const positions = {
+                                        position: {
+                                            x: x,
+                                            y: y
+                                        }
+                                    };
+
+                                    const reqToUpdateMediaFragmentXYCordinates = await tableModel.updateOne(
+                                        {
+                                            _id: _id,
+                                            createdBy: user._id,
+                                        },
+                                        { $set: positions },
+                                        { new: true }
+                                    );
+
+                                    if (reqToUpdateMediaFragmentXYCordinates) {
+                                        return res.status(200).json({
+                                            success: true,
+                                            code: "MEDIA_XY_COORDINATES_REQUEST_UPDATED",
+                                            message: "Table XY coordinates have been updated",
+                                        });
+
+                                    } else {
+                                        return res.status(404).json({
+                                            success: false,
+                                            code: "TABLE_UPDATE_REQUESTED_FAILED",
+                                            message: "Requested table component data is not available",
+                                        });
+                                    }
+                                }
+                                else if (updateType === "SharingSettings") {
+                                    if (personalInfo === undefined) {
+                                        return res.status(400).json({
+                                            success: false,
+                                            code: "INSUFFICIENT_DATA",
+                                            message: "personalInfo field is missing",
+                                        });
+                                    }
+                                    const getCurrentSharingSettings = await tableModel.findOne({ _id: _id });
+                                    if (getCurrentSharingSettings.personalInfo === false && personalInfo === "No") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "TABLE_SHARING_SETTINGS_UNCHANGED",
+                                            message: "Table sharing settings is already disabled",
+                                        });
+                                    }
+                                    if (getCurrentSharingSettings.personalInfo === true && personalInfo === "Yes") {
+                                        res.status(200).json({
+                                            success: true,
+                                            code: "TABLE_SHARING_SETTINGS_UNCHANGED",
+                                            message: "Table sharing settings is already enabled",
+                                        });
+                                    }
+                                    const isSharing = {};
+                                    if (personalInfo === "No") {
+                                        isSharing.shareData = false;
+                                    }
+                                    if (personalInfo === "Yes") {
+                                        isSharing.shareData = true;
+                                    }
+
+                                    const reqToUpdateTablePrivacy = await tableModel.updateOne(
+                                        {
+                                            _id: _id,
+                                            createdBy: user._id,
+                                        },
+                                        { $set: { personalInfo: isSharing.shareData } },
+                                        { new: true }
+                                    );
+
+                                    if (reqToUpdateTablePrivacy.modifiedCount === 1) {
+                                        return res.status(200).json({
+                                            success: true,
+                                            code: "TABLE_PRIVACY_SETTINGS_UPDATED",
+                                            message: "Table privacy settings have been updated",
+                                        });
+
+                                    } else {
+                                        return res.status(404).json({
+                                            success: false,
+                                            code: "TABLE_PRIVACY_SETTINGS_UPDATE_FAILED",
+                                            message: "Table privacy settings not updated",
+                                        });
+                                    }
+                                }
+                            }
+
                             else if (type === "TextLink") {
                                 if (updateType === "TextLink") {
                                     if (!_id) {
@@ -657,6 +789,60 @@ singleDynamicCanvaDataGroupRouter
                                             message: "Link fragment created!",
                                         })
                                     }
+                                }
+                                // NEW — PUT#3 (PATCH): toggle TextLink viewMode between "_self" and "_blank".
+                                // Accepts req.body.target ("_self" | "_blank"). No-ops gracefully if the
+                                // value matches what's already stored.
+                                else if (updateType === "ViewMode") {
+                                    const newTarget = req.body.target;
+                                    if (newTarget !== "_self" && newTarget !== "_blank") {
+                                        return res.status(400).json({
+                                            success: false,
+                                            code: "INVALID_VIEWMODE_TARGET",
+                                            message: "target must be _self or _blank",
+                                        });
+                                    }
+                                    if (!_id) {
+                                        return res.status(400).json({
+                                            success: false,
+                                            code: "INSUFFICIENT_DATA",
+                                            message: "Component id is missing",
+                                        });
+                                    }
+                                    const current = await textLinkModel.findOne({ _id, createdBy: user._id }).select("target");
+                                    if (!current) {
+                                        return res.status(404).json({
+                                            success: false,
+                                            code: "TEXTLINK_NOT_FOUND",
+                                            message: "Link fragment not found",
+                                        });
+                                    }
+                                    if (current.target === newTarget) {
+                                        return res.status(200).json({
+                                            success: true,
+                                            code: "TEXTLINK_VIEWMODE_UNCHANGED",
+                                            message: `TextLink viewMode already ${newTarget}`,
+                                            target: newTarget,
+                                        });
+                                    }
+                                    const reqToUpdateViewMode = await textLinkModel.updateOne(
+                                        { _id, createdBy: user._id },
+                                        { $set: { target: newTarget } },
+                                        { new: true }
+                                    );
+                                    if (reqToUpdateViewMode.modifiedCount === 1) {
+                                        return res.status(200).json({
+                                            success: true,
+                                            code: "TEXTLINK_VIEWMODE_UPDATED",
+                                            message: `TextLink viewMode set to ${newTarget}`,
+                                            target: newTarget,
+                                        });
+                                    }
+                                    return res.status(400).json({
+                                        success: false,
+                                        code: "TEXTLINK_VIEWMODE_UPDATE_FAILED",
+                                        message: "Could not update TextLink viewMode",
+                                    });
                                 }
                                 else if (updateType === "SharingSettings") {
                                     if (personalInfo === undefined) {

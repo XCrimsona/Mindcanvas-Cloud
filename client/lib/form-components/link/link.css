@@ -20,6 +20,7 @@
 
             .link-input-wrapper {
                 @apply flex flex-wrap relative;
+                font-family: "Inter", system-ui, -apple-system, sans-serif;
 
                 .enabled-linkdescription-input-field,
                 .enabled-link-input-field {

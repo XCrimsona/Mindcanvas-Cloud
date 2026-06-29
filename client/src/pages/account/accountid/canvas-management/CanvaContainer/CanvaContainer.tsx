@@ -10,6 +10,7 @@ import DoughnutChartInputUnit from "../../../../../../lib/form-components/chart/
 import TextLinkInputUnit from "../../../../../../lib/form-components/link/LinkInputUnit";
 import VideoInputUnit from "../../../../../../lib/form-components/video/VideoInputUnit";
 import ImageInputUnit from "../../../../../../lib/form-components/image/ImageInputUnit";
+import TableInputUnit from "../../../../../../lib/form-components/table/TableInputUnit";
 import { redirectToSignIn } from "../../../../../../lib/auth-redirect/AuthRedirectContext";
 // import { ImageQueueProvider } from "../../../../../../lib/Providers/ImageQueueContextProvider";
 const CanvaContainer = () => {
@@ -34,6 +35,7 @@ const CanvaContainer = () => {
         {/* <AudioInputUnit params={params} /> */}
         <ImageInputUnit />
         <VideoInputUnit />
+        <TableInputUnit />
 
         <RepositionLiveData />
         <ReadingPage />
