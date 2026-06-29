@@ -221,7 +221,7 @@ const CanvasDataContextProvider = ({
 
   const updateCanvasData = async () => {
     const routeResponse = await fetch(
-      `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+      `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
       {
         method: "GET",
         credentials: "include",

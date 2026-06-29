@@ -93,7 +93,10 @@ interface IModificationUseStateContextType {
   ) => void;
 
   //TextLink viewMode (_self | _blank) — toggled from the ModificationWindow
-  updateTextLinkViewMode: (_id: string, target: "_self" | "_blank") => Promise<void>;
+  updateTextLinkViewMode: (
+    _id: string,
+    target: "_self" | "_blank",
+  ) => Promise<void>;
 
   editLiveDataElement: (
     _id: string,
@@ -244,7 +247,7 @@ const InfoModificationContextProvider = ({
       // console.log(patchPayload);
 
       const setFragmentPriv = await fetch(
-        `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+        `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -279,7 +282,7 @@ const InfoModificationContextProvider = ({
   ) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+        `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -304,7 +307,9 @@ const InfoModificationContextProvider = ({
           redirectToSignIn();
           return;
         }
-        toast.error(err.message || "ViewMode update failed", { autoClose: 4000 });
+        toast.error(err.message || "ViewMode update failed", {
+          autoClose: 4000,
+        });
       }
     } catch (error: any) {
       console.warn("updateTextLinkViewMode error: ", error.message);
@@ -324,7 +329,7 @@ const InfoModificationContextProvider = ({
   ) => {
     try {
       const editedRequest = await fetch(
-        `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+        `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
         {
           method: "PATCH",
           headers: {
@@ -383,7 +388,7 @@ const InfoModificationContextProvider = ({
   ) => {
     try {
       const deleteRequest = await fetch(
-        `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+        `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -422,7 +427,7 @@ const InfoModificationContextProvider = ({
   const editTableFragment = async (_id: string, tableName: string) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/account/${userid}/table-management/${canvaid}/${_id}`,
+        `http://localhost:5176/api/account/${userid}/table-management/${canvaid}/${_id}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -439,7 +444,9 @@ const InfoModificationContextProvider = ({
           redirectToSignIn();
           return;
         }
-        toast.error(`Table fragment was not updated: ${response.message || ""}`);
+        toast.error(
+          `Table fragment was not updated: ${response.message || ""}`,
+        );
       }
     } catch (error: any) {
       console.warn("editTableFragment error: ", error.message);
@@ -449,7 +456,7 @@ const InfoModificationContextProvider = ({
   const deleteTableFragment = async (_id: string) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/account/${userid}/table-management/${canvaid}/${_id}`,
+        `http://localhost:5176/api/account/${userid}/table-management/${canvaid}/${_id}`,
         { method: "DELETE", credentials: "include" },
       );
       if (res.ok) {
@@ -462,7 +469,9 @@ const InfoModificationContextProvider = ({
           redirectToSignIn();
           return;
         }
-        toast.error(err.message || "Could not delete table", { autoClose: 4000 });
+        toast.error(err.message || "Could not delete table", {
+          autoClose: 4000,
+        });
       }
     } catch (error: any) {
       console.warn("deleteTableFragment error: ", error.message);

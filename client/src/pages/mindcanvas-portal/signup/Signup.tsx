@@ -65,7 +65,7 @@ const Signup = () => {
         } else {
           //data will be sent to the backend from here
           const response: any = await fetch(
-            "http://localhost:5000/api/signup-portal",
+            "http://localhost:5176/api/signup-portal",
             {
               method: "POST",
               headers: {

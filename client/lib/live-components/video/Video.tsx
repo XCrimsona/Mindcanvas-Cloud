@@ -68,7 +68,7 @@ export const Video = ({ data }: { data: any }) => {
   // NEW CODE — Manual load handler (mirrors ImageCluster's handleManualLoad).
   //
   // OLD APPROACH — what the browser did automatically and why it caused starvation:
-  // The old <video src="http://localhost:5000/..." crossOrigin="use-credentials" preload="metadata">
+  // The old <video src="http://localhost:5176/..." crossOrigin="use-credentials" preload="metadata">
   // tag fired a browser-native HTTP request the moment the component mounted.
   // The browser opened a PERSISTENT range-stream connection (HTTP 206) to support
   // scrubbing, and held that connection slot open for the entire lifetime of the player.
@@ -95,7 +95,7 @@ export const Video = ({ data }: { data: any }) => {
 
     setIsVideoLoading(true);
 
-    const url = `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}/video/${_id}`;
+    const url = `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}/video/${_id}`;
 
     try {
       // credentials: "include" sends the session cookie — same auth as crossOrigin="use-credentials"
@@ -104,8 +104,7 @@ export const Video = ({ data }: { data: any }) => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        if (errorData.message === "Not Authenticated")
-          redirectToSignIn();
+        if (errorData.message === "Not Authenticated") redirectToSignIn();
 
         toast.error(`${response.status}`);
       }
@@ -157,7 +156,7 @@ export const Video = ({ data }: { data: any }) => {
                 className="video-element"
                 controls
                 preload="metadata"
-                src={`http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}/video/${_id}`}
+                src={`http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}/video/${_id}`}
               />
 
               crossOrigin="use-credentials" — told the browser to include cookies on the

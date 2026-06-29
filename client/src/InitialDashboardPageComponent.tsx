@@ -13,7 +13,7 @@ const InitialDashboardPageComponent = () => {
   if (!userid) return;
   const fetchEssentialData = async () => {
     const response = await fetch(
-      `http://localhost:5000/api/account/${userid}/canvas-management`,
+      `http://localhost:5176/api/account/${userid}/canvas-management`,
       {
         method: "GET",
         credentials: "include",

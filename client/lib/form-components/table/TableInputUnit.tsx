@@ -110,7 +110,7 @@ const TableInputUnit = () => {
       };
 
       const res = await fetch(
-        `http://localhost:5000/api/account/${userid}/table-management/${canvaid}`,
+        `http://localhost:5176/api/account/${userid}/table-management/${canvaid}`,
         {
           method: "POST",
           credentials: "include",
@@ -242,9 +242,7 @@ const TableInputUnit = () => {
                   type="text"
                   placeholder={`Column ${idx + 1} name`}
                   value={col.name}
-                  onChange={(e) =>
-                    updateColumn(idx, { name: e.target.value })
-                  }
+                  onChange={(e) => updateColumn(idx, { name: e.target.value })}
                 />
                 <select
                   className={"table-col-type"}

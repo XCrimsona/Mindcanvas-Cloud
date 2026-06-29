@@ -31,7 +31,7 @@ interface TableMeta {
 const PAGE_SIZE = 30;
 
 const apiBase = (userid: string, canvaid: string) =>
-  `http://localhost:5000/api/account/${userid}/table-management/${canvaid}`;
+  `http://localhost:5176/api/account/${userid}/table-management/${canvaid}`;
 
 // Map column type → input type for the editor
 function inputTypeFor(t: Column["columnType"]): string {
@@ -204,10 +204,7 @@ export const Table = ({ data }: { data: TableMeta | any }) => {
       {editState && selectedComp.dataFragmentId === meta._id && (
         <EditWindow componentData={{ ...meta, type: "Table" }} />
       )}
-      <div
-        ref={fragmentRef}
-        className={"live-table-fragment"}
-      >
+      <div ref={fragmentRef} className={"live-table-fragment"}>
         <SpanFragment
           id={`${data._id}`}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {

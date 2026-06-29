@@ -1,10 +1,10 @@
 Set-ExecutionPolicy Bypass -Scope Process -Force
-Write-Host "Starting Backend Server..." -ForegroundColor Green
+Write-Host "Starting Backend Server..." -ForegroundColor Cyan
 
 # Move to root project directory to access server folder
 Set-Location "$PSScriptRoot/../server"
 
-$port = 5000
+$port = 5176
 
 function Test-PortInUse {
     param ([int]$Port)
@@ -37,5 +37,5 @@ if (Test-PortInUse -Port $port) {
     }
 }
 
-Write-Host "Launching Server on port $port..."
+Write-Host "Launching Server on port http://localhost:$port..."
 npm run start

@@ -4,7 +4,7 @@ Write-Host "Starting Frontend Client..." -ForegroundColor Cyan
 # Move to root project directory to access client folder
 Set-Location "$PSScriptRoot/../client"
 
-$port = 5176
+$port = 3176
 
 function Test-PortInUse {
     param ([int]$Port)
@@ -37,5 +37,5 @@ if (Test-PortInUse -Port $port) {
     }
 }
 
-Write-Host "Launching Client on port $port..."
+Write-Host "Launching Client on port http://localhost:$port..."
 npm run dev

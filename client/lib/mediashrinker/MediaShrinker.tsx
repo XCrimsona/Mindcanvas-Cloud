@@ -10,7 +10,7 @@ export const MediaShrinkUI = () => {
 
   const { userId, canvasId } = useParams();
   // useEffect(() => {
-  // const socket = io("http://localhost:5000");
+  // const socket = io("http://localhost:5176");
   // socket.on("shrink-progress", (data: any) => {
   //   setStatus("Processing...");
   //   setProgress(data.stats); // You can regex this for % if needed
@@ -21,7 +21,7 @@ export const MediaShrinkUI = () => {
   const shrinkProcess = async () => {
     setStatus("Initializing...");
     const res = await fetch(
-      `http://localhost:5000/api/account/${userId}/canvas-management/${canvasId}/media-shrink`,
+      `http://localhost:5176/api/account/${userId}/canvas-management/${canvasId}/media-shrink`,
       {
         method: "POST",
         credentials: "include",

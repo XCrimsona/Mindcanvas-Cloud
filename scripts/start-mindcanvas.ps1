@@ -4,7 +4,7 @@ Write-Host "Launching MindCanvas Full App Pipelines..." -ForegroundColor Magenta
 $pwshExe = "pwsh"
 
 $pipelines = @(
-    @{ name = "Backend"; script = "$PSScriptRoot/launchServer.ps1"; color = "Green" },
+    @{ name = "Backend"; script = "$PSScriptRoot/launchServer.ps1"; color = "Cyan" },
     @{ name = "Frontend"; script = "$PSScriptRoot/launchClient.ps1"; color = "Cyan" },
     @{ name = "Landing"; script = "$PSScriptRoot/OpenLandingPage.ps1"; color = "Yellow" }
 )

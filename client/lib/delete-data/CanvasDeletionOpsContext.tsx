@@ -45,7 +45,7 @@ export const CanvasContextDeletionProvider = ({
   };
   const hitClickDelete = async () => {
     const response = await fetch(
-      `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+      `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
       {
         method: "delete",
         credentials: "include",

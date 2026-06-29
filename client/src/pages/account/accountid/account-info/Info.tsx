@@ -155,7 +155,7 @@ const Info = ({ params }: any) => {
             });
           } else {
             const updatedData = await fetch(
-              `http://localhost:5000/api/account/${userid}/account-info`,
+              `http://localhost:5176/api/account/${userid}/account-info`,
               {
                 method: "PATCH",
                 credentials: "include",

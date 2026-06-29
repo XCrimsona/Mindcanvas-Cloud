@@ -6,7 +6,7 @@ import Signup from "./Signup";
 const SignUpPage = () => {
   //wake up the DB ops for incoming requests
   const signUpInit = async () => {
-    await fetch("http://localhost:5000/api/signup-portal");
+    await fetch("http://localhost:5176/api/signup-portal");
   };
   useEffect(() => {
     document.title = "Signup Page";
