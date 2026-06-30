@@ -23,7 +23,7 @@ export const AuthLogoutProvider = ({ children, userid }: AuthLogoutProps) => {
   const logout = async () => {
     try {
       const logoutRes = await fetch(
-        `http://localhost:5176/api/account/${userid}/logout`,
+        `${import.meta.env.VITE_API_CLOUD_URL}/api/account/${userid}/logout`,
         {
           method: "POST",
           credentials: "include",

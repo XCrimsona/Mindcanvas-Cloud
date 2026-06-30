@@ -54,7 +54,7 @@ const Signin = () => {
         } else {
           //data will be sent to the backend to check for an existing user
           const response = await fetch(
-            "http://localhost:5176/api/signin-portal/account-recovery",
+            `${import.meta.env.VITE_API_CLOUD_URL}/api/signin-portal/account-recovery`,
             {
               method: "POST",
               credentials: "include",
@@ -106,7 +106,7 @@ const Signin = () => {
         } else {
           //data will be sent to the backend to check for an existing user
           const response = await fetch(
-            "http://localhost:5176/api/signin-portal/account-recovery",
+            `${import.meta.env.VITE_API_CLOUD_URL}/api/signin-portal/account-recovery`,
             {
               method: "POST",
               credentials: "include",
@@ -157,7 +157,7 @@ const Signin = () => {
         if (loginSubmitLock === false) {
           //data will be sent to the backend from here
           const response = await fetch(
-            "http://localhost:5176/api/signin-portal",
+            `${import.meta.env.VITE_API_CLOUD_URL}/api/signin-portal`,
             {
               method: "POST",
               credentials: "include",
