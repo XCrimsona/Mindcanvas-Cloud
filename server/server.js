@@ -65,10 +65,9 @@ try {
     app.use("/api/account", isAuthenticated, tableManagementRouter);
     app.use("/api/account", isAuthenticated, signOut);
 
-    //becomes dynamic when deployed to a backend node hosting service and when offlines it switches to localhost
-    if (allowedOrigins.origin === process.env.LOCAL_URL) {
-        app.listen(port, () => console.log(`${port}`));
-    }
+    //Railway is a container platform — it always needs an active listener bound to process.env.PORT.
+    //Locally, process.env.PORT comes from .env and the dev server listens on that port.
+    app.listen(port, () => console.log(`listening on ${port}`));
 }
 catch (err) {
     console.warn("server anomaly message: ", err.message);
