@@ -17,53 +17,49 @@ import About from "./pages/about/About.tsx";
 import { AuthRedirectProvider } from "../lib/auth-redirect/AuthRedirectContext.tsx";
 
 createRoot(document.getElementById("root") as HTMLDivElement).render(
-  // <StrictMode>
   <BrowserRouter>
     <AuthRedirectProvider>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/trust" element={<Trust />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/signin-portal" element={<SignInPage />} />
-      <Route path="/signup-portal" element={<SignUpPage />} />
-      {/* <CanvaDataProvider> */}
-      <Route
-        path="/account/:userid/canvas-management"
-        element={
-          <ProtectedRoute>
-            <InitialDashboardPageComponent />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/account/:userid/canvas-management/:canvaid"
-        element={
-          <ProtectedRoute>
-            <CanvaPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/account/:userid/canvas-management/:canvaid/academy"
-        element={
-          <ProtectedRoute>
-            <LearnToUseMindCanvas />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/account/:userid/account-info"
-        element={
-          <ProtectedRoute>
-            <InfoProvider>
-              <AccountPage />
-            </InfoProvider>
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
-    {/* </CanvaDataProvider> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/trust" element={<Trust />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/signin-portal" element={<SignInPage />} />
+        <Route path="/signup-portal" element={<SignUpPage />} />
+        <Route
+          path="/account/:userid/canvas-management"
+          element={
+            <ProtectedRoute>
+              <InitialDashboardPageComponent />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/account/:userid/canvas-management/:canvaid"
+          element={
+            <ProtectedRoute>
+              <CanvaPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/account/:userid/canvas-management/:canvaid/academy"
+          element={
+            <ProtectedRoute>
+              <LearnToUseMindCanvas />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/account/:userid/account-info"
+          element={
+            <ProtectedRoute>
+              <InfoProvider>
+                <AccountPage />
+              </InfoProvider>
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </AuthRedirectProvider>
-  </BrowserRouter>
-  // </StrictMode>
+  </BrowserRouter>,
 );

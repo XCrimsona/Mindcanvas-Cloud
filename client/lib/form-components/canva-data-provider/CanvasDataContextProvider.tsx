@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 
 //component hub button toggling core definitions
@@ -217,7 +217,6 @@ const CanvasDataContextProvider = ({
   //data object when returning mutiple types of data that the frontend requires.
   const [canvasData, setCanvasData] = useState<{}>({});
   const { userid, canvaid } = useParams();
-  const router = useNavigate();
 
   const updateCanvasData = async () => {
     const routeResponse = await fetch(

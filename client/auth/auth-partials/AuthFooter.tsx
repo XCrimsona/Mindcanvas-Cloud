@@ -1,6 +1,6 @@
-import Footer from "../../src/components/Footer";
-import { DivClass } from "../../src/ui/Div";
-import ShortText from "../../src/ui/ShortText";
+import Footer from "../../lib/components/Footer";
+import { DivClass } from "../../lib/ui/Div";
+import ShortText from "../../lib/ui/ShortText";
 import "../auth-footer.css";
 const AuthFooter = () => {
   return (

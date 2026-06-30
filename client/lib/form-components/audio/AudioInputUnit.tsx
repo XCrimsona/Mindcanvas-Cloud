@@ -9,7 +9,7 @@ import {
 import Label from "../../components/form-elements/Label";
 import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvider";
 import Select from "../../ui/selection/Select";
-import "../../style-files/audio.css";
+import "./audio.css";
 
 const AudioInputUnit = ({ params }: any) => {
   try {

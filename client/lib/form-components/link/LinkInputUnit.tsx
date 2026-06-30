@@ -72,13 +72,10 @@ const TextLinkInputUnit = () => {
       hasInitializedPositionRef.current = true;
     }, [textLinkToggle]);
 
-    // const { newTextComponent, setNewTextLinkComponent } = useNewTextLinkComponent();
     const [newTextLinkComponent, setNewTextLinkComponent] = useState<any>({
       link: "",
       text: "",
     });
-
-    const [selectedType, setSelectedType] = useState<string>("TextLink"); //PURPOSE ???
 
     //submit http link
     const textLinkComponentFormData = async (
@@ -86,14 +83,14 @@ const TextLinkInputUnit = () => {
     ) => {
       event.preventDefault();
 
-      //Checks if textLinkInputCompPosRef,newTextComponent and selectedType are not null
+      //Checks if textLinkInputCompPosRef,newTextComponent are not null
       const textLinkFormData: any = {};
       if (newTextLinkComponent.link)
         textLinkFormData.link = newTextLinkComponent.link;
       if (newTextLinkComponent.text)
         textLinkFormData.text = newTextLinkComponent.text;
 
-      if (selectedType) textLinkFormData.type = selectedType;
+      textLinkFormData.type = "TextLink";
 
       if (textLinkInputCompPosRef.current.x >= 0) {
         textLinkFormData.x = textLinkInputCompPosRef.current.x;

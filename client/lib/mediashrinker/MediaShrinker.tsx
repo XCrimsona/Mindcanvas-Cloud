@@ -6,7 +6,7 @@ export const MediaShrinkUI = () => {
   const [type, setType] = useState("video");
   const [path, setPath] = useState("");
   const [status, setStatus] = useState("Idle");
-  const [progress, setProgress] = useState("");
+  const progress = "";
 
   const { userId, canvasId } = useParams();
   // useEffect(() => {
