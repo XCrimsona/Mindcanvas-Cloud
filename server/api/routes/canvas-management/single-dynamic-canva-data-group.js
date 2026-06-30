@@ -7,7 +7,7 @@ import UserModel from "../../../models/userModel.js";
 import canvaspaceModel from "../../../models/CanvaspaceModel.js";
 import DoughnutChartModel from "../../../models/analytics/DoughnutChartModel.js";
 import Router from "express";
-import textLinkModel from "../../../models/multi-media/textLinkmodel.js";
+import textLinkModel from "../../../models/multi-media/textlinkmodel.js";
 import videoModel from "../../../models/multi-media/videoModel.js";
 import imageModel from "../../../models/multi-media/imageModel.js";
 import tableModel from "../../../models/multi-media/tableModel.js";
