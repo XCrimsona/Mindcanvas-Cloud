@@ -31,7 +31,9 @@ try {
     app.set("trust proxy", 1);
     app.use(cookieParser())
     app.use(morgan('dev'))
-    app.use(helmet())
+    app.use(helmet({
+        crossOriginResourcePolicy: { policy: "cross-origin" }
+    }))
     app.use(cors({
         origin: allowedOrigins.origin,
         credentials: true//allow cookies to be sent
