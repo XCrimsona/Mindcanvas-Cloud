@@ -49,7 +49,7 @@ function inputTypeFor(t: Column["columnType"]): string {
 
 export const Table = ({ data }: { data: TableMeta | any }) => {
   const { userid, canvaid } = useParams();
-  const { imagecluster, _id, type } = data;
+  const { type } = data;
 
   const { setRepositionWindow } = useCanvasContext();
   const {

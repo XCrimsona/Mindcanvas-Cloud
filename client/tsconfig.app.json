@@ -20,5 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "auth/noauth-partials", "lib/canvas-data", "lib/CanvasDeletion", "lib/CanvasHub", "lib/delete-data", "lib/form-components", "lib/header", "lib/live-components", "lib/modify-data", "lib/notifications", "lib/pinning-data-fragments", "lib/ui", "lib/components", "lib/SVG.tsx"]
+  "include": ["vite-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

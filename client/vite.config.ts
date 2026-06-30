@@ -22,9 +22,10 @@ export default defineConfig({
         edge: 111,
         ios_saf: 16, // Mobile Safari
       },
-      drafts: {
-        nesting: true, // Enables the nesting spec
-      },
+      // drafts: {
+      //   nesting: true, // Enables the nesting spec
+      // },
+      // commented out code may crash the app--EXTREME CAUTION
     },
   },
   build: {

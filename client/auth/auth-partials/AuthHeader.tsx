@@ -1,12 +1,11 @@
 import Header from "../../lib/components/Header";
 import { DivClass } from "../../lib/ui/Div";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import RouteLink from "../../lib/components/ProductSection/RouteLink";
 import "../auth-header.css";
 
 const AuthHeader = () => {
   const { userid } = useParams();
-  const navigate = useNavigate();
   if (!userid) return;
   const logout = async () => {
     const logoutRes = await fetch(

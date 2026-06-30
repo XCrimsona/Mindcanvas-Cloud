@@ -1,5 +1,5 @@
 import Button from "../../components/form-elements/Button";
-import "../../style-files/comp-hub-data-components.css";
+import "../../CanvasHub/comp-hub-data-components.css";
 import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvider";
 
 export const AudioButton = () => {
