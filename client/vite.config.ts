@@ -8,6 +8,7 @@ export default defineConfig({
     port: 3176,
     strictPort: true,
     cors: true,
+    allowedHosts: ["mindcanvas.up.railway.app"],
   },
 
   css: {
