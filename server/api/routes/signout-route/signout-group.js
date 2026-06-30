@@ -36,7 +36,7 @@ signOut
                         res.clearCookie("mc_authtoken", {
                             secure: process.env.SECURE === "true",
                             httpOnly: true,
-                            sameSite: "lax",
+                            sameSite: process.env.SECURE === "true" ? "none" : "lax",//must match the login cookie's sameSite or the browser will refuse to clear it
                             maxAge: 1 * 60 * 60 * 1000,
                         })
 
