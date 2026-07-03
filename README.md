@@ -26,9 +26,10 @@
 <a target="_blank"  href="https://www.mongodb.com/try/download/community">MongoDB Community Server</a> 
 </p>
 </div>
-<h2>Download & Install Nodejs via <a href=https://nodejs.org target="_blank">www.nodejs.org</a> software to create a runtime(backend server) environment to run javascript code.</h2>
+<h2>Download & Install Nodejs via <a href=https://nodejs.org target="_blank">nodejs.org</a> software to create a runtime(backend server) environment to run javascript code.</h2>
 
 ### Missing .env file + config | You need to create this yourself since .env uploads are dangerous</p>
+### Local
 <pre><code><p>SECURE=false</p>
 <p>SESSION_SECRET=&lt;your-session-secret(128 character(string) value)&gt;</p>
 <p>JWT=&lt;your-jwt-secret(128 character(string) value)&gt;</p>
@@ -37,7 +38,7 @@
 <p>PORT=5176</p>
 </code></pre>
 
-<hr/>
+<p>Cloud - This is not alaways avail due to security improvements and keeping DDOS shield up against ai based attacks across the internet which also makes access to Canvaspaces nearly impossible. Stick to the local version for now</p>
 
 <h2>Prerequisite: Install PowerShell 7 (The "One-Command" Way)</h2>
 <p>To ensure MindCanvas works seamlessly, you need PowerShell 7. This makes the program cross-platform compatible.</p>
