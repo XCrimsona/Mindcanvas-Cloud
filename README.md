@@ -26,7 +26,7 @@
 <a target="_blank"  href="https://www.mongodb.com/try/download/community">MongoDB Community Server</a> 
 </p>
 </div>
-<h2>Download & Install Nodejs via <a href=https://www.nodejs.org target="_blank">www.nodejs.org</a> software to create a runtime(backend server) environment to run javascript code.</h2>
+<h2>Download & Install Nodejs via <a href=https://nodejs.org target="_blank">www.nodejs.org</a> software to create a runtime(backend server) environment to run javascript code.</h2>
 
 ### Missing .env file + config | You need to create this yourself since .env uploads are dangerous</p>
 <pre><code><p>SECURE=false</p>
