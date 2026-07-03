@@ -110,7 +110,7 @@ const VideoInputUnit = () => {
         // console.log(videoFormData);
         // console.log("source data from VideoInputUnit: ", source);
         const video = await fetch(
-          `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
+          `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
           {
             method: "POST",
             credentials: "include",

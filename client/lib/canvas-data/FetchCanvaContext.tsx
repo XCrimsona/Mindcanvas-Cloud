@@ -31,7 +31,7 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
   //Carry canva data between pages by fetching canva space mandatory data for preview name and description and then the actual data to allow the 2nd functionbelow this one to collect workspace data
   const fetchEssentialData = async (userid: string) => {
     const response = await fetch(
-      `http://localhost:5176/api/account/${userid}/canvas-management`,
+      `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management`,
       {
         method: "GET",
         credentials: "include",
@@ -57,7 +57,7 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchWorkspaceData = async (userid: string, workspaceid: string) => {
     const response = await fetch(
-      `http://localhost:5176/api/account/${userid}/canvas-management/${workspaceid}`,
+      `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${workspaceid}`,
       {
         method: "GET",
         credentials: "include",

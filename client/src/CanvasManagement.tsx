@@ -23,7 +23,7 @@ const DataManagement = ({ source }: { source: any }) => {
 
   const fetchMoreData = async () => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_CLOUD_URL}/api/account/${userid!}/canvas-management`,
+      `${import.meta.env.VITE_API_URL}/api/account/${userid!}/canvas-management`,
       {
         method: "GET",
         credentials: "include",
@@ -157,7 +157,7 @@ const DataManagement = ({ source }: { source: any }) => {
       // console.log("updateFields: ", updateFields);
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_CLOUD_URL}/api/account/${userid!}/canvas-management`,
+        `${import.meta.env.VITE_API_URL}/api/account/${userid!}/canvas-management`,
         {
           method: "PATCH",
           credentials: "include",
@@ -277,7 +277,7 @@ const DataManagement = ({ source }: { source: any }) => {
       toast.info("Fill all the fields!");
     } else {
       const response = await fetch(
-        `${import.meta.env.VITE_API_CLOUD_URL}/api/account/${userid}/canvas-management`,
+        `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management`,
         {
           method: "POST",
           credentials: "include",

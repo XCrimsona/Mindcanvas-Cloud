@@ -19,7 +19,7 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUserInfo = async () => {
     const response: any = await fetch(
-      `${import.meta.env.VITE_API_CLOUD_URL}/api/account/${userid!}/account-info`,
+      `${import.meta.env.VITE_API_URL}/api/account/${userid!}/account-info`,
       {
         method: "GET",
         credentials: "include",
@@ -38,7 +38,7 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
 
   const requestAccountDeletion = async () => {
     const response: any = await fetch(
-      `${import.meta.env.VITE_API_CLOUD_URL}/api/account/${userid!}/account-info`,
+      `${import.meta.env.VITE_API_URL}/api/account/${userid!}/account-info`,
       {
         method: "DELETE",
         credentials: "include",

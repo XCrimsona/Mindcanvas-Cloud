@@ -11,7 +11,7 @@ const HelpButton = () => {
         <ShortText className={"help-text"}>
           <RouteLink
             className="help-route"
-            href={`http://localhost:3176/account/${userid}/canvas-management/${canvaid}/academy`}
+            href={`${import.meta.env.VITE_FRONTEND_CLOUD_URL}/account/${userid}/canvas-management/${canvaid}/academy`}
           >
             Help
           </RouteLink>

@@ -185,7 +185,7 @@ const DoughnutChartInputUnit = () => {
         return;
       } else {
         const text = await fetch(
-          `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
+          `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
           {
             method: "POST",
             credentials: "include",

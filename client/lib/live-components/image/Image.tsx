@@ -41,7 +41,7 @@ export const ImageCluster = ({ data }: { data: any }) => {
   };
   const findThisImage = async (imageClusterId: string, imageName: string) => {
     try {
-      const url = `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}/images/${imageClusterId}/reveal`;
+      const url = `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}/images/${imageClusterId}/reveal`;
       const findImageResponse = await fetch(url, {
         method: "POST",
         credentials: "include",

@@ -54,7 +54,7 @@ const Signin = () => {
         } else {
           //data will be sent to the backend to check for an existing user
           const response = await fetch(
-            `${import.meta.env.VITE_API_CLOUD_URL}/api/signin-portal/account-recovery`,
+            `${import.meta.env.VITE_API_URL}/api/signin-portal/account-recovery`,
             {
               method: "POST",
               credentials: "include",
@@ -79,7 +79,12 @@ const Signin = () => {
           }
         }
       } catch (err: any) {
-        console.warn("Something went wrong");
+        console.warn("Something went wrong", {
+          message: err?.message,
+          stack: err?.stack,
+          apiUrl: import.meta.env.VITE_API_URL,
+          mode: import.meta.env.MODE,
+        });
       }
     };
 
@@ -106,7 +111,7 @@ const Signin = () => {
         } else {
           //data will be sent to the backend to check for an existing user
           const response = await fetch(
-            `${import.meta.env.VITE_API_CLOUD_URL}/api/signin-portal/account-recovery`,
+            `${import.meta.env.VITE_API_URL}/api/signin-portal/account-recovery`,
             {
               method: "POST",
               credentials: "include",
@@ -130,7 +135,12 @@ const Signin = () => {
           }
         }
       } catch (err: any) {
-        console.warn("Something went wrong");
+        console.warn("Something went wrong", {
+          message: err?.message,
+          stack: err?.stack,
+          apiUrl: import.meta.env.VITE_API_URL,
+          mode: import.meta.env.MODE,
+        });
       }
     };
 
@@ -157,7 +167,7 @@ const Signin = () => {
         if (loginSubmitLock === false) {
           //data will be sent to the backend from here
           const response = await fetch(
-            `${import.meta.env.VITE_API_CLOUD_URL}/api/signin-portal`,
+            `${import.meta.env.VITE_API_URL}/api/signin-portal`,
             {
               method: "POST",
               credentials: "include",
@@ -188,7 +198,12 @@ const Signin = () => {
           }
         }
       } catch (err: any) {
-        console.warn("Something went wrong");
+        console.warn("Something went wrong", {
+          message: err?.message,
+          stack: err?.stack,
+          apiUrl: import.meta.env.VITE_API_URL,
+          mode: import.meta.env.MODE,
+        });
       }
     };
 

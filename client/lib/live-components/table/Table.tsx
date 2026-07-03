@@ -31,7 +31,7 @@ interface TableMeta {
 const PAGE_SIZE = 30;
 
 const apiBase = (userid: string, canvaid: string) =>
-  `http://localhost:5176/api/account/${userid}/table-management/${canvaid}`;
+  `${import.meta.env.VITE_API_URL}/api/account/${userid}/table-management/${canvaid}`;
 
 // Map column type → input type for the editor
 function inputTypeFor(t: Column["columnType"]): string {

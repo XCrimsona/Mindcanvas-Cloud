@@ -14,7 +14,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { AuthLogoutProvider } from "../../logout/logoutContext";
 const fetchWorkspaceData = async (userid: string, canvaid: string) => {
   const response = await fetch(
-    `${import.meta.env.VITE_API_CLOUD_URL}/api/account/${userid}/canvas-management/${canvaid}`,
+    `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
     {
       method: "GET",
       credentials: "include",
