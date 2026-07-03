@@ -3,7 +3,7 @@
 # MindCanvas- A Multi purpose tool to create and make sense of physically/digitally complex data.
 
 <p>MindCanvas hands you the ability to choose between cloud(Mindcanvas-Cloud) / offline(Mindcanvas-Local) use cases content inside the same workspace(Canvaspace), drafting notes that can be dragged around bringing a strong user experience for large note boards that may be limiting to the physical workspace you may encounter within an office building and workshops.</p>
-<p>The Cloud verion brings you high avaiability and remote access which also means more responsibility for security to ensure your account remains protected against black hats(The bad poeple breaking into digital systems to steal and sell your data for economical/political/personal gains).</p>
+<p>The Cloud verion brings you high avaiability and remote access which also means more responsibility for security to ensure your account remains protected against black hats(The bad people breaking into digital systems to steal and sell your data for economical/political/personal gains).</p>
 <p>The Local verion brings you more control over the privacy of your data.</p>
 
 <p>Mindcanvas does not replace Word, Excel but this tool offers flexiblity that may be critized as not a clean, pure software. </p>
