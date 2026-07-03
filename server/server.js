@@ -1,5 +1,6 @@
 import dotenv from "dotenv"
 dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV || "development"}` });
 
 import express from "express";
 import registerRouter from "./api/routes/register/registerGroup.js";
@@ -22,9 +23,8 @@ const port = process.env.PORT;
 const app = express();
 
 try {
-    const isSecure = process.env.SECURE === "true";
     const allowedOrigins = Object.freeze({
-        origin: isSecure ? process.env.CLOUD_URL : process.env.LOCAL_URL
+        origin: process.env.FRONTEND_URL
     });
     console.log(allowedOrigins.origin);
 

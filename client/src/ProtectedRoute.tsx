@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!userid) return;
-    fetch(`${import.meta.env.VITE_API_CLOUD_URL}/api/auth-check`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/auth-check`, {
       method: "GET",
       credentials: "include", //allow cookies to be sent
     })

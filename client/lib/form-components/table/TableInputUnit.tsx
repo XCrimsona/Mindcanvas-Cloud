@@ -110,7 +110,7 @@ const TableInputUnit = () => {
       };
 
       const res = await fetch(
-        `http://localhost:5176/api/account/${userid}/table-management/${canvaid}`,
+        `${import.meta.env.VITE_API_URL}/api/account/${userid}/table-management/${canvaid}`,
         {
           method: "POST",
           credentials: "include",

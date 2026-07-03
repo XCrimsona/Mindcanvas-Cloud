@@ -65,7 +65,7 @@ const Signup = () => {
         } else {
           //data will be sent to the backend from here
           const response: any = await fetch(
-            `${import.meta.env.VITE_API_CLOUD_URL}/api/signup-portal`,
+            `${import.meta.env.VITE_API_URL}/api/signup-portal`,
             {
               method: "POST",
               headers: {

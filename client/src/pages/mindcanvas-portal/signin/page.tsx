@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const SignInPage = () => {
   //wake up the DB ops for incoming requests
   const signInInit = async () => {
-    await fetch(`${import.meta.env.VITE_API_CLOUD_URL}/api/signin-portal`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/signin-portal`, {
       method: "GET",
       credentials: "include",
     });

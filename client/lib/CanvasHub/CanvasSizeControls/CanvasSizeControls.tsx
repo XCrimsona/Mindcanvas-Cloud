@@ -40,7 +40,7 @@ const CanvasSizeControls = () => {
         newData.type = "Canvaspace";
         newData.updateType = "size";
         const response = await fetch(
-          `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
+          `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
           {
             method: "PATCH",
             credentials: "include",

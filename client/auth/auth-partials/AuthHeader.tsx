@@ -9,7 +9,7 @@ const AuthHeader = () => {
   if (!userid) return;
   const logout = async () => {
     const logoutRes = await fetch(
-      `http://localhost:5176/api/account/${userid}/logout`,
+      `${import.meta.env.VITE_API_URL}/api/account/${userid}/logout`,
       {
         method: "POST",
         credentials: "include",

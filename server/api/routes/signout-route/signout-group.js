@@ -34,9 +34,9 @@ signOut
                         console.log("cookie route works");
 
                         res.clearCookie("mc_authtoken", {
-                            secure: process.env.SECURE === "true",
+                            secure: process.env.NODE_ENV === "production",
                             httpOnly: true,
-                            sameSite: process.env.SECURE === "true" ? "none" : "lax",//must match the login cookie's sameSite or the browser will refuse to clear it
+                            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",//must match the login cookie's sameSite or the browser will refuse to clear it
                             maxAge: 1 * 60 * 60 * 1000,
                         })
 

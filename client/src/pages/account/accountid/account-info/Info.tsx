@@ -155,7 +155,7 @@ const Info = ({ params }: any) => {
             });
           } else {
             const updatedData = await fetch(
-              `${import.meta.env.VITE_API_CLOUD_URL}/api/account/${userid}/account-info`,
+              `${import.meta.env.VITE_API_URL}/api/account/${userid}/account-info`,
               {
                 method: "PATCH",
                 credentials: "include",

@@ -13,7 +13,7 @@ const InitialDashboardPageComponent = () => {
   if (!userid) return;
   const fetchEssentialData = async () => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_CLOUD_URL}/api/account/${userid}/canvas-management`,
+      `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management`,
       {
         method: "GET",
         credentials: "include",

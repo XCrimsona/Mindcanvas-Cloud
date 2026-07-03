@@ -247,7 +247,7 @@ const InfoModificationContextProvider = ({
       // console.log(patchPayload);
 
       const setFragmentPriv = await fetch(
-        `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
+        `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -282,7 +282,7 @@ const InfoModificationContextProvider = ({
   ) => {
     try {
       const res = await fetch(
-        `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
+        `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -329,7 +329,7 @@ const InfoModificationContextProvider = ({
   ) => {
     try {
       const editedRequest = await fetch(
-        `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
+        `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
         {
           method: "PATCH",
           headers: {
@@ -388,7 +388,7 @@ const InfoModificationContextProvider = ({
   ) => {
     try {
       const deleteRequest = await fetch(
-        `http://localhost:5176/api/account/${userid}/canvas-management/${canvaid}`,
+        `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -427,7 +427,7 @@ const InfoModificationContextProvider = ({
   const editTableFragment = async (_id: string, tableName: string) => {
     try {
       const res = await fetch(
-        `http://localhost:5176/api/account/${userid}/table-management/${canvaid}/${_id}`,
+        `${import.meta.env.VITE_API_URL}/api/account/${userid}/table-management/${canvaid}/${_id}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -456,7 +456,7 @@ const InfoModificationContextProvider = ({
   const deleteTableFragment = async (_id: string) => {
     try {
       const res = await fetch(
-        `http://localhost:5176/api/account/${userid}/table-management/${canvaid}/${_id}`,
+        `${import.meta.env.VITE_API_URL}/api/account/${userid}/table-management/${canvaid}/${_id}`,
         { method: "DELETE", credentials: "include" },
       );
       if (res.ok) {

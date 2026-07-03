@@ -21,7 +21,7 @@ export const MediaShrinkUI = () => {
   const shrinkProcess = async () => {
     setStatus("Initializing...");
     const res = await fetch(
-      `http://localhost:5176/api/account/${userId}/canvas-management/${canvasId}/media-shrink`,
+      `${import.meta.env.VITE_API_URL}/api/account/${userId}/canvas-management/${canvasId}/media-shrink`,
       {
         method: "POST",
         credentials: "include",

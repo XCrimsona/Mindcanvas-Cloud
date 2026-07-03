@@ -90,9 +90,9 @@ loginRouter
 
       //signedToken created and sent to front for including credentials
       res.cookie("mc_authtoken", token, {
-        secure: process.env.SECURE === "true",//have an alternative or the if t he env doesnt see it directly it can fall back. if that is missing you may get kicked out
+        secure: process.env.NODE_ENV === "production",//have an alternative or the if t he env doesnt see it directly it can fall back. if that is missing you may get kicked out
         httpOnly: true,
-        sameSite: process.env.SECURE === "true" ? "none" : "lax",//cross-origin in production (frontend on different domain), lax locally
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",//cross-origin in production (frontend on different domain), lax locally
         maxAge: 1 * 60 * 60 * 1000,
       })
       return res.status(200).json({ code: "AUTHENTICATED", user: user._id, message: "User authenticated" });
