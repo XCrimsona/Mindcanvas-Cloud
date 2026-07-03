@@ -47,7 +47,7 @@
 <p>PORT=5176</p>
 </code></pre>
 
-### Under the server directory you create a .env file, copy the below safe code snippet and paste it into the file.
+### Under the server directory you create a .env file, copy the below safe code snippet and paste it into the file. This is what determines whether you run locally or in the cloud. production will use the cloud link but that is not recommended for your data's security.
 <pre><code>
  <p>NODE_ENV=development</p>
 </code></pre>
