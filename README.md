@@ -32,7 +32,7 @@
 ### Missing .env files + config | You need to create this yourself since .env uploads are dangerous</p>
 <p>(NOTE: Use Notepad if you don't use VS Code/Other and save it as .env. Remove the .txt extention and select the All Files choice at the drop down menu.)</p>
 
-### Under the client(Frontend) directory you create a .env.development file, copy the below safe code snippet and paste it into the file.
+### Under the client(Frontend) directory you create a .env.development file, copy the below safe code snippet and paste it into the file. This tells Vite to run the frontend server as local/development via "npm run dev"
 <pre><code>
  <p>VITE_API_URL=http://localhost:5176</p>
  <p>VITE_FRONTEND_URL=http://localhost:3176</p>
@@ -45,6 +45,11 @@
 <p>DB_CONNECTION_STRING="mongodb://127.0.0.1:27017/mind-canvas?appName=mind-canvas"</p>
 <p>LOCAL_URL=http://localhost:3176</p>
 <p>PORT=5176</p>
+</code></pre>
+
+### Under the server directory you create a .env file, copy the below safe code snippet and paste it into the file.
+<pre><code>
+ <p>NODE_ENV=development</p>
 </code></pre>
 
 
