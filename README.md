@@ -118,7 +118,7 @@
 
 ## Automation
 <p>Currently testing dual server startups on different Operating systems.</p>
-<p>.ps1 files are config files to automate the start up of servers and have no malicous code. Feel free to use an AI to help you verify.</p>
+<p>.ps1 files are powershell files that automate the start up of two or more servers. Feel free to use an AI to help you verify.</p>
 
 
 <ul>
