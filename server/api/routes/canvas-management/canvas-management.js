@@ -141,7 +141,6 @@ canvasManagementRouter
                 await getDB();
                 const sub = request.user?.sub;
                 const { workspaceid, workspacename, currentworkspacename, description, currentworkspacedescription } = request.body;
-                console.log(workspaceid, workspacename, currentworkspacename, description, currentworkspacedescription)
                 const user = await UserModel.findOne({ _id: sub });
                 if (!user) {
                     return response.status(404).json({
@@ -156,7 +155,7 @@ canvasManagementRouter
                     _id: workspaceid,
                     createdBy: user._id,
                 });
-                console.log(workspace)
+
                 if (!workspace) {
                     return response.status(404).json({
                         success: false,
