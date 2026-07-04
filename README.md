@@ -148,6 +148,6 @@
 **Current local version:** 2.1.2
 
 ## Tech Stack + other libraries
-<p>MongoDB | Express | React | Node | TypeScript | CSS + Tailwind + Lightningcss | Material UI | Framer Motion | Bcryptjs (Migrating to Argon2) | Dotenv | Mongoose - ODM | Helmet | Morgan | CORS | Cookie-Parser</p>
+<p>MongoDB | Express | React | Node | TypeScript | CSS + Tailwind + Lightningcss | Material UI | Framer Motion | Zod | Bcryptjs (Migrating to Argon2) | Dotenv | Mongoose - ODM | Helmet | Morgan | CORS | Cookie-Parser</p>
 
 ---
