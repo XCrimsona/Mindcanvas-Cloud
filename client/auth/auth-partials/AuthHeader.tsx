@@ -1,3 +1,11 @@
+// ─── NOTE ───────────────────────────────────────────────────────────
+// AuthHeader is NO LONGER USED on the Canvaspace Dashboard page
+// (/account/:userid/canvas-management). The new dashboard renders its
+// own top-row via DashboardTopBar.tsx.
+//
+// STILL USED by: /account-info (and any other page that imports it).
+// Do NOT delete this file — search for consumers before removing.
+// ────────────────────────────────────────────────────────────────────
 import Header from "../../lib/components/Header";
 import { DivClass } from "../../lib/ui/Div";
 import { useParams } from "react-router-dom";
@@ -13,7 +21,6 @@ const AuthHeader = () => {
       {
         method: "POST",
         credentials: "include",
-        headers: { "x-active-user": userid },
       },
     );
 

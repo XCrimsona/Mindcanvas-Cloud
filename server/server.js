@@ -19,6 +19,9 @@ import searchRouter from "./api/routes/canvas-management/canvas-search.js";
 import videoLoader from "./api/routes/canvas-management/videoLoader.js";
 import imageLoader from "./api/routes/canvas-management/imageLoader.js";
 import tableManagementRouter from "./api/routes/canvas-management/table-management.js";
+// Todo lists — new resource shipped with the Canvaspace Dashboard rework.
+// Separate router file so the CRUD stays independent of canvas-management.js.
+import todoListRouter from "./api/routes/canvas-management/todo-list.js";
 const port = process.env.PORT;
 const app = express();
 
@@ -36,7 +39,13 @@ try {
     }))
     app.use(cors({
         origin: allowedOrigins.origin,
-        credentials: true//allow cookies to be sent
+        credentials: true, //allow cookies to be sent
+        // Preflight must advertise PATCH (and any other non-simple methods
+        // you use) or the browser sends OPTIONS 204 and then silently
+        // refuses to send the real request. That's the "204 then nothing"
+        // symptom.
+        methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type"],
     }))
 
     //enable submissions
@@ -65,6 +74,7 @@ try {
     app.use("/api/account", isAuthenticated, videoLoader);//router endpoint called loader for simplicity
     app.use("/api/account", isAuthenticated, imageLoader);//router endpoint called loader for simplicity
     app.use("/api/account", isAuthenticated, tableManagementRouter);
+    app.use("/api/account", isAuthenticated, todoListRouter);
     app.use("/api/account", isAuthenticated, signOut);
 
     //Railway is a container platform — it always needs an active listener bound to process.env.PORT.
