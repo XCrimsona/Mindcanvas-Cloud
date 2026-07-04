@@ -1,3 +1,14 @@
+/* ─── DEPRECATED ────────────────────────────────────────────────────
+   This file styled the OLD edit-in-place canvaspace cards (grid of
+   editable name/description + view/edit/update buttons).
+   That UI was removed during the Canvaspace Dashboard rework — the
+   new sidebar cards use styles defined in management.css instead.
+
+   MAY NOT BE REQUIRED ANYMORE. Kept temporarily in case any deeper
+   page still references .workspace-sheet-wrapper etc. Safe to
+   delete once a global grep confirms no live consumers remain.
+   ─────────────────────────────────────────────────────────────────── */
+
 /* the canva block that carry data */
 .workspace-sheet-wrapper {
     display: block;

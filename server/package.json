@@ -1,6 +1,6 @@
 {
   "name": "mindcanvas",
-  "version": "1.0.0",
+  "version": "2.2.1",
   "description": "",
   "main": "server.js",
   "private": true,
@@ -37,7 +37,8 @@
     "morgan": "^1.10.1",
     "multer": "^2.1.1",
     "sharp": "^0.34.5",
-    "systeminformation": "^5.31.5"
+    "systeminformation": "^5.31.5",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
