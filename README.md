@@ -43,7 +43,7 @@
 <p>SESSION_SECRET=&lt;your-session-secret(128 character(string) value)&gt;</p>
 <p>JWT=&lt;your-jwt-secret(128 character(string) value)&gt;</p>
 <p>DB_CONNECTION_STRING="mongodb://127.0.0.1:27017/mind-canvas?appName=mind-canvas"</p>
-<p>LOCAL_URL=http://localhost:3176</p>
+<p>FRONTEND_URL=http://localhost:3176</p>
 <p>PORT=5176</p>
 </code></pre>
 
