@@ -5,8 +5,8 @@
 <p>A private personal/office workspace for making sense of complicated ideas and data. Organize text, links, images, and videos as draggable fragments on an infinite canvas, and split your thinking across as many Canvaspaces as you need — each one its own page, tracked and editable at a glance.</p>
 
 <p>MindCanvas hands you the ability to choose between cloud(Mindcanvas-Cloud) / offline(Mindcanvas-Local) use cases content inside the same workspace(Canvaspace), drafting notes that can be dragged around bringing a strong user experience for large note boards that may be limiting to the physical workspace you may encounter within an office building and workshops.</p>
-<p>The Cloud verion brings you high avaiability and remote access which also means more responsibility for security to ensure your account remains protected against black hats(The bad people breaking into digital systems to steal and sell your data for economical/political/personal gains).</p>
-<p>The Local verion brings you more control over the privacy of your data.</p>
+<p>The Cloud version brings you high avaiability and remote access which also means more responsibility for security to ensure your account remains protected against black hats(The bad people breaking into digital systems to steal and sell your data for economical/political/personal gains).</p>
+<p>The Local version brings you more control over the privacy of your data.</p>
 
 <p>Mindcanvas does not replace Word, Excel but this tool offers flexiblity that may be critized as not a clean, pure software. </p>
 <p>Training is requried to correctly use this software - The training is simple and the academy is being improved. </p>
