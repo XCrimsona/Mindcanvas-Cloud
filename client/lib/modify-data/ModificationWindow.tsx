@@ -4,7 +4,6 @@ import { useModificationContext } from "./InfoModificationContextProvider";
 // import StyleDiv from "../../../../../../../src/ui/StylerDiv";
 import "./modification-window.css";
 import Button from "../components/form-elements/Button";
-import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
 import React from "react";
 import ShortText from "../ui/ShortText";
 // import { InputCheckBox } from "../components/form-elements/dry-InputFormComponents";
@@ -31,9 +30,6 @@ export const ModificationWindow = ({ componentData }: any) => {
     toggleDeleteLock, // Toggles the deletion lock state
     openReadingPage, // Callback to open a reading page (A4 view)
   } = useModificationContext();
-
-  // Retrieves context setters from the canvas provider
-  const { setRepositionWindow } = useCanvasContext(); // Function to activate repositioning interface
 
   // Extract data from the componentData object passed as props
   const { owner, _id, workspaceId, type, personalInfo } = componentData;
@@ -211,25 +207,6 @@ export const ModificationWindow = ({ componentData }: any) => {
         }}
       >
         Copy Fragment Id
-      </Button>
-      <hr
-        style={{
-          width: "94%",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-      />
-      <Button
-        className={"component-reposition-button"}
-        id="component-reposition-button"
-        onClick={() => {
-          //Collapse the options window
-          setModificationWindow(false);
-          //Open the interface to move the selected component data to a new x y postion bas on it dragging
-          setRepositionWindow(true);
-        }}
-      >
-        Move Fragment
       </Button>
       <hr
         style={{

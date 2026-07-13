@@ -1,0 +1,20 @@
+/* ─── PURPOSE ─────────────────────────────────────────────────────────
+   DraggableFragment wrapper — the outer .data-component div for each
+   rendered fragment. Owns the world-coordinate positioning and the
+   drag cursor affordance.
+   ───────────────────────────────────────────────────────────────────── */
+
+.data-component {
+  position: absolute;
+  color: #fff;
+  cursor: move; /* four-arrow icon, per user request */
+  transition: left .4s ease-in-out, top .4s ease-in-out;
+  touch-action: none;
+}
+
+.data-component.dragging {
+  cursor: grabbing;
+  /* transition off during drag so the element follows the cursor 1:1 */
+  transition: none;
+  z-index: 10;
+}

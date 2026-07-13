@@ -3,7 +3,6 @@ import { DivClass } from "../../ui/Div";
 // import ZoomControls from "./ZoomControls";
 import HelpButton from "../help/HelpButton";
 import "./canva-core-functionalities.css";
-import CanvasSizeControls from "../CanvasSizeControls/CanvasSizeControls";
 import { ComponentHubProvider } from "../ComponentHubContextProvider";
 import ComponentHubToggler from "../ComponentHub/ComponentHubToggler";
 
@@ -20,7 +19,6 @@ const CanvasCoreFunctionality = () => {
         </ComponentHubProvider>
         <HelpButton />
       </DivClass>
-      <CanvasSizeControls />
     </DivClass>
   );
 };

@@ -50,7 +50,7 @@ const Trust = () => {
             <li>
               <strong>Password hashing</strong>
               <p className="mt-1 text-sm">
-                Passwords are hashed with bcrypt before they touch the
+                Passwords are hashed with Argon2id before they touch the
                 database. The stored value cannot be reversed back to your
                 password.
               </p>
@@ -116,13 +116,6 @@ const Trust = () => {
               </p>
             </li>
             <li>
-              <strong>Argon2 password hashing</strong>
-              <p className="mt-1 text-sm">
-                Upgrade from bcrypt to Argon2 — stronger resistance to modern
-                cracking hardware.
-              </p>
-            </li>
-            <li>
               <strong>JSON canvaspace export</strong>
               <p className="mt-1 text-sm">
                 Export a whole canvaspace as a JSON file. Travels offline.
@@ -159,7 +152,7 @@ const Trust = () => {
             </li>
             <li>
               For important long-term data, wait for the full version with
-              encryption and Argon2 in place.
+              at-rest encryption in place.
             </li>
           </ul>
         </section>

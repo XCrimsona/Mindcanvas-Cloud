@@ -9,7 +9,6 @@ import { LinkPeek } from "./LinkPeek";
 import { SpanFragment } from "../../ui/spanElement";
 import { TextFragment } from "../../ui/LongText";
 import { useModificationContext } from "../../modify-data/InfoModificationContextProvider";
-import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 
 const TextLink = ({ data }: { data: any }) => {
   const { _id, type } = data;
@@ -18,10 +17,8 @@ const TextLink = ({ data }: { data: any }) => {
     selectedComp,
     setSelectedComp,
     editState,
-    moveFragment,
     setModificationWindow,
   } = useModificationContext();
-  const { setRepositionWindow } = useCanvasContext();
 
   //Anchor ref for the peek-view hover card. Only used by <LinkPeek/>; the link
   //itself doesn't care that the ref exists, so nothing else changes shape.
@@ -40,7 +37,6 @@ const TextLink = ({ data }: { data: any }) => {
       type: type,
       info: "",
     });
-    moveFragment(e);
     return;
   };
 
@@ -61,7 +57,6 @@ const TextLink = ({ data }: { data: any }) => {
             id={`${data._id}`}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               selectFragmentId(e);
-              setRepositionWindow(false);
               setModificationWindow(true);
             }}
             className="i-note-drop-down"

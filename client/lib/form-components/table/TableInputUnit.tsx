@@ -1,10 +1,12 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../components/form-elements/Button";
 import { DivClass } from "../../ui/Div";
 import Label from "../../components/form-elements/Label";
-import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvider";
+import { useFormComponentToggle } from "../FormComponentToggleContext";
+import { useCanvasFragmentData } from "../../canvas-data/CanvasFragmentDataContext";
+import useFormComponentDrag from "../useFormComponentDrag";
 import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 import "./table.css";
 
@@ -20,54 +22,26 @@ interface ColumnDraft {
 const TableInputUnit = () => {
   try {
     const { userid, canvaid } = useParams();
-    if (!userid) return null;
+    if (!userid) {
+      return null;
+    } else {
+      //normal path — continue rendering
+    }
 
     const {
-      dataScrollBoardRef,
-      globalDraggingRef,
-      tableInputOffSet,
       tableToggle,
       setTableToggle,
       tableInputCompRef,
       tableInputCompPosRef,
-      hasInitializedPositionRef,
-      updateCanvasData,
-    } = useCanvasContext();
+    } = useFormComponentToggle();
+    const { updateCanvasData } = useCanvasFragmentData();
 
-    // Center the creation form when it appears (mirrors TextInputUnit)
-    useLayoutEffect(() => {
-      if (
-        !tableToggle ||
-        hasInitializedPositionRef.current ||
-        !dataScrollBoardRef.current ||
-        !tableInputCompRef.current
-      )
-        return;
-
-      const boardRect = dataScrollBoardRef.current.getBoundingClientRect();
-      const inputRect = tableInputCompRef.current.getBoundingClientRect();
-
-      const canvasX =
-        window.innerWidth / 2 - boardRect.left - inputRect.width / 2;
-      const canvasY =
-        window.innerHeight / 2 - boardRect.top - inputRect.height / 2;
-
-      const boundedX = Math.max(
-        0,
-        Math.min(canvasX, boardRect.width - inputRect.width),
-      );
-      const boundedY = Math.max(
-        0,
-        Math.min(canvasY, boardRect.height - inputRect.height),
-      );
-
-      const el = tableInputCompRef.current as HTMLDivElement;
-      el.style.left = `${boundedX}px`;
-      el.style.top = `${boundedY}px`;
-      tableInputCompPosRef.current = { x: boundedX, y: boundedY };
-
-      hasInitializedPositionRef.current = true;
-    }, [tableToggle]);
+    const { handlePointerDown, handlePointerMove, handlePointerUp } =
+      useFormComponentDrag({
+        elementRef: tableInputCompRef,
+        positionRef: tableInputCompPosRef,
+        isOpen: tableToggle,
+      });
 
     const [tableName, setTableName] = useState<string>("");
     const [columns, setColumns] = useState<ColumnDraft[]>([
@@ -96,10 +70,14 @@ const TableInputUnit = () => {
       if (!cleanName) {
         toast.error("Table name is required");
         return;
+      } else {
+        //continue
       }
       if (cleanColumns.length === 0) {
         toast.error("At least one named column is required");
         return;
+      } else {
+        //continue
       }
 
       const payload = {
@@ -127,76 +105,20 @@ const TableInputUnit = () => {
         updateCanvasData();
       } else {
         const json = await res.json().catch(() => ({}));
-        if (json?.message === "Not Authenticated") redirectToSignIn();
+        if (json?.message === "Not Authenticated") {
+          redirectToSignIn();
+        } else {
+          //non-auth failure — surface toast below
+        }
         toast.error(json?.message || "Table was not created");
       }
     };
 
-    // Drag plumbing — same pattern as TextInputUnit
-    const onMouseMove = (event: MouseEvent) => {
-      if (
-        !globalDraggingRef.current ||
-        !dataScrollBoardRef.current ||
-        !tableInputCompRef.current
-      )
-        return;
-      const el = tableInputCompRef.current as HTMLDivElement;
-      const elRect = el.getBoundingClientRect();
-      const boardRect = dataScrollBoardRef.current.getBoundingClientRect();
-
-      const mouseX = event.clientX - boardRect.left;
-      const mouseY = event.clientY - boardRect.top;
-
-      const newX = Math.max(
-        0,
-        Math.min(
-          mouseX - tableInputOffSet.current.x,
-          boardRect.width - elRect.width,
-        ),
-      );
-      const newY = Math.max(
-        0,
-        Math.min(
-          mouseY - tableInputOffSet.current.y,
-          boardRect.height - elRect.height,
-        ),
-      );
-
-      tableInputCompPosRef.current = { x: newX, y: newY };
-      el.style.left = `${newX}px`;
-      el.style.top = `${newY}px`;
-    };
-    const onMouseUp = () => {
-      globalDraggingRef.current = false;
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
-      tableInputOffSet.current = {
-        x: tableInputCompPosRef.current.x,
-        y: tableInputCompPosRef.current.y,
-      };
-    };
-    const onMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
-      // don't start a drag when clicking inputs/buttons
-      const target = event.target as HTMLElement;
-      if (
-        target.tagName === "INPUT" ||
-        target.tagName === "BUTTON" ||
-        target.tagName === "SELECT" ||
-        target.tagName === "TEXTAREA"
-      )
-        return;
-      globalDraggingRef.current = true;
-      const el = tableInputCompRef.current as HTMLDivElement;
-      const elRect = el.getBoundingClientRect();
-      tableInputOffSet.current = {
-        x: event.clientX - elRect.left,
-        y: event.clientY - elRect.top,
-      };
-      document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseup", onMouseUp);
-    };
-
-    if (!tableToggle) return null;
+    if (!tableToggle) {
+      return null;
+    } else {
+      //normal path — continue rendering
+    }
 
     return (
       <div
@@ -206,8 +128,13 @@ const TableInputUnit = () => {
           position: "absolute",
           left: `${tableInputCompPosRef.current.x}px`,
           top: `${tableInputCompPosRef.current.y}px`,
+          cursor: "move",
+          touchAction: "none",
         }}
-        onMouseDown={onMouseDown}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
       >
         <div className="absolute top-2 right-2 z-10">
           <span

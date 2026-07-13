@@ -1,22 +1,22 @@
-import bcrypt from "bcryptjs";
+import argon2 from "argon2";
+
+const BCRYPT_HASH_PREFIXES = ["$2a$", "$2b$", "$2y$"];
 
 export class PasswordService {
 
-  #saltStrength = 12;
-
   hashPassword = async (password) => {
-
-    const salt = await bcrypt.genSalt(this.#saltStrength);
-    return await bcrypt.hash(password, salt);
+    return await argon2.hash(password, { type: argon2.argon2id });
   }
 
-  comparePasswords = async (
-    plainTextPassword,
-    hashPassword
-  ) => {
-    // try {
-    const match = await bcrypt.compare(plainTextPassword, hashPassword);
-    // console.log("comparing: ", match);
-    return match;
-  };
+  verifyPassword = async (plainTextPassword, hashPassword) => {
+    return await argon2.verify(hashPassword, plainTextPassword);
+  }
+
+  isLegacyHash = (hash) => {
+    if (typeof hash !== "string") return false;
+    for (const prefix of BCRYPT_HASH_PREFIXES) {
+      if (hash.startsWith(prefix)) return true;
+    }
+    return false;
+  }
 }

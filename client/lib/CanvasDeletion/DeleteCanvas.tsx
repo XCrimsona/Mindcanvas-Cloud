@@ -3,12 +3,12 @@ import { useCanvasDeletionContext } from "../delete-data/CanvasDeletionOpsContex
 import Button from "../components/form-elements/Button";
 import "./deletecanva.css";
 import { LongText } from "../ui/LongText";
-import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasFragmentData } from "../canvas-data/CanvasFragmentDataContext";
 
 const DeleteCanvas = () => {
   const { canvasDeletionState, hitClickDelete, canvasDeletionToggle } =
     useCanvasDeletionContext();
-  const { canvasData } = useCanvasContext();
+  const { canvasData } = useCanvasFragmentData();
   // console.log("log from Delete Canvas UI ops: live data: ", canvasData);
 
   return (

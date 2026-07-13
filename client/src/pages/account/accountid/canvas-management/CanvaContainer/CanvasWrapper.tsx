@@ -3,7 +3,7 @@ import "./CanvaWrapper.css";
 import { DivClass, DivStylingAndClassName } from "../../../../../../lib/ui/Div";
 import AuthCanvasHeader from "../../../../../../lib/header/AuthCanvasHeader";
 import CanvaContainer from "./CanvaContainer";
-import { useCanvasContext } from "../../../../../../lib/form-components/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasFragmentData } from "../../../../../../lib/canvas-data/CanvasFragmentDataContext";
 import InfoModificationContextProvider from "../../../../../../lib/modify-data/InfoModificationContextProvider";
 import CanvasCoreFunctionality from "../../../../../../lib/CanvasHub/CanvasCoreFunctionality/CanvasCoreFunctionality";
 import { CanvasContextDeletionProvider } from "../../../../../../lib/delete-data/CanvasDeletionOpsContext";
@@ -58,7 +58,7 @@ const fetchWorkspaceData = async (userid: string, canvaid: string) => {
 
 const CanvaComponent = () => {
   const { userid, canvaid } = useParams();
-  const { canvasData, setCanvasData } = useCanvasContext();
+  const { canvasData, setCanvasData } = useCanvasFragmentData();
   const navRouter = useNavigate();
   // if (!userid) return;
   //loads persisted data after page is done loading

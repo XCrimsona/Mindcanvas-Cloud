@@ -8,7 +8,6 @@ import { EditWindow } from "../../modify-data/EditWindow";
 import { ModificationWindow } from "../../modify-data/ModificationWindow";
 import { SpanFragment } from "../../ui/spanElement";
 import "../i-menu-selector.css";
-import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 import ShortText from "../../ui/ShortText";
 import HeadingThree from "../../ui/HeadingThree";
 import "../../form-components/chart/doughnutchart.css";
@@ -53,10 +52,8 @@ const DoughnutChart = ({ data }: { data: any }) => {
     selectedComp,
     setSelectedComp,
     editState,
-    moveFragment,
     setModificationWindow,
   } = useModificationContext();
-  const { setRepositionWindow } = useCanvasContext();
 
   const selectFragmentId = (e: React.MouseEvent<HTMLButtonElement>) => {
     const dataFragmentId = String((e.target as HTMLElement).id);
@@ -65,7 +62,6 @@ const DoughnutChart = ({ data }: { data: any }) => {
       type: type,
       info: "",
     });
-    moveFragment(e);
     return;
   };
 
@@ -112,7 +108,6 @@ const DoughnutChart = ({ data }: { data: any }) => {
             id={`${data._id}`}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               selectFragmentId(e);
-              setRepositionWindow(false);
               setModificationWindow(true);
               //style={{
               //  problem with below line: once toggle all would be fixed. Id ref require dto make fixed position

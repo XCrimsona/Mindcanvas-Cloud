@@ -2,7 +2,6 @@
 import { useParams } from "react-router-dom";
 import { SpanFragment } from "../../ui/spanElement";
 import { useModificationContext } from "../../modify-data/InfoModificationContextProvider";
-import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 // import { TextFragment } from "../../../../../../ui/LongText";
 import { DivClass } from "../../ui/Div";
 import { EditWindow } from "../../modify-data/EditWindow";
@@ -21,12 +20,9 @@ export const ImageCluster = ({ data }: { data: any }) => {
     selectedComp,
     setSelectedComp,
     editState,
-    moveFragment,
 
     setModificationWindow,
   } = useModificationContext();
-
-  const { setRepositionWindow } = useCanvasContext();
 
   const selectFragmentId = (e: React.MouseEvent<HTMLButtonElement>) => {
     const dataFragmentId = String((e.target as HTMLElement).id);
@@ -36,8 +32,6 @@ export const ImageCluster = ({ data }: { data: any }) => {
       type: type,
       info: "",
     });
-
-    moveFragment(e);
   };
   const findThisImage = async (imageClusterId: string, imageName: string) => {
     try {
@@ -76,7 +70,6 @@ export const ImageCluster = ({ data }: { data: any }) => {
             id={`${data._id}`}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               selectFragmentId(e);
-              setRepositionWindow(false);
               setModificationWindow(true);
             }}
             className="i-note-drop-down"

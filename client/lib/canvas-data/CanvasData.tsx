@@ -1,4 +1,4 @@
-import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasFragmentData } from "./CanvasFragmentDataContext";
 import { Text } from "../live-components/text/Text";
 // import { ImmutableList } from "../absolute-data-components/TextList";
 // import { ImmutableAudio } from "../absolute-data-components/TextAudio";
@@ -10,9 +10,10 @@ import TextLink from "../live-components/link/TextLink";
 import { Video } from "../live-components/video/Video";
 import { ImageCluster } from "../live-components/image/Image";
 import { Table } from "../live-components/table/Table";
+import DraggableFragment from "./DraggableFragment";
 const CanvasData = () => {
   // Display all workspace data including text, list, audio, image, video once submitted
-  const { canvasData } = useCanvasContext();
+  const { canvasData } = useCanvasFragmentData();
 
   const renderDataByComponentType = (data: any) => {
     switch (data.type) {
@@ -65,19 +66,9 @@ const CanvasData = () => {
   ];
   const userData = components.map((data: any) => {
     return (
-      <div
-        className={"data-component"}
-        key={data._id}
-        style={{
-          position: "absolute",
-          left: `${data.position.x}px`,
-          top: `${data.position.y}px`,
-          color: "#fff",
-          transition: "left .4s ease-in-out, top .4s ease-in-out",
-        }}
-      >
+      <DraggableFragment key={data._id} data={data}>
         {renderDataByComponentType(data)}
-      </div>
+      </DraggableFragment>
     );
   });
   const noWorkspaceData = canvasData?.code === "NO_EXISTING_DATA" && (

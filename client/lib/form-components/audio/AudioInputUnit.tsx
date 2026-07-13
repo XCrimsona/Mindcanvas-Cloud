@@ -7,7 +7,8 @@ import {
   EnabledAudiosInput,
 } from "../../components/media-retrieved-components/MediaInputComponents";
 import Label from "../../components/form-elements/Label";
-import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvider";
+import { useFormComponentToggle } from "../FormComponentToggleContext";
+import { useCanvasFragmentData } from "../../canvas-data/CanvasFragmentDataContext";
 import Select from "../../ui/selection/Select";
 import "./audio.css";
 
@@ -21,8 +22,8 @@ const AudioInputUnit = ({ params }: any) => {
       audioInputCompPosRef,
       audioInputCompRef,
       audioToggle,
-      updateCanvasData,
-    } = useCanvasContext();
+    } = useFormComponentToggle();
+    const { updateCanvasData } = useCanvasFragmentData();
 
     const [newAudioComponent, setNewAudioComponent] = useState<any>({
       files: [],

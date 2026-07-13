@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 import { useModificationContext } from "../../modify-data/InfoModificationContextProvider";
 import { ModificationWindow } from "../../modify-data/ModificationWindow";
 import { EditWindow } from "../../modify-data/EditWindow";
@@ -51,14 +50,12 @@ export const Table = ({ data }: { data: TableMeta | any }) => {
   const { userid, canvaid } = useParams();
   const { type } = data;
 
-  const { setRepositionWindow } = useCanvasContext();
   const {
     modificationWindow,
     setModificationWindow,
     editState,
     selectedComp,
     setSelectedComp,
-    moveFragment,
   } = useModificationContext();
 
   const selectFragmentId = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -69,8 +66,6 @@ export const Table = ({ data }: { data: TableMeta | any }) => {
       type: type,
       info: "",
     });
-
-    moveFragment(e);
   };
   const [meta, setMeta] = useState<TableMeta>(data);
   const [rows, setRows] = useState<Row[]>([]);
@@ -209,7 +204,6 @@ export const Table = ({ data }: { data: TableMeta | any }) => {
           id={`${data._id}`}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             selectFragmentId(e);
-            setRepositionWindow(false);
             setModificationWindow(true);
           }}
           className="i-note-drop-down"

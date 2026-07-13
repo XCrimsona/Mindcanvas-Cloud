@@ -18,6 +18,8 @@ dist-ssr
 .env.development
 .env.production
 
+/project-guide
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -30,3 +32,6 @@ dist-ssr
 *.sw?
 .continue
 .claude
+
+# Local-only planning notes (kept off git per project decision)
+project-guide/

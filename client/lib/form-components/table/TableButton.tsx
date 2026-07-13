@@ -1,9 +1,9 @@
 import Button from "../../components/form-elements/Button";
-import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvider";
+import { useFormComponentToggle } from "../FormComponentToggleContext";
 import "../../CanvasHub/comp-hub-data-components.css";
 
 export const TableButton = () => {
-  const { setTableToggle } = useCanvasContext();
+  const { setTableToggle } = useFormComponentToggle();
   return (
     <Button
       id="table-comp"

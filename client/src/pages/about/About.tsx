@@ -95,10 +95,10 @@ const About = () => {
               </p>
             </li>
             <li>
-              <strong>Bcrypt auth, Argon2 next</strong>
+              <strong>Argon2id password hashing</strong>
               <p className="mt-1 text-sm">
-                Password hashing today. Stronger hashing on the way. No
-                third-party sign-in, ever.
+                Passwords hashed with Argon2id before storage. No third-party
+                sign-in, ever.
               </p>
             </li>
             <li>
