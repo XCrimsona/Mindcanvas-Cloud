@@ -1,6 +1,8 @@
 # BE ADVISED THIS DOCUMENT IS BEING IMPROVED
 
-# MindCanvas- A Multi purpose tool to create and make sense of physically/digitally complex data.
+# MindCanvas- Multi purpose full stack offline web application.
+
+<p>A private personal/office workspace for making sense of complicated ideas and data. Organize text, links, images, and videos as draggable fragments on an infinite canvas, and split your thinking across as many Canvaspaces as you need — each one its own page, tracked and editable at a glance.</p>
 
 <p>MindCanvas hands you the ability to choose between cloud(Mindcanvas-Cloud) / offline(Mindcanvas-Local) use cases content inside the same workspace(Canvaspace), drafting notes that can be dragged around bringing a strong user experience for large note boards that may be limiting to the physical workspace you may encounter within an office building and workshops.</p>
 <p>The Cloud verion brings you high avaiability and remote access which also means more responsibility for security to ensure your account remains protected against black hats(The bad people breaking into digital systems to steal and sell your data for economical/political/personal gains).</p>
