@@ -1,9 +1,11 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../../components/form-elements/Button";
 import { DivClass } from "../../ui/Div";
 import { EnabledTextAreaInput } from "../../components/media-retrieved-components/MediaInputComponents";
 import Label from "../../components/form-elements/Label";
-import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvider";
+import { useFormComponentToggle } from "../FormComponentToggleContext";
+import { useCanvasFragmentData } from "../../canvas-data/CanvasFragmentDataContext";
+import useFormComponentDrag from "../useFormComponentDrag";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./doughnutchart.css";
@@ -12,77 +14,26 @@ import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 const DoughnutChartInputUnit = () => {
   try {
     const { userid, canvaid } = useParams();
-    if (!userid) return;
-    //activates text input form
+    if (!userid) {
+      return;
+    } else {
+      //normal path — continue rendering
+    }
     const {
-      dataScrollBoardRef,
-      globalDraggingRef,
-      doughnutChartInputOffSet,
       setDoughnutChartToggle,
-      //useref used to control the element's left with x and top with y canvas coordinates
       doughnutChartInputCompPosRef,
       doughnutChartInputCompRef,
-      hasInitializedPositionRef,
       doughnutChartToggle,
-      updateCanvasData,
-    } = useCanvasContext();
+    } = useFormComponentToggle();
+    const { updateCanvasData } = useCanvasFragmentData();
 
-    //Determines the web app width and height as perceived on screen and centers this exact file's UI in the middle of the screen.
-    //It also re-centers by collraborating with another useEffect function which checks the boolean value to toggle the UI.
-    useLayoutEffect(() => {
-      if (
-        !doughnutChartToggle ||
-        hasInitializedPositionRef.current ||
-        !dataScrollBoardRef.current ||
-        !doughnutChartInputCompRef.current
-      )
-        return;
+    const { handlePointerDown, handlePointerMove, handlePointerUp } =
+      useFormComponentDrag({
+        elementRef: doughnutChartInputCompRef,
+        positionRef: doughnutChartInputCompPosRef,
+        isOpen: doughnutChartToggle,
+      });
 
-      const boardRect = dataScrollBoardRef.current.getBoundingClientRect();
-      const doughnutChartInputElementRect =
-        doughnutChartInputCompRef.current.getBoundingClientRect();
-
-      const viewportCenterX = window.innerWidth / 2;
-      const viewportCenterY = window.innerHeight / 2;
-
-      const canvasX =
-        viewportCenterX -
-        boardRect.left -
-        doughnutChartInputElementRect.width / 2;
-      const canvasY =
-        viewportCenterY -
-        boardRect.top -
-        doughnutChartInputElementRect.height / 2;
-
-      //clamp to keep the elements inside the canvas
-      const boundedX = Math.max(
-        0,
-        Math.min(
-          canvasX,
-          boardRect.width - doughnutChartInputElementRect.width,
-        ),
-      );
-      const boundedY = Math.max(
-        0,
-        Math.min(
-          canvasY,
-          boardRect.height - doughnutChartInputElementRect.height,
-        ),
-      );
-
-      const doughnutChartInputElement =
-        doughnutChartInputCompRef.current as HTMLDivElement;
-
-      //center doughnutChartInputUnit
-      if (doughnutChartInputElement) {
-        doughnutChartInputElement.style.left = `${boundedX}px`;
-        doughnutChartInputElement.style.top = `${boundedY}px`;
-      }
-
-      hasInitializedPositionRef.current = true;
-    }, [doughnutChartToggle]);
-
-    // const { newDoughnutChartComponent, setNewDoughnutChartComponent } = useNewDoughnutChartComponent();
     const [newDoughnutChartComponent, setNewDoughnutChartComponent] =
       useState<any>({
         label: "",
@@ -93,48 +44,59 @@ const DoughnutChartInputUnit = () => {
 
     const [selectedType, setSelectedType] = useState<string>("DoughnutChart");
 
-    //submit text Data
     const chartComponentFormData = async (
       event: React.FormEvent<HTMLFormElement>,
     ) => {
       event.preventDefault();
 
-      //Checks if doughnutChartInputCompPosRef,newDoughnutChartComponent and selectedType are not null
       const chartFormData: any = {};
-      if (selectedType) chartFormData.type = selectedType;
-      //coordinates of where on the canvas the chart will be placed.
+      if (selectedType) {
+        chartFormData.type = selectedType;
+      } else {
+        //no type selected
+      }
       if (doughnutChartInputCompPosRef.current.x >= 0) {
         chartFormData.x = doughnutChartInputCompPosRef.current.x;
+      } else {
+        //negative x
       }
       if (doughnutChartInputCompPosRef.current.y >= 0) {
         chartFormData.y = doughnutChartInputCompPosRef.current.y;
+      } else {
+        //negative y
       }
       if (newDoughnutChartComponent.label) {
         chartFormData.label = newDoughnutChartComponent.label;
+      } else {
+        //no label
       }
 
       const parseCSV = (str: string) =>
-        str.split(",").map((item) => item.trim()); //split by comma and trim whitespace
+        str.split(",").map((item) => item.trim());
       const parseNumber = (str: string) =>
-        str.split(",").map((item) => Number(item.trim())); //split by comma and trim whitespace
+        str.split(",").map((item) => Number(item.trim()));
 
       if (newDoughnutChartComponent.labels) {
         chartFormData.labels = parseCSV(newDoughnutChartComponent.labels);
+      } else {
+        //no labels
       }
 
       if (newDoughnutChartComponent.listOfNumericValues) {
         const toStrValArray = parseNumber(
           newDoughnutChartComponent.listOfNumericValues,
         );
-
         chartFormData.listOfNumericValues = toStrValArray;
+      } else {
+        //no numeric values
       }
       if (newDoughnutChartComponent.listOfBackgroundColors) {
         const toNumberValArray = parseCSV(
           newDoughnutChartComponent.listOfBackgroundColors,
         );
-
         chartFormData.listOfBackgroundColors = toNumberValArray;
+      } else {
+        //no background colors
       }
 
       chartFormData.borderColor = [
@@ -142,15 +104,14 @@ const DoughnutChartInputUnit = () => {
         "rgba(0,0,0, 1)",
         "rgba(0,0,0, 1)",
       ];
-      chartFormData.borderWidth = 0; //no border needed for now
-      chartFormData.hoverOffset = 10; //can be changed in the future
-      chartFormData.offset = 10; //can be changed in the future
+      chartFormData.borderWidth = 0;
+      chartFormData.hoverOffset = 10;
+      chartFormData.offset = 10;
 
-      //for now the options are defaulted to non-changeable values, but in the future this change
       const options = {
         responsive: true,
-        maintainAspectRatio: false, // important for dashboards
-        cutout: "60%", // makes it a proper doughnut (not pie)
+        maintainAspectRatio: false,
+        cutout: "60%",
         plugins: {
           legend: {
             position: "bottom",
@@ -180,7 +141,6 @@ const DoughnutChartInputUnit = () => {
         !chartFormData.listOfBackgroundColors &&
         !chartFormData.listOfNumericValues
       ) {
-        //fires when the logic breaks
         toast.success("DoughnutChart form must be filled with suffcient data");
         return;
       } else {
@@ -200,7 +160,11 @@ const DoughnutChartInputUnit = () => {
           updateCanvasData();
         } else {
           const errorData = await text.json();
-          if (errorData.message === "Not Authenticated") redirectToSignIn();
+          if (errorData.message === "Not Authenticated") {
+            redirectToSignIn();
+          } else {
+            //non-auth failure — surface toast below
+          }
           toast.error(
             "DoughnutChart fragment was not added: " + errorData.message,
           );
@@ -208,114 +172,23 @@ const DoughnutChartInputUnit = () => {
       }
     };
 
-    const processDoughnutChartMouseMove = (event: React.MouseEvent) => {
-      if (
-        !globalDraggingRef.current ||
-        !dataScrollBoardRef.current ||
-        !doughnutChartInputCompRef.current
-      )
-        return;
-
-      const doughnutChartInputElement =
-        doughnutChartInputCompRef.current as HTMLDivElement;
-      const doughnutChartInputElementRect =
-        doughnutChartInputElement.getBoundingClientRect();
-      const boardRect = dataScrollBoardRef.current.getBoundingClientRect();
-
-      //mouse position inside the board
-      const mouseInsideBoardX = event.clientX - boardRect.left;
-      const mouseInsideBoardY = event.clientY - boardRect.top;
-
-      //When we first click down, we store how far from the element's left and top the mouse was (doughnutChartInputOffSet.current.x/y)
-      const newXElementLeft =
-        mouseInsideBoardX - doughnutChartInputOffSet.current.x;
-      const newYElementTop =
-        mouseInsideBoardY - doughnutChartInputOffSet.current.y;
-
-      // set boundaries so draggables dont go outside the drag frame
-      const newPosX = Math.max(
-        0,
-        Math.min(
-          newXElementLeft,
-          boardRect.width - doughnutChartInputElementRect.width,
-        ),
-      );
-
-      const newPosY = Math.max(
-        0,
-        Math.min(
-          newYElementTop,
-          boardRect.height - doughnutChartInputElementRect.height,
-        ),
-      );
-
-      doughnutChartInputCompPosRef.current = {
-        x: newPosX,
-        y: newPosY,
-      };
-
-      if (doughnutChartInputElement) {
-        doughnutChartInputElement.style.left = `${doughnutChartInputCompPosRef.current.x}px`;
-        doughnutChartInputElement.style.top = `${doughnutChartInputCompPosRef.current.y}px`;
-      }
-    };
-    const processDoughnutChartMouseUp = () => {
-      globalDraggingRef.current = false;
-      document.removeEventListener<any>(
-        "mousemove",
-        processDoughnutChartMouseMove,
-      );
-      document.removeEventListener<any>("mouseup", processDoughnutChartMouseUp);
-      doughnutChartInputOffSet.current = {
-        x: doughnutChartInputCompPosRef.current.x,
-        y: doughnutChartInputCompPosRef.current.y,
-      };
-    };
-    const processDoughnutChartMouseDown = (
-      event: React.MouseEvent<HTMLDivElement>,
-    ) => {
-      globalDraggingRef.current = true;
-      const doughnutchartElement =
-        doughnutChartInputCompRef.current as HTMLDivElement;
-      const doughnutchartElementRect =
-        doughnutchartElement.getBoundingClientRect();
-      //Store where inside the element-doughnutchartui the click happened
-      doughnutChartInputOffSet.current = {
-        x: event.clientX - doughnutchartElementRect.left,
-        y: event.clientY - doughnutchartElementRect.top,
-      };
-      document.addEventListener<any>(
-        "mousemove",
-        processDoughnutChartMouseMove,
-      );
-      document.addEventListener<any>("mouseup", processDoughnutChartMouseUp);
-    };
-
-    //pin feature here has a double toggle bug, issue is not the end of the world altough its irritating
-
-    //demo
-    // const chartColors = [
-    //   "rgba(250, 170, 0, 0.5)",
-    //   "rgba(250, 170, 0, 0.8)",
-    //   "rgba(250, 170, 0, 0.7)",
-    //   "rgba(101, 81, 38, 1)",
-    // ];
-
-    // const chartData = [35, 25, 20, 20];
     return (
       doughnutChartToggle && (
-        // add the pin true false feature
         <div
           className={"data-doughnutchart-component"}
           ref={doughnutChartInputCompRef}
           style={{
-            //DO NOT PUT THE PIN FEATURE HERE
             position: "absolute",
             left: `${doughnutChartInputCompPosRef.current.x}px`,
             top: `${doughnutChartInputCompPosRef.current.y}px`,
             color: "#fff",
+            cursor: "move",
+            touchAction: "none",
           }}
-          onMouseDown={processDoughnutChartMouseDown}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
         >
           <div className="absolute top-2 z-11 right-2 h-15 w-5 ">
             <span
@@ -419,7 +292,6 @@ const DoughnutChartInputUnit = () => {
                         checked
                         id="doughnutchart-type-option-one"
                         className={"doughnutchart-type-option-one"}
-                        // value={"Doughnut Chart"}
                         onChange={() => {
                           setSelectedType("DoughnutChart");
                         }}

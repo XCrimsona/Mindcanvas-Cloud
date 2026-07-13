@@ -1,0 +1,31 @@
+/* ─── PURPOSE ─────────────────────────────────────────────────────────
+   CanvasViewport — infinite-canvas viewport styles.
+   The outer viewport fills its parent and clips overflow so the world
+   layer can be translated/scaled freely. The world layer is a single
+   transformed div — all canvas items sit at their stored world-coords
+   inside it and inherit the pan/zoom for free.
+   ───────────────────────────────────────────────────────────────────── */
+
+.canvas-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.canvas-viewport.is-panning {
+  cursor: grabbing;
+}
+
+.canvas-viewport-world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}

@@ -1,11 +1,14 @@
 import CanvaComponent from "./CanvaContainer/CanvasWrapper";
-import CanvasDataContextProvider from "../../../../../lib/form-components/canva-data-provider/CanvasDataContextProvider";
+import { CanvasFragmentDataProvider } from "../../../../../lib/canvas-data/CanvasFragmentDataContext";
+import { FormComponentToggleProvider } from "../../../../../lib/form-components/FormComponentToggleContext";
 
 const CanvaPage = () => {
   return (
-    <CanvasDataContextProvider>
-      <CanvaComponent />
-    </CanvasDataContextProvider>
+    <CanvasFragmentDataProvider>
+      <FormComponentToggleProvider>
+        <CanvaComponent />
+      </FormComponentToggleProvider>
+    </CanvasFragmentDataProvider>
   );
 };
 

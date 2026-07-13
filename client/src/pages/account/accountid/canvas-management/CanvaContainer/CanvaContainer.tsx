@@ -1,9 +1,9 @@
 import { DivClass } from "../../../../../../lib/ui/Div";
 import "./data-container.css";
 import TextInputUnit from "../../../../../../lib/form-components/text/TextInputUnit";
-import { useCanvasContext } from "../../../../../../lib/form-components/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasFragmentData } from "../../../../../../lib/canvas-data/CanvasFragmentDataContext";
+import { useFormComponentToggle } from "../../../../../../lib/form-components/FormComponentToggleContext";
 import CanvasData from "../../../../../../lib/canvas-data/CanvasData";
-import RepositionLiveData from "../../../../../../lib/form-components/mediaReposition/RepositionLiveData";
 import ReadingPage from "../../../../../../lib/components/perception/ReadingPage";
 // import AudioInputUnit from "./form-components/audio/AudioInputUnit";
 import DoughnutChartInputUnit from "../../../../../../lib/form-components/chart/DoughnutChartInputUnit";
@@ -12,34 +12,35 @@ import VideoInputUnit from "../../../../../../lib/form-components/video/VideoInp
 import ImageInputUnit from "../../../../../../lib/form-components/image/ImageInputUnit";
 import TableInputUnit from "../../../../../../lib/form-components/table/TableInputUnit";
 import { redirectToSignIn } from "../../../../../../lib/auth-redirect/AuthRedirectContext";
+import CanvasViewport from "../../../../../../lib/CanvasHub/CanvasViewport/CanvasViewport";
 // import { ImageQueueProvider } from "../../../../../../lib/Providers/ImageQueueContextProvider";
 const CanvaContainer = () => {
-  const { dataScrollBoardRef, canvasData } = useCanvasContext();
-  const canvaspaceSize = canvasData.data?.workspaceNameData?.canvaspace?.size;
-  if (canvasData.message === "Not Authenticated") redirectToSignIn();
+  const { canvasData } = useCanvasFragmentData();
+  const { dataScrollBoardRef } = useFormComponentToggle();
+  if (canvasData.message === "Not Authenticated") {
+    redirectToSignIn();
+  } else {
+    //no redirect required; render the canvas normally
+  }
   return (
     <DivClass className={"data-container"}>
-      <div
-        className={"data-scroll-board"}
-        ref={dataScrollBoardRef}
-        style={{
-          width: `${canvaspaceSize?.width}px`,
-          height: `${canvaspaceSize?.height}px`,
-          transition: "height .2s ease-in-out, width .2s ease-in-out",
-        }}
-      >
-        {/* Below InputUnits used for multi media submits */}
-        <TextInputUnit />
-        <DoughnutChartInputUnit />
-        <TextLinkInputUnit />
-        {/* <AudioInputUnit params={params} /> */}
-        <ImageInputUnit />
-        <VideoInputUnit />
-        <TableInputUnit />
-
-        <RepositionLiveData />
+      <div className={"data-scroll-board"} ref={dataScrollBoardRef}>
         <ReadingPage />
-        <CanvasData />
+        <CanvasViewport>
+          {/* Form-component input units live inside the viewport so
+              they inherit the world transform: they zoom + pan with
+              the canvas and drag via world coordinates, matching the
+              live fragments they will become on submit. */}
+          <TextInputUnit />
+          <DoughnutChartInputUnit />
+          <TextLinkInputUnit />
+          {/* <AudioInputUnit params={params} /> */}
+          <ImageInputUnit />
+          <VideoInputUnit />
+          <TableInputUnit />
+
+          <CanvasData />
+        </CanvasViewport>
       </div>
     </DivClass>
   );

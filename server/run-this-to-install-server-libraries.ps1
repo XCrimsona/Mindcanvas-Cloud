@@ -7,7 +7,7 @@ if (-not (Test-Path "package.json")) {
 
 # Define production dependencies with specific versions
 $dependencies = @(
-    "bcryptjs@3.0.2",
+    "argon2@0.44.0",
     "cookie-parser@1.4.7",
     "cors@2.8.5",
     "dotenv@17.2.2",

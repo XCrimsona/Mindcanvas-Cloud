@@ -50,15 +50,23 @@ loginRouter
       }
 
       const passwordService = new PasswordService();
-      const currentPassword = await passwordService.comparePasswords(
+
+      if (passwordService.isLegacyHash(user.password)) {
+        return res.status(409).json({
+          code: "PASSWORD_RESET_REQUIRED",
+          message: "For your security, please reset your password via account recovery to continue.",
+          status: 409,
+        });
+      }
+
+      const currentPassword = await passwordService.verifyPassword(
         password,
         user.password
       )
-      if (
-        !currentPassword
-      ) {
+      if (!currentPassword) {
         throw new Error("Incorrect Credentials");
       }
+
       const tokenId = crypto.randomUUID();
       const payload = {
         sub: user._id,

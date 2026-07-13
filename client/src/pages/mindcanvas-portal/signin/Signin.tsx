@@ -194,6 +194,12 @@ const Signin = () => {
             }
           } else {
             const error = await response.json();
+            if (response.status === 409 && error.code === "PASSWORD_RESET_REQUIRED") {
+              toast.info(error.message, { autoClose: 6000 });
+              setRecoveryFormData({ email: formData.email, password: "" });
+              setSwitchForms("password-reset");
+              return;
+            }
             toast.error(`Signin failed: ${error.message}`, { autoClose: 4000 });
           }
         }

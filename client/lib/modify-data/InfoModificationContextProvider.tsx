@@ -22,7 +22,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasFragmentData } from "../canvas-data/CanvasFragmentDataContext";
 // import canvaNotification_Edit from "../notifications/fragment-updates/CanvaNotification_Edit";
 // import canvaNotification_EditFailed from "../notifications/fragment-updates/CanvaNotification_EditFailed";
 // // import canvaNotification_Delete from "../notifications/canva-deletes/CanvaNotification_Delete";
@@ -59,11 +59,6 @@ interface IModificationUseStateContextType {
   >;
   updateSelectedComp: (id: any, type: any, info: any) => void;
 
-  moveFragment: (
-    e: React.MouseEvent<HTMLButtonElement>,
-    // top: string,
-    // left: string,
-  ) => void;
   DeleteDataFragment: (e: React.MouseEvent<HTMLButtonElement>) => void;
 
   //state being toggled
@@ -200,7 +195,7 @@ const InfoModificationContextProvider = ({
   };
   //From the WorkspaceContextProvider, it refreshes the displayed data after
   // data has been deleted using deleteLiveDataElement.
-  const { updateCanvasData, setRepositionData } = useCanvasContext();
+  const { updateCanvasData } = useCanvasFragmentData();
 
   const [note, setNote] = useState<{
     component_sub: string;
@@ -565,24 +560,6 @@ const InfoModificationContextProvider = ({
     readingPageDataRef.current = null;
   };
 
-  //executes when the user interacts with the i icon and passes data to the next function
-  const moveFragment = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // const dataFragmentId = String((e.target as HTMLElement).id);
-    const dataFragmentId = String(selectedComp.dataFragmentId);
-    const fragmentText = (e.target as HTMLElement).parentElement?.childNodes[1]
-      .textContent;
-
-    //provides the elemtn id to capture data and pass references
-    setRepositionData({
-      dataFragmentId,
-      fragmentText,
-      selectedComp: dataFragmentId,
-    });
-
-    //enables the menu and bring up forward
-    return;
-  };
-
   //this mouse click event is fired when a live data element is already selected
   // and then removed from the selectedComp that has been stored when the mouse
   // double click event was fired.
@@ -627,7 +604,6 @@ const InfoModificationContextProvider = ({
 
         PinToScreen,
 
-        moveFragment,
         DeleteDataFragment,
 
         antiDeleteLock,

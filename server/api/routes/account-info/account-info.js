@@ -1,6 +1,5 @@
 import UserModel from "../../../models/userModel.js";
 import getDB from "../../../lib/connnections/Connections.js";
-import bcrypt from "bcryptjs";
 import { PasswordService } from "../../../lib/PasswordService.js";
 import Router from "express";
 import textModel from "../../../models/multi-media/textModel.js";
@@ -56,8 +55,17 @@ accountRouter
         if (!currentPassword) {
           return res.status(400).json({ message: "Enter the currently used password with your new credentials to continue" })
         }
-        const hashNewPassword = new PasswordService();
-        const checkPassword = await hashNewPassword.comparePasswords(
+        const passwordService = new PasswordService();
+
+        if (passwordService.isLegacyHash(user.password)) {
+          return res.status(409).json({
+            code: "PASSWORD_RESET_REQUIRED",
+            message: "For your security, please reset your password via account recovery to continue.",
+            status: 409,
+          });
+        }
+
+        const checkPassword = await passwordService.verifyPassword(
           currentPassword,
           user.password
         )
@@ -75,7 +83,7 @@ accountRouter
           if (email) newAccountInfo.email = email;
           //these three work together
           if (newPassword && confirmNewPassword) {
-            newAccountInfo.password = await bcrypt.hash(newPassword, 12);
+            newAccountInfo.password = await passwordService.hashPassword(newPassword);
           }
           if (newPassword !== confirmNewPassword) {
             return res.status(400).json({ error: "New passwords don't match", status: 400 });

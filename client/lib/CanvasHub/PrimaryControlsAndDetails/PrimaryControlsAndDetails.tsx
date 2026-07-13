@@ -5,7 +5,7 @@ import Button from "../../components/form-elements/Button";
 import { InputDisabledText } from "../../components/form-elements/dry-InputFormComponents";
 import SVG from "../../SVG";
 import { useMaskSensitiveData } from "../MaskSensitiveData";
-import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasFragmentData } from "../../canvas-data/CanvasFragmentDataContext";
 import { useCanvasDeletionContext } from "../../delete-data/CanvasDeletionOpsContext";
 import { useParams } from "react-router-dom";
 
@@ -13,7 +13,7 @@ const PrimaryControlsAndDetails = () => {
   try {
     const { canvaid } = useParams();
     const { canvasDeletionToggle } = useCanvasDeletionContext();
-    const { canvasData, updateCanvasData } = useCanvasContext();
+    const { canvasData, updateCanvasData } = useCanvasFragmentData();
     // console.log("log from Delete Canvas UI ops: live data: ", canvasData);
 
     //refresh content without reload

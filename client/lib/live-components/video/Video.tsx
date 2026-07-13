@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { SpanFragment } from "../../ui/spanElement";
 import { DivClass } from "../../ui/Div";
 import { useModificationContext } from "../../modify-data/InfoModificationContextProvider";
-import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 import { EditWindow } from "../../modify-data/EditWindow";
 import { ModificationWindow } from "../../modify-data/ModificationWindow";
 import { useParams } from "react-router-dom";
@@ -33,11 +32,8 @@ export const Video = ({ data }: { data: any }) => {
     selectedComp,
     setSelectedComp,
     editState,
-    moveFragment,
     setModificationWindow,
   } = useModificationContext();
-
-  const { setRepositionWindow } = useCanvasContext();
 
   // ===============================
   // NEW CODE — Blob URL cleanup on unmount.
@@ -60,8 +56,6 @@ export const Video = ({ data }: { data: any }) => {
       type: type,
       info: "",
     });
-
-    moveFragment(e);
   };
 
   // ===============================
@@ -140,7 +134,6 @@ export const Video = ({ data }: { data: any }) => {
             id={`${data._id}`}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               selectFragmentId(e);
-              setRepositionWindow(false);
               setModificationWindow(true);
             }}
             className="i-note-drop-down"

@@ -9,7 +9,6 @@ import "../../form-components/text/text.css";
 import "../i-menu-selector.css";
 import "./text-data-styling.css";
 import "../is-note.css";
-import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 
 //This component is used to display already create info TextInput is the one that creates text
 export const Text = ({ data }: { data: any }) => {
@@ -19,10 +18,8 @@ export const Text = ({ data }: { data: any }) => {
     selectedComp,
     setSelectedComp,
     editState,
-    moveFragment,
     setModificationWindow,
   } = useModificationContext();
-  const { setRepositionWindow } = useCanvasContext();
 
   const selectFragmentId = (e: React.MouseEvent<HTMLButtonElement>) => {
     const dataFragmentId = String((e.target as HTMLElement).id);
@@ -31,7 +28,6 @@ export const Text = ({ data }: { data: any }) => {
       type: type,
       info: "",
     });
-    moveFragment(e);
     return;
   };
 
@@ -51,7 +47,6 @@ export const Text = ({ data }: { data: any }) => {
             id={`${data._id}`}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               selectFragmentId(e);
-              setRepositionWindow(false);
               setModificationWindow(true);
             }}
             // className="i-note-drop-down"

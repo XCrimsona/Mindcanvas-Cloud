@@ -30,3 +30,24 @@ body {
     letter-spacing: 1px;
     background: linear-gradient(90deg, var(--color-black) 20%, var(--color-gold), var(--color-black) 80%);
 }
+
+/* Muted gold dot texture. Sits above the body gradient (rendered by
+   the body background above) and below every rendered app child.
+   Uses a body pseudo-element so it appears on every route with zero
+   React coupling. pointer-events: none keeps interactions unblocked. */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(201, 162, 39, 0.14) 1.5px, transparent 0);
+    background-size: 28px 28px;
+}
+
+/* Ensure app content stacks above the dot overlay. #root is the
+   Vite/React mount point in index.html. */
+#root {
+    position: relative;
+    z-index: 1;
+}

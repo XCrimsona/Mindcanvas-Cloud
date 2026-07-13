@@ -1,9 +1,11 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../../components/form-elements/Button";
 import { DivClass } from "../../ui/Div";
 import { EnabledTextAreaInput } from "../../components/media-retrieved-components/MediaInputComponents";
 import Label from "../../components/form-elements/Label";
-import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvider";
+import { useFormComponentToggle } from "../FormComponentToggleContext";
+import { useCanvasFragmentData } from "../../canvas-data/CanvasFragmentDataContext";
+import useFormComponentDrag from "../useFormComponentDrag";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./link.css";
@@ -12,92 +14,58 @@ import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 const TextLinkInputUnit = () => {
   try {
     const { userid, canvaid } = useParams();
-    if (!userid) return;
-    //activates link input form
+    if (!userid) {
+      return;
+    } else {
+      //normal path — continue rendering
+    }
     const {
-      dataScrollBoardRef,
-      globalDraggingRef,
-      textLinkInputOffSet,
       setTextLinkToggle,
-      //useref used to control the element's left with x and top with y canvas coordinates
       textLinkInputCompPosRef,
       textLinkInputCompRef,
-      hasInitializedPositionRef,
       textLinkToggle,
-      updateCanvasData,
-    } = useCanvasContext();
+    } = useFormComponentToggle();
+    const { updateCanvasData } = useCanvasFragmentData();
 
-    //Determines the web app width and height as perceived on screen and centers this exact file's UI in the middle of the screen.
-    //It also re-centers by collraborating with another useEffect function which checks the boolean value to toggle the UI.
-    useLayoutEffect(() => {
-      if (
-        !textLinkToggle ||
-        hasInitializedPositionRef.current ||
-        !dataScrollBoardRef.current ||
-        !textLinkInputCompRef.current
-      )
-        return;
-
-      const boardRect = dataScrollBoardRef.current.getBoundingClientRect();
-      const textLinkInputElementRect =
-        textLinkInputCompRef.current.getBoundingClientRect();
-
-      const viewportCenterX = window.innerWidth / 2;
-      const viewportCenterY = window.innerHeight / 2;
-
-      const canvasX =
-        viewportCenterX - boardRect.left - textLinkInputElementRect.width / 2;
-      const canvasY =
-        viewportCenterY - boardRect.top - textLinkInputElementRect.height / 2;
-
-      //clamp to keep the elements inside the canvas
-      const boundedX = Math.max(
-        0,
-        Math.min(canvasX, boardRect.width - textLinkInputElementRect.width),
-      );
-      const boundedY = Math.max(
-        0,
-        Math.min(canvasY, boardRect.height - textLinkInputElementRect.height),
-      );
-
-      const textLinkInputElement =
-        textLinkInputCompRef.current as HTMLDivElement;
-
-      //center textLinkInputUnit
-      if (textLinkInputElement) {
-        textLinkInputElement.style.left = `${boundedX}px`;
-        textLinkInputElement.style.top = `${boundedY}px`;
-      }
-
-      hasInitializedPositionRef.current = true;
-    }, [textLinkToggle]);
+    const { handlePointerDown, handlePointerMove, handlePointerUp } =
+      useFormComponentDrag({
+        elementRef: textLinkInputCompRef,
+        positionRef: textLinkInputCompPosRef,
+        isOpen: textLinkToggle,
+      });
 
     const [newTextLinkComponent, setNewTextLinkComponent] = useState<any>({
       link: "",
       text: "",
     });
 
-    //submit http link
     const textLinkComponentFormData = async (
       event: React.FormEvent<HTMLFormElement>,
     ) => {
       event.preventDefault();
 
-      //Checks if textLinkInputCompPosRef,newTextComponent are not null
       const textLinkFormData: any = {};
-      if (newTextLinkComponent.link)
+      if (newTextLinkComponent.link) {
         textLinkFormData.link = newTextLinkComponent.link;
-      if (newTextLinkComponent.text)
+      } else {
+        //no link entered
+      }
+      if (newTextLinkComponent.text) {
         textLinkFormData.text = newTextLinkComponent.text;
-
+      } else {
+        //no text entered
+      }
       textLinkFormData.type = "TextLink";
 
       if (textLinkInputCompPosRef.current.x >= 0) {
         textLinkFormData.x = textLinkInputCompPosRef.current.x;
+      } else {
+        //negative x
       }
-
       if (textLinkInputCompPosRef.current.y >= 0) {
         textLinkFormData.y = textLinkInputCompPosRef.current.y;
+      } else {
+        //negative y
       }
 
       if (
@@ -107,7 +75,6 @@ const TextLinkInputUnit = () => {
         !textLinkFormData.x &&
         !textLinkFormData.y
       ) {
-        //fires when the logic breaks
         toast.success("Complete the fields to continue");
         return;
       } else {
@@ -132,101 +99,34 @@ const TextLinkInputUnit = () => {
             updateCanvasData();
           } else {
             const response = await link.json();
-            if (response.message === "Not Authenticated") redirectToSignIn();
+            if (response.message === "Not Authenticated") {
+              redirectToSignIn();
+            } else {
+              //non-auth failure — surface toast below
+            }
             toast.error(response.message, { autoClose: 4000 });
           }
         }
       }
     };
 
-    const processTextLinkMouseMove = (event: React.MouseEvent) => {
-      if (
-        !globalDraggingRef.current ||
-        !dataScrollBoardRef.current ||
-        !textLinkInputCompRef.current
-      )
-        return;
-
-      const textLinkInputElement =
-        textLinkInputCompRef.current as HTMLDivElement;
-      const textLinkInputElementRect =
-        textLinkInputElement.getBoundingClientRect();
-      const boardRect = dataScrollBoardRef.current.getBoundingClientRect();
-
-      //mouse position inside the board
-      const mouseInsideBoardX = event.clientX - boardRect.left;
-      const mouseInsideBoardY = event.clientY - boardRect.top;
-
-      //When we first click down, we store how far from the element's left and top the mouse was (textLinkInputOffSet.current.x/y)
-      const newXElementLeft = mouseInsideBoardX - textLinkInputOffSet.current.x;
-      const newYElementTop = mouseInsideBoardY - textLinkInputOffSet.current.y;
-
-      // set boundaries so draggables dont go outside the drag frame
-      const newPosX = Math.max(
-        0,
-        Math.min(
-          newXElementLeft,
-          boardRect.width - textLinkInputElementRect.width,
-        ),
-      );
-
-      const newPosY = Math.max(
-        0,
-        Math.min(
-          newYElementTop,
-          boardRect.height - textLinkInputElementRect.height,
-        ),
-      );
-
-      textLinkInputCompPosRef.current = {
-        x: newPosX,
-        y: newPosY,
-      };
-
-      if (textLinkInputElement) {
-        textLinkInputElement.style.left = `${textLinkInputCompPosRef.current.x}px`;
-        textLinkInputElement.style.top = `${textLinkInputCompPosRef.current.y}px`;
-      }
-    };
-    const processTextLinkMouseUp = () => {
-      globalDraggingRef.current = false;
-      document.removeEventListener<any>("mousemove", processTextLinkMouseMove);
-      document.removeEventListener<any>("mouseup", processTextLinkMouseUp);
-      textLinkInputOffSet.current = {
-        x: textLinkInputCompPosRef.current.x,
-        y: textLinkInputCompPosRef.current.y,
-      };
-    };
-    const processTextLinkMouseDown = (
-      event: React.MouseEvent<HTMLDivElement>,
-    ) => {
-      globalDraggingRef.current = true;
-      const textLinkElement = textLinkInputCompRef.current as HTMLDivElement;
-      const textLinkElementRect = textLinkElement.getBoundingClientRect();
-      //Store where inside the element-textLinkui the click happened
-      textLinkInputOffSet.current = {
-        x: event.clientX - textLinkElementRect.left,
-        y: event.clientY - textLinkElementRect.top,
-      };
-      document.addEventListener<any>("mousemove", processTextLinkMouseMove);
-      document.addEventListener<any>("mouseup", processTextLinkMouseUp);
-    };
-
-    //pin feature here has a double toggle bug, issue is not the end of the world altough its irritating
-
     return (
       textLinkToggle && (
-        // add the pin true false feature
         <div
           className={"data-link-component"}
           ref={textLinkInputCompRef}
           style={{
-            //DO NOT PUT THE PIN FEATURE HERE
+            position: "absolute",
             left: `${textLinkInputCompPosRef.current.x}px`,
             top: `${textLinkInputCompPosRef.current.y}px`,
             color: "#fff",
+            cursor: "move",
+            touchAction: "none",
           }}
-          onMouseDown={processTextLinkMouseDown}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
         >
           <div className="absolute top-2 z-11 right-2 h-15 w-5 ">
             <span
@@ -270,7 +170,6 @@ const TextLinkInputUnit = () => {
                   className={"enabled-link-input-field"}
                   value={newTextLinkComponent.text}
                   placeholder="What is the is about"
-                  // href={newTextLinkComponent.link}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setNewTextLinkComponent({
                       ...newTextLinkComponent,
@@ -298,27 +197,6 @@ const TextLinkInputUnit = () => {
                       SAVE
                     </Button>
                   </DivClass>
-                  {/* <DivClass className={"link-selection-wrapper"}>
-                    <div className="radio-group">
-                      <input
-                        type="radio"
-                        checked
-                        id="link-type-option-one"
-                        className={"link-type-option-one"}
-                        value={"TextLink"}
-                        onChange={() => {
-                          setSelectedType("TextLink");
-                        }}
-                        name="layout-format"
-                      />
-                      <label
-                        className="link-type-label"
-                        htmlFor="link-type-option-one"
-                      >
-                        Link
-                      </label>
-                    </div>
-                  </DivClass> */}
                 </DivClass>
               </DivClass>
             </DivClass>
