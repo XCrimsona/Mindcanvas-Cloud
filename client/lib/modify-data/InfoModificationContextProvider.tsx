@@ -93,6 +93,16 @@ interface IModificationUseStateContextType {
     target: "_self" | "_blank",
   ) => Promise<void>;
 
+  //FrameSize (small | medium | large) — fires imperatively from the
+  //Modification Window's <select> onChange. No React state in between:
+  //the chosen value is passed straight to fetch, and updateCanvasData()
+  //ripples the new frameSize back to every live-component on success.
+  updateFragmentFrameSize: (
+    _id: string,
+    type: string,
+    frameSize: "small" | "medium" | "large",
+  ) => Promise<void>;
+
   editLiveDataElement: (
     _id: string,
     userid: string,
@@ -308,6 +318,55 @@ const InfoModificationContextProvider = ({
       }
     } catch (error: any) {
       console.warn("updateTextLinkViewMode error: ", error.message);
+    }
+  };
+
+  //Event-driven frame-size updater. Called straight from the <select> onChange
+  //in ModificationWindow — the picked value is passed by argument, never stored
+  //in React state. On success we call updateCanvasData() so the affected
+  //live-component re-reads its frameSize and the CSS bucket takes effect.
+  const updateFragmentFrameSize = async (
+    _id: string,
+    type: string,
+    frameSize: "small" | "medium" | "large",
+  ) => {
+    if (!_id || !type) {
+      toast.info("Insufficient data to resize fragment", { autoClose: 4000 });
+      return;
+    }
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            _id,
+            type,
+            updateType: "FrameSize",
+            frameSize,
+          }),
+        },
+      );
+      if (res.ok) {
+        const json = await res.json().catch(() => ({}));
+        toast.success(json.message || `Frame size → ${frameSize}`, {
+          autoClose: 2500,
+        });
+        updateCanvasData();
+      } else {
+        const err = await res.json().catch(() => ({}));
+        if (err.message === "Not Authenticated") {
+          redirectToSignIn();
+          return;
+        }
+        toast.error(err.message || "Frame size update failed", {
+          autoClose: 4000,
+        });
+      }
+    } catch (error: any) {
+      console.warn("updateFragmentFrameSize error: ", error.message);
     }
   };
 
@@ -591,6 +650,7 @@ const InfoModificationContextProvider = ({
         isPersonalNote,
         updateFragmentPrivacy,
         updateTextLinkViewMode,
+        updateFragmentFrameSize,
         editLiveDataElement,
 
         deleteLiveDataElement,

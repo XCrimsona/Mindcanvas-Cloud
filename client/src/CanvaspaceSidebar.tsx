@@ -92,7 +92,10 @@ const CanvaspaceSidebar = ({ canvaData, onCanvaCreated }: Props) => {
 
       {/* 2. Create */}
       <form className="canvaspace-create-form" onSubmit={createCanvaspace}>
-        <label htmlFor="new-canvaspace-name" className="canvaspace-create-label">
+        <label
+          htmlFor="new-canvaspace-name"
+          className="canvaspace-create-label"
+        >
           Name of Canvaspace
         </label>
         <InputText

@@ -6,7 +6,7 @@
     --One-pixel: 1px;
     --Two-pixel: 2px;
     --Ten-pixel: 10px;
-    --Twenty-pixel: 20px;
+    --Twenty-pixel: 32px;
     --size20: 20px;
     --size24: 24px;
     --size32: 32px;
@@ -28,7 +28,6 @@
 
 .info-container {
     background-color: var(--faded-black);
-    border-radius: 50px;
     border: var(--Two-pixel) solid var(--golden-brown);
     box-shadow: 0 0 7px 3px var(--golden-brown);
 }
@@ -45,6 +44,10 @@
     box-shadow: 0 0 12px 1px rgba(250, 170, 0, 0.12);
     transform: translateY(-1px);
 } */
+
+.hero-size {
+    font-size: var(--size40);
+}
 
 .box-heading {
     font-size: var(--Twenty-pixel);

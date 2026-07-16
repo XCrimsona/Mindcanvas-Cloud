@@ -9,11 +9,19 @@ import { ModificationWindow } from "../../modify-data/ModificationWindow";
 
 import "./image-data-styling.css";
 import "../i-menu-selector.css";
+import "../frame-size.css";
 import { toast } from "react-toastify";
 
 export const ImageCluster = ({ data }: { data: any }) => {
   const { userid, canvaid } = useParams();
-  const { imagecluster, _id, type } = data;
+  const { imagecluster, _id, type, frameSize } = data;
+  // Frame-size bucket class. Baseline is "medium" — same rule as Text.tsx.
+  const frameSizeClass =
+    frameSize === "small"
+      ? " frame-size-small"
+      : frameSize === "large"
+        ? " frame-size-large"
+        : " frame-size-medium";
 
   const {
     modificationWindow,
@@ -64,7 +72,7 @@ export const ImageCluster = ({ data }: { data: any }) => {
       )}
 
       {/* Fragment Container */}
-      <DivClass className={"image-fragment-container"}>
+      <DivClass className={"image-fragment-container" + frameSizeClass}>
         <div id={`${_id}`} className={"image-fragment"}>
           <SpanFragment
             id={`${data._id}`}

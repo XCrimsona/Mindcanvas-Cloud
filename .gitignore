@@ -19,6 +19,7 @@ dist-ssr
 .env.production
 
 /project-guide
+/docs
 
 # Editor directories and files
 .vscode/*

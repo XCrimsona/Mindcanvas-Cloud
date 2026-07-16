@@ -48,7 +48,6 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
       const issue = await response.json();
       if (issue.message === "Not Authenticated") redirectToSignIn();
       console.log(issue);
-
       console.log("frontend dashboard initial user data: ", issue);
     }
   };
