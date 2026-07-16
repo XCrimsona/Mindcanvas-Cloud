@@ -10,6 +10,11 @@ const audioSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    frameSize: {
+      type: String,
+      enum: ["small", "medium", "large"],
+      default: "medium",
+    },
     audioFormat: {
       type: String,
       enum: ["mp3", "wav", "ogg"],

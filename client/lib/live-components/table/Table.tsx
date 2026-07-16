@@ -7,6 +7,7 @@ import { EditWindow } from "../../modify-data/EditWindow";
 import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 import "../../form-components/table/table.css";
 import "../i-menu-selector.css";
+import "../frame-size.css";
 import { SpanFragment } from "../../ui/spanElement";
 
 interface Column {
@@ -48,7 +49,14 @@ function inputTypeFor(t: Column["columnType"]): string {
 
 export const Table = ({ data }: { data: TableMeta | any }) => {
   const { userid, canvaid } = useParams();
-  const { type } = data;
+  const { type, frameSize } = data;
+  // Frame-size bucket class. Baseline is "medium" — same rule as Text.tsx.
+  const frameSizeClass =
+    frameSize === "small"
+      ? " frame-size-small"
+      : frameSize === "large"
+        ? " frame-size-large"
+        : " frame-size-medium";
 
   const {
     modificationWindow,
@@ -199,7 +207,7 @@ export const Table = ({ data }: { data: TableMeta | any }) => {
       {editState && selectedComp.dataFragmentId === meta._id && (
         <EditWindow componentData={{ ...meta, type: "Table" }} />
       )}
-      <div ref={fragmentRef} className={"live-table-fragment"}>
+      <div ref={fragmentRef} className={"live-table-fragment" + frameSizeClass}>
         <SpanFragment
           id={`${data._id}`}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {

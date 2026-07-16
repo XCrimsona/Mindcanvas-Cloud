@@ -14,6 +14,13 @@ const textSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    //Rendered width bucket applied by the live-component CSS.
+    //"medium" is the baseline every fragment is created with.
+    frameSize: {
+      type: String,
+      enum: ["small", "medium", "large"],
+      default: "medium",
+    },
     type: {
       type: String,
       enum: ["Text", "List"],

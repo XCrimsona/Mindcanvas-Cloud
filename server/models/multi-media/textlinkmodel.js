@@ -14,6 +14,11 @@ const textlinkSchema = new mongoose.Schema(
             type: Boolean,
             default: true,
         },
+        frameSize: {
+            type: String,
+            enum: ["small", "medium", "large"],
+            default: "medium",
+        },
         text: {
             type: String,
             minlength: [1, "Text content cannot be empty"],

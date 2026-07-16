@@ -8,11 +8,19 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./video-data-styling.css";
 import "../i-menu-selector.css";
+import "../frame-size.css";
 import { redirectToSignIn } from "../../auth-redirect/AuthRedirectContext";
 
 export const Video = ({ data }: { data: any }) => {
   const { userid, canvaid } = useParams();
-  const { _id, type } = data;
+  const { _id, type, frameSize } = data;
+  // Frame-size bucket class. Baseline is "medium" — same rule as Text.tsx.
+  const frameSizeClass =
+    frameSize === "small"
+      ? " frame-size-small"
+      : frameSize === "large"
+        ? " frame-size-large"
+        : " frame-size-medium";
 
   // ===============================
   // NEW CODE — Manual load state (mirrors ImageCluster pattern).
@@ -128,7 +136,7 @@ export const Video = ({ data }: { data: any }) => {
       )}
 
       {/* Fragment Container */}
-      <DivClass className={"video-fragment-container"}>
+      <DivClass className={"video-fragment-container" + frameSizeClass}>
         <div id={`${_id}`} className={"video-fragment"}>
           <SpanFragment
             id={`${data._id}`}

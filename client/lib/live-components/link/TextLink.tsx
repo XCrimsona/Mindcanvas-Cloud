@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { DivClass } from "../../ui/Div";
 import "./textlink-data-styling.css";
+import "../frame-size.css";
 
 import { ModificationWindow } from "../../modify-data/ModificationWindow";
 import { EditWindow } from "../../modify-data/EditWindow";
@@ -11,7 +12,14 @@ import { TextFragment } from "../../ui/LongText";
 import { useModificationContext } from "../../modify-data/InfoModificationContextProvider";
 
 const TextLink = ({ data }: { data: any }) => {
-  const { _id, type } = data;
+  const { _id, type, frameSize } = data;
+  // Frame-size bucket class. Baseline is "medium" — same rule as Text.tsx.
+  const frameSizeClass =
+    frameSize === "small"
+      ? " frame-size-small"
+      : frameSize === "large"
+        ? " frame-size-large"
+        : " frame-size-medium";
   const {
     modificationWindow,
     selectedComp,
@@ -50,7 +58,7 @@ const TextLink = ({ data }: { data: any }) => {
       {editState && selectedComp.dataFragmentId === _id && (
         <EditWindow componentData={data} />
       )}
-      <DivClass className={"textlink-fragment-container"}>
+      <DivClass className={"textlink-fragment-container" + frameSizeClass}>
         {/* <TextLinkFragmentFragment id={`${_id}`} href={data.href} className={"text-fragment"}> */}
         <TextFragment id={`${_id}`} className={"textlink-fragment"}>
           <SpanFragment

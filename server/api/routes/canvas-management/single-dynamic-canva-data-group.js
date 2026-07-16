@@ -475,11 +475,52 @@ singleDynamicCanvaDataGroupRouter
                             });
                         } else {
 
-                            const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, personalInfo, text, link, type, x, y, options
+                            const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, personalInfo, text, link, type, x, y, options, frameSize
                             } = req.body;
-                            // console.log
-                            //     ("req.body: ", req.body);
+                            console.log
+                                ("req.body: ", req.body);
 
+                            //FrameSize is dispatched INSIDE each per-type block below
+                            //(as the 4th updateType branch alongside Text/XY_POSITIONS/SharingSettings).
+                            //Auth is enforced by isAuthenticated + the `createdBy: user._id` scope on
+                            //every updateOne, so a user can only resize fragments they own.
+                            //
+                            //Small helper so each type's FrameSize branch stays a one-liner and every
+                            //branch enforces the same validation (whitelisted enum) + the same
+                            //ownership guard (createdBy: user._id).
+                            const applyFrameSize = async (Model, typeLabel) => {
+                                if (!_id) {
+                                    return res.status(400).json({
+                                        success: false,
+                                        code: "INSUFFICIENT_DATA",
+                                        message: "Component id is missing",
+                                    });
+                                }
+                                if (!["small", "medium", "large"].includes(frameSize)) {
+                                    return res.status(400).json({
+                                        success: false,
+                                        code: "INVALID_FRAME_SIZE",
+                                        message: "frameSize must be small, medium, or large",
+                                    });
+                                }
+                                const reqToUpdateFrameSize = await Model.updateOne(
+                                    { _id: _id, createdBy: user._id },
+                                    { $set: { frameSize: frameSize } },
+                                );
+                                if (reqToUpdateFrameSize.matchedCount === 1) {
+                                    return res.status(200).json({
+                                        success: true,
+                                        code: `${typeLabel}_FRAME_SIZE_UPDATED`,
+                                        message: `${typeLabel} frame size set to ${frameSize}`,
+                                    });
+                                } else {
+                                    return res.status(404).json({
+                                        success: false,
+                                        code: `${typeLabel}_FRAME_SIZE_UPDATE_FAILED`,
+                                        message: `${typeLabel} fragment not found for frame size update`,
+                                    });
+                                }
+                            };
 
                             if (type === "Text") {
                                 if (updateType === "Text") {
@@ -617,6 +658,9 @@ singleDynamicCanvaDataGroupRouter
                                         });
                                     }
                                 }
+                                else if (updateType === "FrameSize") {
+                                    return await applyFrameSize(textModel, "TEXT");
+                                }
                             }
 
                             //Table fragment uses the same dispatcher for XY repositioning and sharing
@@ -709,6 +753,9 @@ singleDynamicCanvaDataGroupRouter
                                             message: "Table privacy settings not updated",
                                         });
                                     }
+                                }
+                                else if (updateType === "FrameSize") {
+                                    return await applyFrameSize(tableModel, "TABLE");
                                 }
                             }
 
@@ -900,6 +947,9 @@ singleDynamicCanvaDataGroupRouter
                                         });
                                     }
                                 }
+                                else if (updateType === "FrameSize") {
+                                    return await applyFrameSize(textLinkModel, "TEXTLINK");
+                                }
                             }
                             else if (type === "DoughnutChart") {
 
@@ -1004,6 +1054,9 @@ singleDynamicCanvaDataGroupRouter
                                         });
                                     }
                                 }
+                                else if (updateType === "FrameSize") {
+                                    return await applyFrameSize(DoughnutChartModel, "DOUGHNUT_CHART");
+                                }
                             }
                             else if (type === "Video") {
                                 //requires if to update video content
@@ -1101,6 +1154,9 @@ singleDynamicCanvaDataGroupRouter
                                         });
                                     }
                                 }
+                                else if (updateType === "FrameSize") {
+                                    return await applyFrameSize(videoModel, "VIDEO");
+                                }
                             }
                             else if (type === "Images") {
                                 //requires if to update image cluster content
@@ -1197,6 +1253,9 @@ singleDynamicCanvaDataGroupRouter
                                             message: "Image Cluster sharing settings not updated",
                                         });
                                     }
+                                }
+                                else if (updateType === "FrameSize") {
+                                    return await applyFrameSize(imageModel, "IMAGE_CLUSTER");
                                 }
                             }
                             else {

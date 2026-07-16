@@ -125,12 +125,13 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            overflow-y: auto;
 
             .canvaspace-card {
                 padding: 12px 14px;
                 border-radius: 12px;
                 border: 1px solid rgba(250, 187, 0, 0.7);
-                box-shadow: 0 0 10px 0 rgba(250, 187, 0, 0.5);
+                /* box-shadow: 0 0 10px 0 rgba(250, 187, 0, 0.5); */
                 display: flex;
                 flex-direction: column;
                 gap: 8px;

@@ -21,7 +21,7 @@ registrationRouter.get("/", async (req, res) => {
       await getDB();
       console.log("post register route");
       const { firstname, lastname, gender, dob, email, password } = req.body;
-      console.log(req.body.email);
+      // console.log(req.body.email);
 
       const user = await UserModel.findOne({ email: email });
       if (!firstname || !lastname || !email || !password) {

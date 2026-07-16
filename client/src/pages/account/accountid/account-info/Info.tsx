@@ -1,6 +1,5 @@
 import { DivClass } from "../../../../../lib/ui/Div";
 import HeadingOne from "../../../../../lib/ui/HeadingOne";
-// import AuthHeader from "../../../../../auth/auth-partials/AuthHeader";
 import "./info-media-queries.css";
 import "./info.css";
 // import ShortText from "../../../../../src/ui/ShortText";

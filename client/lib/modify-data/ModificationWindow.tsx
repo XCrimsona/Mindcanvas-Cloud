@@ -22,6 +22,7 @@ export const ModificationWindow = ({ componentData }: any) => {
     setModificationWindow, // Function to close or open the modification window
     setEditWindow, // Callback for switching to edit mode
     updateFragmentPrivacy, // Updates privacy settings for the fragment
+    updateFragmentFrameSize, // Updates rendered frame width bucket (small/medium/large)
     DeleteDataFragment, // General callback for deleting fragments
     updateTextLinkViewMode, // Toggles TextLink target between _self and _blank
     deleteLiveDataElement, // Deletes live data elements (Text, etc.)
@@ -32,7 +33,13 @@ export const ModificationWindow = ({ componentData }: any) => {
   } = useModificationContext();
 
   // Extract data from the componentData object passed as props
-  const { owner, _id, workspaceId, type, personalInfo } = componentData;
+  const { owner, _id, workspaceId, type, personalInfo, frameSize } =
+    componentData;
+  // Baseline is "medium" — matches the default we chose in the fragment schemas,
+  // so a fragment that predates this feature (frameSize === undefined) still
+  // shows the correct option in the dropdown without an implicit React state.
+  const currentFrameSize: "small" | "medium" | "large" =
+    frameSize === "small" || frameSize === "large" ? frameSize : "medium";
 
   // Flag used to differentiate between Table and other element types for deletion handling
   const isTable = type === "Table";
@@ -98,6 +105,54 @@ export const ModificationWindow = ({ componentData }: any) => {
         >
           No
         </Button>
+      </div>
+      <hr
+        style={{
+          width: "94%",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      />
+      {/*
+        Resize frame controls: mirrors the Share fragment section but is a
+        <select> instead of two buttons because there are three exclusive
+        buckets. Chosen value is passed straight to updateFragmentFrameSize —
+        no React state assignment in between — and the server PATCH response
+        triggers updateCanvasData() which ripples frameSize back to the live
+        component so the CSS bucket applies without a manual reload.
+      */}
+      <div className="frame-size-controls-container">
+        <p className="ux-note-status">Resize frame</p>
+        {/*
+          Uncontrolled by design. If we used `value={currentFrameSize}`, React
+          would snap the visible option back to the prop-derived value the
+          instant onChange fired — before the PATCH round-trip and canvas
+          refetch have swapped `componentData.frameSize` — and the dropdown
+          would appear frozen. `defaultValue` + `key={currentFrameSize}`
+          reseats the select whenever the DB truth changes: the browser
+          keeps whatever the user just picked visible immediately, and once
+          updateCanvasData() lands the new frameSize the key change cleanly
+          remounts the select with the fresh baseline.
+        */}
+        <select
+          id={`frame-size-select-${_id}`}
+          key={`frame-size-select-${_id}-${currentFrameSize}`}
+          className={`frame-size-select select-${currentFrameSize}`}
+          defaultValue={currentFrameSize}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+            const frameSize = e.currentTarget.value as
+              | "small"
+              | "medium"
+              | "large";
+            console.log(frameSize);
+
+            updateFragmentFrameSize(_id, type, frameSize);
+          }}
+        >
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
       </div>
       <hr
         style={{
