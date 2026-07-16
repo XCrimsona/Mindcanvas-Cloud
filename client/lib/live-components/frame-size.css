@@ -1,0 +1,28 @@
+/*
+ * Frame-size buckets applied to any live-component container.
+ * The Modification Window PATCHes `frameSize` on the fragment; the live
+ * component reads that field and adds `frame-size-<value>` to its outer
+ * container. Dimensions use so they win over the per-component
+ * Tailwind width/height utilities that already ship with each fragment.
+ */
+
+.frame-size-small {
+    width: 200px;
+    /* height: 100px; */
+    max-width: 200px;
+    /* max-height: 100px; */
+}
+
+.frame-size-medium {
+    width: 400px;
+    /* height: 200px; */
+    max-width: 400px;
+    /* max-height: 200px; */
+}
+
+.frame-size-large {
+    width: 600px;
+    /* height: 300px; */
+    /* max-width: 600px; */
+    /* max-height: 300px; */
+}

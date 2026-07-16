@@ -9,10 +9,20 @@ import "../../form-components/text/text.css";
 import "../i-menu-selector.css";
 import "./text-data-styling.css";
 import "../is-note.css";
+import "../frame-size.css";
 
 //This component is used to display already create info TextInput is the one that creates text
 export const Text = ({ data }: { data: any }) => {
-  const { _id, type } = data;
+  const { _id, type, frameSize } = data;
+  // Resolve frame-size class. "medium" is the baseline — no override class.
+  // Anything unknown falls through to "medium" as well, so legacy fragments
+  // that predate the schema field keep their existing width.
+  const frameSizeClass =
+    frameSize === "small"
+      ? " frame-size-small"
+      : frameSize === "large"
+        ? " frame-size-large"
+        : " frame-size-medium";
   const {
     modificationWindow,
     selectedComp,
@@ -41,7 +51,7 @@ export const Text = ({ data }: { data: any }) => {
       {editState && selectedComp.dataFragmentId === _id && (
         <EditWindow componentData={data} />
       )}
-      <DivClass className={"text-fragment-container"}>
+      <DivClass className={"text-fragment-container" + frameSizeClass}>
         <TextFragment id={`${_id}`} className={"text-fragment"}>
           <SpanFragment
             id={`${data._id}`}

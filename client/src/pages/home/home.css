@@ -7,3 +7,19 @@
     padding: 0px 0px 10px 0px;
     position: relative;
 }
+
+/* Scroll-snap layer — activated only when Home mounts (see Home.tsx).
+   Each snap-section lands at the top of the viewport instead of drifting past. */
+html.snap-home {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+html.snap-home body {
+    scroll-snap-type: y mandatory;
+}
+
+.snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}

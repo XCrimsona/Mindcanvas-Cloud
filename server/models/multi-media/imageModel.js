@@ -10,6 +10,11 @@ const imageSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    frameSize: {
+      type: String,
+      enum: ["small", "medium", "large"],
+      default: "medium",
+    },
     //NEW STRUCTURE
     imagecluster: [
       {

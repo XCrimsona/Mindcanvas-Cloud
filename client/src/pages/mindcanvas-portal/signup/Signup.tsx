@@ -9,7 +9,6 @@ import {
   InputConfirmPassword,
   InputEmail,
   InputPassword,
-  InputSelect,
   InputText,
 } from "../../../../lib/components/form-elements/dry-InputFormComponents";
 
@@ -116,15 +115,16 @@ const Signup = () => {
       });
     };
 
-    const gender = [
-      "Prefer not to specify",
-      "Female",
-      "Male",
-      "Transgender Woman",
-      "Transgender Man",
-      "Non-binary",
-      "Other",
-    ];
+    // Disabled for now — gender field structure/input/validation/styling
+    // const gender = [
+    //   "Prefer not to specify",
+    //   "Female",
+    //   "Male",
+    //   "Transgender Woman",
+    //   "Transgender Man",
+    //   "Non-binary",
+    //   "Other",
+    // ];
     return (
       <Section
         id="sign-up-container"
@@ -189,8 +189,8 @@ const Signup = () => {
               />
             </DivClass>
           </DivClass>
-          {/* //gender */}
-          <DivClass className="form-data-container">
+          {/* //gender - disabled for now */}
+          {/* <DivClass className="form-data-container">
             <DivClass className="label-wrapper">
               <Label
                 htmlfor="gender-input"
@@ -216,9 +216,9 @@ const Signup = () => {
                 })}
               </InputSelect>
             </DivClass>
-          </DivClass>
-          {/* //dob */}
-          <DivClass className="form-data-container">
+          </DivClass> */}
+          {/* //dob - disabled for now */}
+          {/* <DivClass className="form-data-container">
             <DivClass className="label-wrapper">
               <Label
                 htmlfor="dob-input"
@@ -237,7 +237,7 @@ const Signup = () => {
                 }}
               />
             </DivClass>
-          </DivClass>
+          </DivClass> */}
           {/* //email */}
           <DivClass className="form-data-container">
             <DivClass className="label-wrapper">

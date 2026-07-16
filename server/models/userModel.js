@@ -11,7 +11,7 @@ const userschema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      required: [true, "User's gender is required"],
+      required: [false, "User's gender optional"],
       enum: [
         "Agender",
         "Female",

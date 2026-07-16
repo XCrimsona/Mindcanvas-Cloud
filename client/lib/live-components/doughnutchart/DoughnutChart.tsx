@@ -8,6 +8,7 @@ import { EditWindow } from "../../modify-data/EditWindow";
 import { ModificationWindow } from "../../modify-data/ModificationWindow";
 import { SpanFragment } from "../../ui/spanElement";
 import "../i-menu-selector.css";
+import "../frame-size.css";
 import ShortText from "../../ui/ShortText";
 import HeadingThree from "../../ui/HeadingThree";
 import "../../form-components/chart/doughnutchart.css";
@@ -46,7 +47,16 @@ const DoughnutChart = ({ data }: { data: any }) => {
     },
   };
 
-  const { _id, type } = data;
+  const { _id, type, frameSize } = data;
+  // Frame-size bucket class. Baseline is "medium" — same rule as Text.tsx.
+  // frame-size-* is a plain global class from frame-size.css; it's concatenated
+  // as a string alongside the CSS-module class on the outer container.
+  const frameSizeClass =
+    frameSize === "small"
+      ? " frame-size-small"
+      : frameSize === "large"
+        ? " frame-size-large"
+        : " frame-size-medium";
   const {
     modificationWindow,
     selectedComp,
@@ -99,7 +109,9 @@ const DoughnutChart = ({ data }: { data: any }) => {
       {editState && selectedComp.dataFragmentId === _id && (
         <EditWindow componentData={data} />
       )}
-      <DivClass className={DoughnutChartClass.chartfragmentdashboard}>
+      <DivClass
+        className={DoughnutChartClass.chartfragmentdashboard + frameSizeClass}
+      >
         <div
           id={`${data._id}`}
           className={DoughnutChartClass.doughnutchartcontainer}

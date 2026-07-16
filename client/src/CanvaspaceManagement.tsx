@@ -50,7 +50,7 @@ const CanvaspaceManagement = ({ source }: { source: any }) => {
     if (response.ok) {
       const data = await response.json();
       data.data.sort((a: any, b: any) => a.name.localeCompare(b.name));
-      console.log("data: ", data);
+      // console.log("data: ", data);
       setUserName(data.user);
       setCanvaData(data.data);
     } else {

@@ -12,6 +12,31 @@
     box-shadow: inset 0px 0px 4px 2px #faaa0040;
     cursor: default;
 
+    .frame-size-controls-container {
+        margin: 8px auto;
+        text-align: center;
+
+        .ux-note-status {
+            display: block;
+            font-size: 11px;
+            text-align: center;
+            margin: 8px auto 4px;
+        }
+
+        .frame-size-select {
+            display: block;
+            margin: 0 auto 8px;
+            width: 170px;
+            padding: 4px 6px;
+            font-size: 11px;
+            background-color: #000;
+            color: #faaa00;
+            border: 1px solid #faaa0060;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    }
+
     .data-sharing-buttons-container {
         margin: 8px auto;
 

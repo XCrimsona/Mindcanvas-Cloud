@@ -16,6 +16,11 @@ const videoSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    frameSize: {
+      type: String,
+      enum: ["small", "medium", "large"],
+      default: "medium",
+    },
     position: {
       x: {
         type: Number,
