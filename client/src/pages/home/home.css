@@ -1,6 +1,26 @@
+@reference "tailwindcss";
+
+/* ==========================================================
+   Home page styling — nested to mirror the JSX tree.
+   ----------------------------------------------------------
+   All rules are UNLAYERED so they coexist with the unlayered
+   brand primitives (info-container, feature-tile, hero-size,
+   box-heading, accent-button, black-cover) in tailwind-style.css.
+
+   Native CSS nesting (Lightning CSS via @tailwindcss/vite):
+     • `&` = the current parent selector.
+     • `& .child` = descendant.
+     • `& > .child` or `& > tagname` = direct child.
+     • `@media (...)` may appear inside a rule; it applies
+       to that rule's selector only.
+   The structure below reads like a JSX tree so parent → child
+   containment is obvious without cross-referencing files.
+   ========================================================== */
+
+/* ---- Page frame ------------------------------------------- */
 .page {
     letter-spacing: 1px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Inter, Helvetica, sans-serif;
     background-color: rgba(0, 0, 0, 0.65);
     color: #fff;
     margin: 0px auto;
@@ -8,18 +28,298 @@
     position: relative;
 }
 
-/* Scroll-snap layer — activated only when Home mounts (see Home.tsx).
-   Each snap-section lands at the top of the viewport instead of drifting past. */
+/* ---- Scroll-snap (desktop only) --------------------------- */
 html.snap-home {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-}
 
-html.snap-home body {
-    scroll-snap-type: y mandatory;
+    & body {
+        scroll-snap-type: y mandatory;
+    }
 }
 
 .snap-section {
     scroll-snap-align: start;
     scroll-snap-stop: always;
+}
+
+/* ---- Shared CTA primitives (used in hero, mid-CTA, final CTA) */
+.cta-button {
+    @apply w-full px-8 py-3 rounded-full cursor-pointer;
+
+    @media (min-width: 640px) {
+        @apply w-auto;
+    }
+}
+
+.cta-link {
+    @apply block;
+}
+
+.cta-link-underlined {
+    @apply block underline;
+}
+
+.hero-cta-row {
+    @apply mt-6 flex flex-col gap-3;
+
+    @media (min-width: 640px) {
+        @apply flex-row items-center justify-center;
+    }
+
+    @media (min-width: 1024px) {
+        @apply justify-start;
+    }
+}
+
+.cta-button-row {
+    @apply mt-2 flex flex-col gap-3;
+
+    @media (min-width: 640px) {
+        @apply flex-row justify-center;
+    }
+}
+
+.section-heading {
+    @apply text-center pb-6;
+}
+
+.section-heading--tight {
+    @apply pb-4;
+}
+
+.cta-heading {
+    @apply pb-3;
+}
+
+/* ==========================================================
+   .home-shell — the outer column that holds every section.
+   ---------------------------------------------------------- */
+.home-shell {
+    @apply mx-auto w-full max-w-5xl px-4 pb-16 space-y-16;
+
+    @media (min-width: 640px) {
+        @apply px-6;
+    }
+
+    /* -------- 1. HERO ------------------------------------- */
+    /* Mobile/tablet: light top padding (~60px), grow with content.
+       Desktop: original py-70 + full-viewport height (h-screen). */
+    & .hero-section {
+        @apply text-left pt-30 pb-8 h-screen;
+
+        @media (min-width: 1024px) {
+            @apply py-70;
+        }
+
+        & .hero-headline {
+            @apply mt-3 max-w-5xl mx-auto;
+
+            @media (min-width: 1024px) {
+                @apply mx-0;
+            }
+        }
+
+        & .hero-subtext {
+            @apply mt-2 opacity-75 max-w-2xl mx-auto;
+
+            @media (min-width: 1024px) {
+                @apply mx-0;
+            }
+        }
+
+        & .hero-microcopy {
+            @apply mt-3 text-xs opacity-75 max-w-2xl mx-auto;
+
+            @media (min-width: 1024px) {
+                @apply mx-0;
+            }
+        }
+    }
+
+    /* -------- 2. PILL WORKSPACE --------------------------- */
+    /* Layout intent:
+         .pill-section is a flex column that fills the viewport.
+         Its only child is an unclassed <section> wrapper — we
+         target that positionally with `& > section` and force
+         w-full so its children (especially .pill-row) actually
+         have horizontal space to distribute via justify-content.
+         This is the fix for the "pills won't center" problem:
+         justify-content only works when the container is WIDER
+         than the sum of its children. */
+    & .pill-section {
+        @apply flex flex-wrap items-center justify-center py-12 h-screen;
+
+        @media (min-width: 1024px) {
+            @apply h-screen py-0;
+        }
+
+        &>section {
+            @apply w-full;
+
+            & .pill-lead {
+                /* A paragraph with a single text node — plain
+                   block-level centering is enough. No flex is
+                   needed here (it would only wrap the text run
+                   into an anonymous flex item with no visible
+                   effect). */
+                @apply max-w-5xl mx-auto text-center;
+                font-size: 32px;
+            }
+
+            & .pill-row {
+                /* justify-content is set in home-media-queries.css:
+                   flex-start on mobile, center on tablet+desktop.
+                   Now that the parent wrapper is w-full, this row
+                   is wider than the pills → justify-content has
+                   space to distribute. */
+                @apply flex flex-wrap items-center justify-center w-full min-h-25 mt-8 mb-8;
+
+                & .pill-tag {
+                    @apply px-6 py-2 m-2 rounded-3xl;
+                }
+            }
+
+            & .pill-close {
+                @apply max-w-lg mx-auto text-center;
+            }
+        }
+    }
+
+    /* -------- 4. WHAT YOU CAN DO -------------------------- */
+    & .what-section {
+        @apply flex flex-wrap items-center justify-center py-12;
+
+        @media (min-width: 1024px) {
+            @apply h-screen py-0;
+        }
+
+        &>section {
+            & .feature-grid {
+                @apply grid gap-4;
+
+                @media (min-width: 640px) {
+                    @apply grid-cols-2;
+                }
+
+                @media (min-width: 1024px) {
+                    @apply grid-cols-3;
+                }
+
+                & .feature-item {
+                    @apply px-4 py-4;
+
+                    & .feature-body {
+                        @apply mt-1 text-sm;
+                    }
+                }
+            }
+        }
+    }
+
+    /* -------- 5. WHY MINDCANVAS --------------------------- */
+    & .why-section {
+        @apply flex flex-wrap items-center justify-center px-4 py-12;
+
+        @media (min-width: 640px) {
+            @apply px-6;
+        }
+
+        @media (min-width: 1024px) {
+            @apply h-screen py-6;
+        }
+
+        &>section {
+            & .why-grid {
+                @apply flex flex-wrap items-center justify-center gap-4 max-w-5xl mx-auto;
+
+                & .why-item {
+                    @apply rounded-3xl min-h-40;
+
+                    /* w-82 is a valid v4 dynamic utility → 20.5rem */
+                    @media (min-width: 768px) {
+                        @apply w-82;
+                    }
+
+                    & .why-item-title {
+                        @apply block mt-4 ml-6;
+                    }
+
+                    & .why-item-body {
+                        @apply mt-1 text-sm mx-6 my-2;
+                    }
+                }
+            }
+        }
+    }
+
+    /* -------- 5b. MID CTA --------------------------------- */
+    & .mid-cta-section {
+        @apply flex flex-col items-center justify-center text-center py-12;
+
+        @media (min-width: 1024px) {
+            @apply h-screen py-0;
+        }
+
+        & .mid-cta-note {
+            @apply mt-4 text-sm opacity-75 max-w-xl mx-auto px-4;
+        }
+    }
+
+    /* -------- 6. HONEST NOTES ----------------------------- */
+    & .notes-section {
+        @apply flex flex-wrap items-center justify-center rounded-3xl px-4 py-12 max-w-5xl;
+
+        @media (min-width: 640px) {
+            @apply px-6;
+        }
+
+        @media (min-width: 1024px) {
+            @apply h-screen py-6;
+        }
+
+        &>section {
+            & .notes-heading {
+                @apply text-center pb-3;
+                font-size: 32px;
+            }
+
+            & .notes-list {
+                @apply flex flex-wrap justify-center list-disc pl-6 max-w-5xl mx-auto space-y-1 text-sm;
+
+                & .notes-item {
+                    @apply m-6 p-8 rounded-3xl w-60;
+                    list-style: none;
+                }
+            }
+        }
+    }
+
+    /* -------- 7. FINAL CTA -------------------------------- */
+    & .final-cta-section {
+        @apply flex flex-wrap items-center justify-center text-center py-12 h-screen;
+
+        /* @media (min-width: 1024px) {
+            @apply h-screen py-0;
+        } */
+
+        &>section {
+            & .alt-login-link {
+                @apply underline text-sm self-center;
+            }
+
+            & .final-cta-note {
+                @apply mt-3 text-xs opacity-75;
+            }
+        }
+    }
+}
+
+/* ---- Footer pin ------------------------------------------ */
+.home-footer-pin {
+    @apply fixed bottom-0 left-0 right-0 z-50;
+
+    & .home-footer {
+        @apply text-center pt-2 pb-2 w-full;
+    }
 }

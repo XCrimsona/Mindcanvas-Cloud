@@ -10,9 +10,14 @@ export const ImageButton = () => {
     <Button
       id="image-comp"
       onClick={() => setImageToggle(true)}
-      className={"image-comp"}
+      className={"fragment-icon-btn image-comp"}
+      title="Add image cluster fragment"
     >
-      Image
+      <img
+        src="/Image.svg"
+        alt="Image cluster fragment"
+        className="fragment-icon"
+      />
     </Button>
   );
 };
