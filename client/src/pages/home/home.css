@@ -127,14 +127,6 @@ html.snap-home {
                 @apply mx-0;
             }
         }
-
-        & .hero-microcopy {
-            @apply mt-3 text-xs opacity-75 max-w-2xl mx-auto;
-
-            @media (min-width: 1024px) {
-                @apply mx-0;
-            }
-        }
     }
 
     /* -------- 2. PILL WORKSPACE --------------------------- */

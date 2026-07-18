@@ -1,6 +1,4 @@
-# BE ADVISED THIS DOCUMENT IS BEING IMPROVED
-
-# MindCanvas- Multi purpose full stack offline web application.
+# MindCanvas- Multi purpose offline web application.
 
 <p>A private personal/office workspace for making sense of complicated ideas and data. Organize text, links, images, and videos as draggable fragments on an infinite canvas, and split your thinking across as many Canvaspaces as you need — each one its own page, tracked and editable at a glance.</p>
 
@@ -9,13 +7,13 @@
 <p>The Local version brings you more control over the privacy of your data.</p>
 
 <p>Mindcanvas does not replace Word, Excel but this tool offers flexiblity that may be critized as not a clean, pure software. </p>
-<p>Training is requried to correctly use this software - The training is simple and the academy is being improved. </p>
+<p>Training is requried to correctly use this software - The training is simple and the academy is being improved.</p>
 
 ## Designed for large screens
 
 <p>Drag and content edits only supported via desktop devices  | You can still view your created data on mobile via Mindcanvas-Cloud.</p>
 
-## Contribution Policy for Users(Human) and AI that can interpret.
+## Contribution Policy for Users(Humans) and AI that can interpret.
 
 <p>Note: This is a private project. When public, its for those to receive updates from the evolution of this program when using it. Users that attempt to push features will not be allowed under any state in time to push features to this code base.</p>
  
@@ -33,7 +31,8 @@
  <a target="_blank"  href="https://www.mongodb.com/try/download/community">MongoDB Community Server</a> 
  </p>
 </div>
-<h2>Download & Install Nodejs via <a href=https://nodejs.org target="_blank">nodejs.org</a> software to create a runtime(backend server) environment to run JavaScript code.</h2>
+
+<p>Download & Install Nodejs via <a href=https://nodejs.org target="_blank">nodejs.org</a> software to create a runtime(backend server) environment to run JavaScript code.</p>
 
 ### Missing .env files + config | You need to create this yourself since .env uploads are dangerous</p>
 

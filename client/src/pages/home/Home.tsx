@@ -210,9 +210,6 @@ const Home = () => {
               </Link>
             </button>
           </div>
-          <p className="hero-microcopy">
-            No plugins. No setup. Just drop things in.
-          </p>
         </motion.section>
 
         <motion.section
