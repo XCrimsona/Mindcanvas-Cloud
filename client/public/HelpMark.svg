@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Outer Outline Circle -->
+  <circle cx="12" cy="12" r="10" />
+  
+  <!-- Geometric Question Mark Hook -->
+  <path d="M 9 9 A 3 3 0 0 1 15 9 C 15 11, 12 11.5, 12 13.5" />
+  
+  <!-- Crisp UI Pixel-Aligned Dot -->
+  <line x1="12" y1="17.5" x2="12" y2="17.51" />
+</svg>

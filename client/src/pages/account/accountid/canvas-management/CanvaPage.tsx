@@ -1,4 +1,4 @@
-import CanvaComponent from "./CanvaContainer/CanvasWrapper";
+import CanvaComponent from "./CanvaContainer/CanvaLeftBar";
 import { CanvasFragmentDataProvider } from "../../../../../lib/canvas-data/CanvasFragmentDataContext";
 import { FormComponentToggleProvider } from "../../../../../lib/form-components/FormComponentToggleContext";
 

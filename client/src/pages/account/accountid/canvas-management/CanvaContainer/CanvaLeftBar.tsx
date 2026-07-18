@@ -12,6 +12,7 @@ import PrimaryControlsAndDetails from "../../../../../../lib/CanvasHub/PrimaryCo
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { AuthLogoutProvider } from "../../logout/logoutContext";
+import CreationFragments from "../../../../../../lib/CreationFragments";
 const fetchWorkspaceData = async (userid: string, canvaid: string) => {
   const response = await fetch(
     `${import.meta.env.VITE_API_URL}/api/account/${userid}/canvas-management/${canvaid}`,
@@ -108,11 +109,12 @@ const CanvaComponent = () => {
                     />
                   </div>
                 </DivStylingAndClassName>
+                <CreationFragments />
                 {/* this is the sidebar */}
                 <CanvasContextDeletionProvider>
                   <DivStylingAndClassName
                     styles={{
-                      left: sideBarState ? "0px" : "-350px",
+                      left: sideBarState ? "0" : "-100%",
                     }}
                     className="canva-properties-wrapper"
                   >

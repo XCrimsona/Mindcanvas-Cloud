@@ -8,9 +8,10 @@ export const TableButton = () => {
     <Button
       id="table-comp"
       onClick={() => setTableToggle(true)}
-      className={"text-comp"}
+      className={"fragment-icon-btn table-comp"}
+      title="Add table fragment"
     >
-      Table
+      <img src="/Table.svg" alt="Table fragment" className="fragment-icon" />
     </Button>
   );
 };

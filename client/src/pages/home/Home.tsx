@@ -3,7 +3,8 @@ import "../../../lib/components/Header";
 import ShortText from "../../../lib/ui/ShortText";
 import "./home.css";
 import "./tailwind-style.css";
-import { useEffect, useRef } from "react";
+import "./home-media-queries.css";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView, type MotionProps } from "framer-motion";
 import Footer from "../../../lib/components/Footer";
 import TopNav from "../../../lib/components/TopNav";
@@ -95,7 +96,45 @@ const reveal = (
 //   ...
 // </motion.section>
 
+// Reveal-direction responsiveness.
+// ------------------------------------------------------------------
+// The `reveal()` helper takes a direction ("up" | "down" | "left" |
+// "right" | "none") that was chosen for the DESKTOP layout. On
+// narrower viewports those sideways slides look wrong — a tile that
+// enters from the left on a 375px phone crosses the entire content
+// column and reads as chaotic. We want:
+//
+//   mobile   (< 600px)   → force every reveal to "up"
+//   tablet   (600–1023)  → keep desktop direction (side slides still
+//                          make sense when there's horizontal room)
+//   desktop  (≥ 1024)    → keep desktop direction (author's intent)
+//
+// One `useBreakpoint` hook + one `dir()` mapper is enough. We do NOT
+// rewrite reveal() itself — the mapper is just applied at each call
+// site: `reveal(80, dir("left"))` instead of `reveal(80, "left")`.
+type Breakpoint = "mobile" | "tablet" | "desktop";
+
+const readBreakpoint = (): Breakpoint => {
+  // Guarded for safety even though this project is Vite-only (no SSR).
+  if (typeof window === "undefined") return "desktop";
+  const w = window.innerWidth;
+  if (w < 600) return "mobile";
+  else if (w < 1024) return "tablet";
+  else return "desktop";
+};
+
+const useBreakpoint = (): Breakpoint => {
+  const [bp, setBp] = useState<Breakpoint>(readBreakpoint);
+  useEffect(() => {
+    const onResize = () => setBp(readBreakpoint());
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return bp;
+};
+
 const Home = () => {
+  const bp = useBreakpoint();
   // Ref attached to the "Ready to try it" section. We use framer-motion's
   // useInView to detect when that section enters/leaves the viewport, so
   // the footer can pin itself only during that moment.
@@ -120,72 +159,76 @@ const Home = () => {
   useEffect(() => {
     document.title =
       "MindCanvas — One canvas. Your data. No subscription stack.";
-    // Enable scroll-snap only while the Home page is mounted, so other
-    // routes keep their normal free-scroll behaviour.
-    document.documentElement.classList.add("snap-home");
-    return () => document.documentElement.classList.remove("snap-home");
   }, []);
+
+  // Scroll-snap is desktop-only.
+  // ------------------------------------------------------------------
+  // On mobile/tablet, sections often contain more content than a
+  // single viewport can hold. With `scroll-snap-type: y mandatory` on
+  // <html>, the browser force-snaps each section to viewport top — so
+  // anything taller than 100vh gets clipped by the next snap point
+  // and reads as "overlapping". The fix: enable snap ONLY when we
+  // know every section fits inside 100vh, i.e. on desktop.
+  //
+  // We watch `bp` (not just mount) so a user resizing from desktop →
+  // mobile drops out of snap cleanly, no reload needed. The paired
+  // CSS override in home-media-queries.css lifts `h-screen` to
+  // `min-height:100vh` below 1024px so sections grow with content.
+  useEffect(() => {
+    if (bp === "desktop") {
+      document.documentElement.classList.add("snap-home");
+    } else {
+      document.documentElement.classList.remove("snap-home");
+    }
+    return () => document.documentElement.classList.remove("snap-home");
+  }, [bp]);
 
   return (
     <DivClass className="page">
       <TopNav />
-      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 pb-16 space-y-16">
+      <div className="home-shell">
         {/* 1. HERO */}
         <motion.section
-          className="text-left lg:text-left py-70 h-screen snap-section"
+          className="hero-section snap-section"
           {...reveal(0, "up", {
             duration: 0.5,
             delay: 0,
             ease: "easeOut",
-            amount: 0.5,
+            amount: 0.55,
             once: true,
           })}
         >
-          <p className="mt-3 hero-size max-w-5xl mx-auto lg:mx-0">
+          <p className="hero-headline hero-size">
             Stacked documents on your desk introduce cluttered workflow that
             hold you back from accomplishing the peak performance for your work.
           </p>
-          <p className="mt-2 text-md opacity-75 max-w-2xl mx-auto lg:mx-0">
-            Take back your energy and workflow.
-          </p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-center lg:justify-start">
-            <button className="accent-button black-cover gold-brown-border-shadow w-full sm:w-auto px-8 py-3 rounded-full cursor-pointer">
-              <Link url="/signup-portal" className="block">
+          <p className="hero-subtext">Take back your energy and workflow.</p>
+          <div className="hero-cta-row">
+            <button className="accent-button black-cover gold-brown-border-shadow cta-button">
+              <Link url="/signup-portal" className="cta-link">
                 Get Started
               </Link>
             </button>
           </div>
-          <p className="mt-3 text-xs opacity-75 max-w-2xl mx-auto lg:mx-0">
+          <p className="hero-microcopy">
             No plugins. No setup. Just drop things in.
           </p>
         </motion.section>
 
         <motion.section
-          className="flex flex-wrap items-center justify-center px-4 h-screen  snap-section"
+          className="pill-section snap-section"
           {...reveal(60, "up")}
         >
           <section>
-            <p className="max-w-5xl text-[32px] mx-auto text-center ">
-              A private workspace where
-            </p>
-            <section className="flex align-center justify-center my-8">
-              <section className="info-container px-6 py-2 mx-2 rounded-3xl">
-                text
-              </section>
-              <section className="info-container px-6 py-2 mx-2 rounded-3xl">
-                images
-              </section>
-              <section className="info-container px-6 py-2 mx-2 rounded-3xl">
-                video
-              </section>
-              <section className="info-container px-6 py-2 mx-2 rounded-3xl">
-                list
-              </section>
-              <section className="info-container px-6 py-2 mx-2 rounded-3xl">
-                links
-              </section>
+            <p className="pill-lead">A private workspace where</p>
+            <section className="pill-row">
+              <section className="info-container pill-tag">text</section>
+              <section className="info-container pill-tag">images</section>
+              <section className="info-container pill-tag">video</section>
+              <section className="info-container pill-tag">list</section>
+              <section className="info-container pill-tag">links</section>
             </section>
-            <p className="max-w-lg mx-auto text-center">
+            <p className="pill-close">
               come together on the same canvas. The workspace scales as your
               ideas grow in visual size, giving every data-fragment room to
               breathe and keeping your workflow effortless.
@@ -195,70 +238,70 @@ const Home = () => {
 
         {/* 4. WHAT YOU CAN DO */}
         <motion.section
-          className="flex flex-wrap items-center justify-center h-screen  snap-section"
+          className="what-section snap-section"
           {...reveal(60, "up")}
         >
           <section>
-            <h2 className="box-heading text-center pb-6">What you can do</h2>
-            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <h2 className="box-heading section-heading">What you can do</h2>
+            <ul className="feature-grid">
               <motion.li
-                className="feature-tile px-4 py-4"
-                {...reveal(80, "left", { delay: 0.2 })}
+                className="feature-tile feature-item"
+                {...reveal(80, "up", { delay: 0.2 })}
               >
                 <strong>Think spatially, not vertically</strong>
-                <p className="mt-1 text-sm">
+                <p className="feature-body">
                   Lay ideas out until the picture clicks, instead of scrolling a
                   long document trying to hold it all in your head.
                 </p>
               </motion.li>
               <motion.li
-                className="feature-tile px-4 py-4"
+                className="feature-tile feature-item"
                 {...reveal(80, "up", { delay: 0.1 })}
               >
                 <strong>
                   Follow your train of thought without app-switching
                 </strong>
-                <p className="mt-1 text-sm">
+                <p className="feature-body">
                   Stay inside one workspace from first spark to finished idea —
                   no context lost between five tabs and three tools.
                 </p>
               </motion.li>
               <motion.li
-                className="feature-tile px-4 py-4"
-                {...reveal(80, "right", { delay: 0.2 })}
+                className="feature-tile feature-item"
+                {...reveal(80, "up", { delay: 0.2 })}
               >
                 <strong>Keep separate parts of your life separated</strong>
-                <p className="mt-1 text-sm">
+                <p className="feature-body">
                   A canvas per project, client or side idea — nothing bleeds
                   into the wrong context or clutters unrelated work.
                 </p>
               </motion.li>
               <motion.li
-                className="feature-tile px-4 py-4"
-                {...reveal(80, "left", { delay: 0.2 })}
+                className="feature-tile feature-item"
+                {...reveal(80, "up", { delay: 0.2 })}
               >
                 <strong>Grow without pruning</strong>
-                <p className="mt-1 text-sm">
+                <p className="feature-body">
                   Start with one thought and keep adding — the workspace
                   stretches to fit, so nothing has to be deleted to make room.
                 </p>
               </motion.li>
               <motion.li
-                className="feature-tile px-4 py-4"
+                className="feature-tile feature-item"
                 {...reveal(80, "up", { delay: 0.2 })}
               >
                 <strong>Hand off a slice, not the whole desk</strong>
-                <p className="mt-1 text-sm">
+                <p className="feature-body">
                   Coming soon — share the exact fragment or canvas that matters
                   to someone else, and keep the rest of your workspace private.
                 </p>
               </motion.li>
               <motion.li
-                className="feature-tile px-4 py-4"
-                {...reveal(80, "right", { delay: 0.2 })}
+                className="feature-tile feature-item"
+                {...reveal(80, "up", { delay: 0.2 })}
               >
                 <strong>Pick up exactly where you left off</strong>
-                <p className="mt-1 text-sm">
+                <p className="feature-body">
                   Your last arrangement is your next starting point — no
                   re-opening tabs, no rebuilding the setup you had yesterday.
                 </p>
@@ -268,62 +311,59 @@ const Home = () => {
         </motion.section>
 
         {/* 5. WHY MINDCANVAS */}
-        <motion.section className="flex flex-wrap items-center justify-center px-4 sm:px-6 py-6 h-screen snap-section">
+        <motion.section className="why-section snap-section">
           <section>
             <motion.h2
-              className="box-heading text-center pb-4"
+              className="box-heading section-heading section-heading--tight"
               {...reveal(60, "up")}
             >
               Why MindCanvas
             </motion.h2>
-            <motion.ul
-              className="flex flex-wrap items-center justify-center gap-4 sm:grid-cols-2 max-w-5xl mx-auto"
-              {...reveal(60, "up")}
-            >
+            <motion.ul className="why-grid" {...reveal(60, "up")}>
               <motion.li
-                className="info-container rounded-3xl min-h-40 md:w-82"
+                className="info-container why-item"
                 {...reveal(60, "up")}
               >
-                <strong className="block mt-4 ml-6">
+                <strong className="why-item-title">
                   Your work belongs to you.
                 </strong>
-                <p className="mt-1 text-sm mx-6 my-2">
+                <p className="why-item-body">
                   Nothing you make gets parked on someone else's server, so
                   nobody can lock it away, ration it, or mine it later.
                 </p>
               </motion.li>
               <motion.li
-                className="info-container rounded-3xl min-h-40 md:w-82"
+                className="info-container why-item"
                 {...reveal(60, "up")}
               >
-                <strong className="block mt-4 ml-6">
+                <strong className="why-item-title">
                   No account you don't own.
                 </strong>
-                <p className="mt-1 text-sm mx-6 my-2">
+                <p className="why-item-body">
                   Sign in with your own credentials — not Google, Apple, Meta or
                   Microsoft. Nobody outside gets a record of what you do here.
                 </p>
               </motion.li>
               <motion.li
-                className="info-container rounded-3xl min-h-40 md:w-82"
+                className="info-container why-item"
                 {...reveal(60, "up")}
               >
-                <strong className="block mt-4 ml-6">
+                <strong className="why-item-title">
                   Room to actually think.
                 </strong>
-                <p className="mt-1 text-sm mx-6 my-2">
+                <p className="why-item-body">
                   No AI shortcut writing over your process — the work stays
                   yours, and so does the understanding you build along the way.
                 </p>
               </motion.li>
               <motion.li
-                className="info-container rounded-3xl min-h-40 md:w-82"
+                className="info-container why-item"
                 {...reveal(60, "up")}
               >
-                <strong className="block mt-4 ml-6">
+                <strong className="why-item-title">
                   One place, not a monthly bill for five.
                 </strong>
-                <p className="mt-1 text-sm mx-6 my-2">
+                <p className="why-item-body">
                   Notes app, whiteboard, moodboard, file dump — one workspace
                   covers the ground four subscriptions used to.
                 </p>
@@ -338,54 +378,52 @@ const Home = () => {
              shifts from reassurance to specificity — no more "no setup"
              hand-holding; instead, names the outcome. */}
         <motion.section
-          className="flex flex-col items-center justify-center text-center h-screen snap-section"
+          className="mid-cta-section snap-section"
           {...reveal(60, "up")}
         >
-          <h2 className="box-heading pb-3">
+          <h2 className="box-heading cta-heading">
             The canvas is ready when you are.
           </h2>
-          <div className="mt-2 flex flex-col sm:flex-row gap-3 sm:justify-center">
-            <button className="accent-button black-cover gold-brown-border-shadow w-full sm:w-auto px-8 py-3 rounded-full cursor-pointer">
-              <Link url="/signup-portal" className="block">
+          <div className="cta-button-row">
+            <button className="accent-button black-cover gold-brown-border-shadow cta-button">
+              <Link url="/signup-portal" className="cta-link">
                 Create My Account
               </Link>
             </button>
           </div>
-          <p className="mt-4 text-sm opacity-75 max-w-xl mx-auto px-4">
-            One workspace on your device.
-          </p>
+          <p className="mid-cta-note">One workspace on your device.</p>
         </motion.section>
 
         {/* 6. HONEST NOTES */}
         <motion.section
-          className="flex flex-wrap items-center justify-center h-screen rounded-3xl px-4 sm:px-6 py-6 max-w-5xl snap-section"
+          className="notes-section snap-section"
           {...reveal(60, "up")}
         >
           <section>
             <motion.h2
-              className="box-heading text-center pb-3 text-[32px]"
+              className="box-heading notes-heading"
               {...reveal(60, "up")}
             >
               Honest notes
             </motion.h2>
-            <motion.ul className="flex flex-wrap justify-center list-disc pl-6 max-w-5xl mx-auto space-y-1 text-sm">
+            <motion.ul className="notes-list">
               <motion.li
-                className="info-container m-6 p-8 list-none rounded-3xl w-60"
-                {...reveal(60, "left", { delay: 0.1 })}
+                className="info-container notes-item"
+                {...reveal(60, "up", { delay: 0.1 })}
               >
                 Designed for large screens. Mobile-Screen layouts are in
                 progress.
               </motion.li>
               <motion.li
-                className="info-container m-6 p-8 list-none rounded-3xl w-60"
+                className="info-container notes-item"
                 {...reveal(60, "up")}
               >
                 At-rest encryption is on the roadmap — for now, avoid storing
                 sensitive material.
               </motion.li>
               <motion.li
-                className="info-container m-6 p-8 list-none rounded-3xl w-60"
-                {...reveal(60, "right", { delay: 0.1 })}
+                className="info-container notes-item"
+                {...reveal(60, "up", { delay: 0.1 })}
               >
                 Chart fragments, A4 reading mode, PDF and JSON canvaspace export
                 are planned next.
@@ -397,27 +435,22 @@ const Home = () => {
         {/* 7. FINAL CTA */}
         <motion.section
           ref={finalCtaRef}
-          className="flex flex-wrap items-center justify-center  text-center h-screen snap-section"
+          className="final-cta-section snap-section"
           {...reveal(60, "up")}
         >
           <section>
-            <h2 className="box-heading pb-3">Ready to try it?</h2>
-            <div className="mt-2 flex flex-col sm:flex-row gap-3 sm:justify-center">
-              <button className="accent-button black-cover gold-brown-border-shadow w-full sm:w-auto px-8 py-3 rounded-full cursor-pointer">
-                <Link url="/signup-portal" className="block underline">
+            <h2 className="box-heading cta-heading">Ready to try it?</h2>
+            <div className="cta-button-row">
+              <button className="accent-button black-cover gold-brown-border-shadow cta-button">
+                <Link url="/signup-portal" className="cta-link-underlined">
                   Get MindCanvas
                 </Link>
               </button>
-              <Link
-                url="/signin-portal"
-                className="underline text-sm self-center"
-              >
+              <Link url="/signin-portal" className="alt-login-link">
                 Already have an account? Log in
               </Link>
             </div>
-            <p className="mt-3 text-xs opacity-75">
-              Open source. Local. Yours.
-            </p>
+            <p className="final-cta-note">Open source. Local. Yours.</p>
           </section>
         </motion.section>
       </div>
@@ -470,12 +503,9 @@ const Home = () => {
           pointerEvents: finalCtaInView ? "auto" : "none",
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="fixed bottom-0 left-0 right-0 z-50"
+        className="home-footer-pin"
       >
-        <Footer
-          id="home-footer"
-          className={"text-center pt-2 pb-2 w-full black-cover"}
-        >
+        <Footer id="home-footer" className={"home-footer black-cover"}>
           <DivClass className={"project-creator"}>
             <ShortText className={"creator"}>Maintained by XCrimsona</ShortText>
           </DivClass>

@@ -1,0 +1,201 @@
+@reference "tailwindcss";
+
+/* Home page — responsive layer.
+   ------------------------------------------------------------------
+   Pattern (matches mind-canvas-portal-media-queries.css):
+     1. One @media block per device tier (mobile-first, ascending).
+     2. Rules are UNLAYERED. The base class declarations for
+        `.hero-size`, `.box-heading`, `.info-container`,
+        `.accent-button`, `.feature-tile`, `.page` all live in
+        `tailwind-style.css` as unlayered rules. Per CSS cascade-
+        layer spec (research doc §2), unlayered outranks anything
+        in `@layer components`. So a tier override wrapped in
+        `@layer components` would silently lose to the base 40px
+        `.hero-size` and the responsive font-size never takes
+        effect. Keeping rules unlayered here lets them win by
+        source order (this file loads AFTER tailwind-style.css).
+     3. Inside each rule we use `@apply` to pull Tailwind utilities
+        in. Anything Tailwind doesn't have a class for (e.g. a
+        specific 15px font-size) is written as raw CSS.
+     4. We only re-declare the class name — the base declaration
+        in tailwind-style.css / home.css stays untouched.
+
+   Breakpoint tiers (Google / Chrome DevTools device categories):
+     ≤ 374px   — very small phones (Galaxy Fold, small Androids at 320)
+     375–424   — standard phones (iPhone 12/13/14/15 at 375, Pixel at 412)
+     425–599   — large phones / phablets (475 tier)
+     600–767   — small tablets, landscape phones (667)
+     768–1023  — tablets (iPad at 768)
+     ≥ 1024    — laptop / desktop = base declarations, no override needed.
+
+   Why we don't just use Tailwind's sm:/md:/lg: on the JSX:
+     Tailwind's mobile-first prefixes only let you override utilities
+     in one direction (small → larger). For a page like Home where each
+     tier needs its own tuned font-size AND its own layout switch on
+     several custom classes at once, keeping the tier rules co-located
+     in this file is easier to read and audit than sprinkling
+     `sm:text-[24px] md:text-[28px] lg:text-[32px]` everywhere. */
+
+/* ============================================================
+   TIER 1 — Very small phones (320px devices)
+   ------------------------------------------------------------ */
+@media screen and (min-width: 320px) and (max-width: 374.9px) {
+    .page {
+        @apply text-sm;
+    }
+
+    .hero-size {
+        font-size: 24px;
+        @apply leading-snug;
+    }
+
+    .box-heading {
+        font-size: 22px;
+    }
+
+    .info-container {
+        @apply px-3 py-2 mx-1 text-sm;
+    }
+
+    .feature-tile {
+        @apply text-sm;
+    }
+
+    .accent-button {
+        font-size: 16px;
+        @apply px-5 py-2;
+    }
+
+    /* The 5-pill row (text / images / video / list / links) is a
+       flex row of .info-container elements. On a 320 phone the row
+       overflows — force it to wrap. */
+    .snap-section .flex.align-center.justify-center {
+        @apply flex-wrap gap-1;
+    }
+}
+
+/* ============================================================
+   TIER 2 — Standard phones (375 – 424, iPhone / Pixel)
+   ------------------------------------------------------------ */
+@media screen and (min-width: 375px) and (max-width: 424.9px) {
+    .hero-size {
+        font-size: 26px;
+        @apply leading-snug;
+    }
+
+    .box-heading {
+        font-size: 24px;
+    }
+
+    .info-container {
+        @apply px-4 py-2 mx-1 text-sm;
+    }
+
+    .accent-button {
+        font-size: 18px;
+        @apply px-6 py-2;
+    }
+
+    .snap-section .flex.align-center.justify-center {
+        @apply flex-wrap gap-2;
+    }
+}
+
+/* ============================================================
+   TIER 3 — Large phones / phablets (425 – 599)
+   ------------------------------------------------------------ */
+@media screen and (min-width: 425px) and (max-width: 599.9px) {
+    .hero-size {
+        font-size: 30px;
+        @apply leading-snug;
+    }
+
+    .box-heading {
+        font-size: 26px;
+    }
+
+    .info-container {
+        @apply px-5 py-2 mx-1;
+    }
+
+    .accent-button {
+        font-size: 18px;
+        @apply px-6 py-2;
+    }
+
+    .snap-section .flex.align-center.justify-center {
+        @apply flex-wrap gap-2;
+    }
+}
+
+/* ============================================================
+   TIER 4 — Small tablets / landscape phones (600 – 767)
+   ------------------------------------------------------------ */
+@media screen and (min-width: 600px) and (max-width: 767.9px) {
+    .hero-size {
+        font-size: 34px;
+    }
+
+    .box-heading {
+        font-size: 28px;
+    }
+
+    .info-container {
+        @apply px-5 py-2 mx-2;
+    }
+
+    .accent-button {
+        font-size: 18px;
+    }
+}
+
+/* ============================================================
+   TIER 5 — Tablets (768 – 1023, iPad portrait)
+   ------------------------------------------------------------ */
+@media screen and (min-width: 768px) and (max-width: 1023.9px) {
+    .hero-size {
+        font-size: 36px;
+    }
+
+    .box-heading {
+        font-size: 30px;
+    }
+
+    .info-container {
+        @apply px-6 py-2 mx-2;
+    }
+
+    .accent-button {
+        font-size: 20px;
+    }
+}
+
+/* Note: the previous "min-height: 100vh below 1024" override was
+   removed. h-screen is now applied only inside `@media (min-width:
+   1024px)` in home.css, so mobile/tablet sections size naturally
+   to their content — no viewport-height floor forcing them tall. */
+
+/* ============================================================
+   Pill-row justify-content (unlayered on purpose).
+   ------------------------------------------------------------
+   `.pill-row` in home.css sits at the unlayered cascade tier
+   (same tier as the brand primitives). Per the v4 research
+   doc §2, `@layer components` rules would lose to it, so
+   these responsive overrides are written unlayered too.
+   ------------------------------------------------------------
+   Mobile (< 600px)     → justify-content: flex-start
+   Tablet + desktop (≥ 600) → justify-content: center
+   ============================================================ */
+@media screen and (max-width: 599.9px) {
+    .pill-row {
+        @apply justify-start;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .pill-row {
+        @apply justify-center;
+    }
+}
+
+/* ≥ 1024px = base rules in tailwind-style.css apply as-is. */

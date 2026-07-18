@@ -10,9 +10,10 @@ export const VideoButton = () => {
     <Button
       id="video-comp"
       onClick={() => setVideoToggle(true)}
-      className={"video-comp"}
+      className={"fragment-icon-btn video-comp"}
+      title="Add video fragment"
     >
-      Video
+      <img src="/Video.svg" alt="Video fragment" className="fragment-icon" />
     </Button>
   );
 };

@@ -8,9 +8,10 @@ export const TextButton = () => {
     <Button
       id="text-comp"
       onClick={() => setTextToggle(true)}
-      className={"text-comp"}
+      className={"fragment-icon-btn text-comp"}
+      title="Add text fragment"
     >
-      Text
+      <img src="/Text.svg" alt="Text fragment" className="fragment-icon" />
     </Button>
   );
 };
